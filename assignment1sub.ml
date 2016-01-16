@@ -8,12 +8,17 @@
 
 
 (*
-   Write a function named "order" that takes a triple of integers and
-   returns a triple of the same integers but in increasing order.
+   Write a function named "fixLastTwo" that takes a triple of integers
+   (x, y, z) and possibly rearranges the last two so that they are in increasing
+   order (and just keeps the first in place).
    It should have type: int * int * int -> int * int * int
 *)
-
-
+(*
+   Write a function named "order" that takes a triple of integers and
+   returns a triple of the same integers but in increasing order.
+   You may want to use the function from the previous part.
+   It should have type: int * int * int -> int * int * int
+*)
 
 
 (*
