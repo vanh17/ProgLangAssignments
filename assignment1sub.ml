@@ -13,6 +13,8 @@
    order (and just keeps the first in place).
    It should have type: int * int * int -> int * int * int
 *)
+
+
 (*
    Write a function named "order" that takes a triple of integers and
    returns a triple of the same integers but in increasing order.
