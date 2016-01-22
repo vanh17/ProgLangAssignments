@@ -46,6 +46,10 @@
    flatten [[1; 2; 3]; []; [4; 5]; [6]] = [1; 2; 3; 4; 5; 6]
    It should have type: int list list -> int list
 *)
+(*
+   Write a function `remove` that takes as input a pair of an integer n and a
+   list of integers, and removes from that list any occurence of n.
+*)
 
 
 
