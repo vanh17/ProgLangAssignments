@@ -11,6 +11,7 @@
    Write a function `getnth` that takes as input a pair of an integer n and a list
    of strings. It then returns the nth element in the list, counting from 1. If
    the list does not have n elements, it should raise an exception (Failure "getnth").
+   It should have type: int * string list -> string
 *)
 
 
@@ -46,17 +47,21 @@
    flatten [[1; 2; 3]; []; [4; 5]; [6]] = [1; 2; 3; 4; 5; 6]
    It should have type: int list list -> int list
 *)
+
+
+
 (*
    Write a function `remove` that takes as input a pair of an integer n and a
-   list of integers, and removes from that list any occurence of n.
+   list of integers, and removes from that list any occurrence of n.
+   It should have type: int * int list -> int list
 *)
 
 
 
 (*
    Write a function `removeDups` that takes a list of integers and returns a
-   list of the integers in the same order where any later occurence of an integer
-   after its first occurence is removed. For example:
+   list of the integers in the same order, but where any later occurrence of
+   an integer after its first occurrence is removed. For example:
    removeDups [4; 1; 2; 1; 4; 5; 20] = [4; 1; 2; 5; 20]
    It should have type: int list -> int list
 *)
@@ -65,7 +70,7 @@
 
 
 (*
-   Write a function `collateSome` that takes as input a list of option integers
+   Write a function `collateSome` that takes as input a list of int options
    and returns a list of integers. The list should consist of those integers that
    were part of a `Some v` in the list, and in the same order. For example:
    collateSome [Some 1; None; Some 2; Some 1; None; Some 3] = [1; 2; 1; 3]
