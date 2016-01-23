@@ -13,7 +13,13 @@
    order (and just keeps the first in place).
    It should have type: int * int * int -> int * int * int
 *)
-
+let fixLastTwo ((x,y,z) : int * int * int) = 
+   if 
+   y > z 
+   then 
+   (x, z, y) 
+   else 
+   (x, y,z);; 
 
 (*
    Write a function named "order" that takes a triple of integers and
@@ -21,7 +27,17 @@
    You may want to use the function from the previous part.
    It should have type: int * int * int -> int * int * int
 *)
-
+let rec order ((x, y, z) : int * int * int) =
+   if 
+   x > y 
+   then 
+   order (y,x,z) 
+   else 
+    if x < z
+    then 
+    fixLastTwo (x, y, z)
+    else
+    (z, x, y);;
 
 (*
    Write a function "distance" that given a pair of integers returns the
