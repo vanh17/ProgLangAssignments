@@ -22,7 +22,7 @@
    looking for a string that equals s, and if it finds one returns "Some i" where
    i is the corresponding integer in the pair. If it does not find a suitable
    pair then it returns "None".
-   It should have type: int * (string * int) list -> int option
+   It should have type: string * (string * int) list -> int option
 *)
 
 
