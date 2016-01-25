@@ -45,9 +45,13 @@ let rec order ((x, y, z) : int * int * int) =
    as is the distance between 4 and 10.
    It should have type: int * int -> int
 *)
-
-
-
+let distance ((x,y) : int * int) =
+    if
+    x < y
+    then
+      y - x
+    else
+      x - y;;
 
 (*
    Write a function "greeting" that given a pair of an integer (age) and
@@ -57,7 +61,8 @@ let rec order ((x, y, z) : int * int * int) =
    It should have type: int * string -> string
    You may see "bytes" instead of "string" as a type.
 *)
-
+let greeting ((x,y) : int * string) =
+    "Greeting " ^ y ^ ", you are " ^ (string_of_int x) ^ " years old!";;
 
 
 (*
@@ -70,7 +75,17 @@ let rec order ((x, y, z) : int * int * int) =
    It should have type: int * string -> string
    You may see "bytes" instead of "string" as a type.
 *)
-
+let greeting2 ((x,y) : int * string) =
+    "Greeting " ^ y ^ ", you are " ^
+    (if x <= 0
+    then
+      "not born yet!"
+    else
+         if x <= 20 && x >= 1
+         then
+           "a youngster!"
+         else
+           "young at heart!");;
 
 
 (*
@@ -80,7 +95,7 @@ let rec order ((x, y, z) : int * int * int) =
    a string.
    It should have type: int * string -> bool
 *)
-
+let tooShort ((x, y) : int * string) = x > (String.length y);;
 
 
 (*
@@ -88,7 +103,7 @@ let rec order ((x, y, z) : int * int * int) =
    their total length.
    It should have type string * string -> int
 *)
-
+let totalLength ((x, y) : string * string) = (String.length x) + (String.length y);;
 
 
 
@@ -99,9 +114,10 @@ let rec order ((x, y, z) : int * int * int) =
    string more than once.
    It should have type: string * string * string -> bool
 *)
-
-
-
+let orderedByLength ((x, y, z) : string * string * string) =
+        let isOrdered ((d, m, n) : int * int * int) =
+           d <= m && m <= n
+        in isOrdered((String.length x), (String.length y), (String.length z));;
 
 (*
    Write a function "prodInRange" that is given a pair of integers, and it returns
@@ -110,4 +126,7 @@ let rec order ((x, y, z) : int * int * int) =
    integers more than once.
    It should have type: int * int -> bool
 *)
-
+let prodInRange ((x, y) : int * int)=
+        let isOrdered ((d, m, n) : int * int * int) =
+           d <= m && m <= n
+        in isOrdered (10,x*y,20);;
