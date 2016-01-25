@@ -16,6 +16,7 @@ let t3e = distance (-5, -6) = 1
 
 
 let t4a = greeting (23, "Pete") = "Greetings Pete, you are 23 years old!"
+let t4b = greeting (0, "Hoang") = "Greetings Hoang, you are 0 years old!"
 
 let t5a = greeting2 (0, "Jackson") = "Greetings Jackson, you are not born yet!"
 let t5b = greeting2 (1, "Jackson") = "Greetings Jackson, you are a youngster!"
@@ -29,7 +30,7 @@ let t6b = tooShort (5, "tree") = true
 let t6c = tooShort (5, "treee") = false
 let t6d = tooShort (6, "tree") = true
 let t6e = tooShort (0, "") = false
-let t6f = tooShort (4, "") = false
+let t6f = tooShort (4, "") = true
 let t6g = tooShort (3, "tree") = false
 
 let t7a = totalLength ("you", "me") = 5
@@ -52,4 +53,4 @@ let t9d = prodInRange (0, 5) == false
 let t9e = prodInRange (10, 0) == false
 let t9f = prodInRange (20, 1) == true
 let t9g = prodInRange (20, 2) == false
-let t9h = prodInRange (3, 20) == false
+let t9h = prodInRange (3, 20) == false 

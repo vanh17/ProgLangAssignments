@@ -62,7 +62,7 @@ let distance ((x,y) : int * int) =
    You may see "bytes" instead of "string" as a type.
 *)
 let greeting ((x,y) : int * string) =
-    "Greeting " ^ y ^ ", you are " ^ (string_of_int x) ^ " years old!";;
+    "Greetings " ^ y ^ ", you are " ^ (string_of_int x) ^ " years old!";;
 
 
 (*
@@ -76,7 +76,7 @@ let greeting ((x,y) : int * string) =
    You may see "bytes" instead of "string" as a type.
 *)
 let greeting2 ((x,y) : int * string) =
-    "Greeting " ^ y ^ ", you are " ^
+    "Greetings " ^ y ^ ", you are " ^
     (if x <= 0
     then
       "not born yet!"
