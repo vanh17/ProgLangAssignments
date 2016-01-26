@@ -128,5 +128,5 @@ let orderedByLength ((x, y, z) : string * string * string) =
 *)
 let prodInRange ((x, y) : int * int)=
         let isOrdered ((d, m, n) : int * int * int) =
-           d <= m && m <= n
+           d < m && m < n
         in isOrdered (10,x*y,20);;
