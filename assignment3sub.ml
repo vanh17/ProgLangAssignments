@@ -66,7 +66,8 @@ type play = shape list
 (*
    Write a function `game_from_plays` that takes as input two plays (correspoding
    to the intended plays of the two players) and creates a game by combining them,
-   representing how they would have been played.
+   representing how they would have been played. If one play is longer than the
+   other, stop at the shortest one.
    Type: play * play -> game
 *)
 
@@ -101,6 +102,8 @@ type temp = C of float | F of float
 (*
    Write a function `to_f` that takes as input a value of type "temp" and
    returns the temperature measured in Fahrenheit.
+   Note: The operators for floating point arithmetic have a dot following
+   them to distinguish from the integer ones. For example "2.1 +. 5.2"
    Type: temp -> float
 *)
 
@@ -109,7 +112,7 @@ type temp = C of float | F of float
    Write a function `temp_compare` that takes as input a pair of temperatures and
    "compares" them, returning 1 if the first temperature is higher, 0 if they are
    equal and -1 if the second temperature is higher.
-   Type: temp -> int
+   Type: temp * temp -> int
 *)
 
 
@@ -131,4 +134,9 @@ type temp = C of float | F of float
    returns the largest one. It should raise an exception `Failure "max_temp"`
    if the list is empty.
    Type: temp list -> temp
+*)
+(*
+   Write a function `max_temp2` that behaves like `max_temp` but where all the
+   recursive calls are tail calls. You will likely need to define an auxiliary
+   function and use state recursion.
 *)
