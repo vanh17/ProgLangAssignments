@@ -13,7 +13,11 @@
    the list does not have n elements, it should raise an exception (Failure "getnth").
    It should have type: int * string list -> string
 *)
-
+let rec getnth ((x, y) : int * string list) =
+    match (x,y) with
+        | (_,[]) -> raise (Failure "getnth")
+        | (1, d::_) -> d
+        | (n, d::rest) -> getnth (n - 1, rest)
 
 
 (*
@@ -24,7 +28,10 @@
    pair then it returns "None".
    It should have type: string * (string * int) list -> int option
 *)
-
+let rec lookup ((x, y) : string * (string * int) list) =
+    match (x,y) with
+        | (_, []) -> None
+        | (s, (t,d)::rest) -> if s = t then Some d else lookup (s, rest)
 
 
 
@@ -36,7 +43,11 @@
    inPairs [1; 2; 3; 4; 5] = [(1, 2); (3, 4)]
    It should have type: int list -> (int * int) list
 *)
-
+let rec inPairs (x : int list) =
+    match x with
+        | m :: n :: rest -> (m, n) :: inPairs (rest)
+        | d :: [] -> []
+        | [] -> []
 
 
 
@@ -47,7 +58,10 @@
    flatten [[1; 2; 3]; []; [4; 5]; [6]] = [1; 2; 3; 4; 5; 6]
    It should have type: int list list -> int list
 *)
-
+let rec flatten (x : int list list) =
+    match x with
+        | [] -> []
+        | y :: rest -> y @ flatten (rest)
 
 
 (*
@@ -55,7 +69,10 @@
    list of integers, and removes from that list any occurrence of n.
    It should have type: int * int list -> int list
 *)
-
+let rec remove ((x,y) : int * int list) =
+    match y with
+        | [] -> []
+        | t :: rest -> if t = x then remove(x, rest) else t :: remove(x, rest)
 
 
 (*
@@ -65,7 +82,10 @@
    removeDups [4; 1; 2; 1; 4; 5; 20] = [4; 1; 2; 5; 20]
    It should have type: int list -> int list
 *)
-
+let rec removeDups (x : int list) =
+    match x with
+    | [] -> []
+    | t :: rest -> t :: removeDups (remove (t, rest))
 
 
 
@@ -76,7 +96,12 @@
    collateSome [Some 1; None; Some 2; Some 1; None; Some 3] = [1; 2; 1; 3]
    It should have type: int option list -> int list
 *)
-
+let rec collateSome (x : int option list) =
+    match x with
+    | [] -> []
+    | x :: rest -> match x with
+                   | None   -> collateSome (rest)
+                   | Some y -> y :: collateSome (rest)
 
 
 
@@ -87,7 +112,17 @@
    unzip2 [(1, 2); (3, 4); (5, 6)] = ([1; 3; 5], [2; 4; 6])
    It should have type: (int * int) list -> int list * int list
 *)
-
+let unzip2 (x : (int * int) list) =
+    (let rec leftunzip2 (t : (int * int) list) =
+                                  match t with
+                                  | [] -> []
+                                  | (m,n) :: subrest -> m :: leftunzip2 (subrest)
+     in leftunzip2 (x),
+     let rec rightunzip2 (t : (int * int) list) =
+                                  match t with
+                                  | [] -> []
+                                  | (m,n) :: subrest -> n :: rightunzip2 (subrest)
+     in rightunzip2 (x))
 
 
 
@@ -105,5 +140,28 @@
    write some good tests of this behavior.
    It should have type: int * int list -> int list option
 *)
-
+let makeChange ((u,v) : int * int list) =
+    let rec makeChange1 ((x, y) : int * int list) =
+            match y with
+            | [] -> []
+            | n :: rest -> let rec submakeChange ((d, lst) : int * int list) =
+                               match lst with
+                               | [] -> []
+                               | t :: trest -> if d < t
+                                               then submakeChange (d, trest)
+                                               else [t] @ makeChange1 (d - t, lst)
+                           in if ((let rec sumList (l : int list) =
+                                            match l with
+                                            | [] -> 0
+                                            | l1 :: lrest -> l1 + sumList (lrest)
+                                        in sumList (if x < n
+                                               then submakeChange (x,rest)
+                                               else [n] @ makeChange1 (x-n, y))) = x)
+                              then (if x < n
+                                    then submakeChange (x,rest)
+                                    else [n] @ makeChange1 (x-n, y))
+                              else makeChange1 (x, rest)
+    in if (makeChange1(u,v) != [])
+       then Some (makeChange1(u,v))
+       else None
 
