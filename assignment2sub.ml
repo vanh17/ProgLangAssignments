@@ -140,7 +140,7 @@ let unzip2 (x : (int * int) list) =
    write some good tests of this behavior.
    It should have type: int * int list -> int list option
 *)
-let makeChange ((u,v) : int * int list) = 
+(*let makeChange ((u,v) : int * int list) = 
     if u = 0 then Some []
     else 
         if u < 0 then None
@@ -167,5 +167,16 @@ let makeChange ((u,v) : int * int list) =
                               else makeChange1 (x, rest)
             in if (makeChange1(u,v) != [])
                then Some (makeChange1(u,v))
-               else None
+               else None*)
+let rec makeChange ((u,v) : int * int list) =
+    if u < 0 then None
+    else
+        if u = 0 then Some []
+        else
+            match v with
+            | [] -> None
+            | x :: rest -> let  t  = makeChange (u - x, v)
+                           in match t with
+                              | None -> makeChange (u, rest)
+                              | Some i -> Some (x::i)
 
