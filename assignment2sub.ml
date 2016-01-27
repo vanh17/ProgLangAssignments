@@ -140,17 +140,21 @@ let unzip2 (x : (int * int) list) =
    write some good tests of this behavior.
    It should have type: int * int list -> int list option
 *)
-let makeChange ((u,v) : int * int list) =
-    let rec makeChange1 ((x, y) : int * int list) =
-            match y with
-            | [] -> []
-            | n :: rest -> let rec submakeChange ((d, lst) : int * int list) =
-                               match lst with
-                               | [] -> []
-                               | t :: trest -> if d < t
-                                               then submakeChange (d, trest)
-                                               else [t] @ makeChange1 (d - t, lst)
-                           in if ((let rec sumList (l : int list) =
+let makeChange ((u,v) : int * int list) = 
+    if u = 0 then Some []
+    else 
+        if u < 0 then None
+        else
+            let rec makeChange1 ((x, y) : int * int list) =
+                match y with
+                | [] -> []
+                | n :: rest -> let rec submakeChange ((d, lst) : int * int list) =
+                                   match lst with
+                                   | [] -> []
+                                   | t :: trest -> if d < t
+                                                   then submakeChange (d, trest)
+                                                   else [t] @ makeChange1 (d - t, lst)
+                               in if ((let rec sumList (l : int list) =
                                             match l with
                                             | [] -> 0
                                             | l1 :: lrest -> l1 + sumList (lrest)
@@ -161,7 +165,7 @@ let makeChange ((u,v) : int * int list) =
                                     then submakeChange (x,rest)
                                     else [n] @ makeChange1 (x-n, y))
                               else makeChange1 (x, rest)
-    in if (makeChange1(u,v) != [])
-       then Some (makeChange1(u,v))
-       else None
+            in if (makeChange1(u,v) != [])
+               then Some (makeChange1(u,v))
+               else None
 

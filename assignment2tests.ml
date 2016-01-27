@@ -87,23 +87,28 @@ let t8c = unzip2 [(1, 3); (4, 5)] = ([1;4], [3; 5])
 let t9a = makeChange (20, [8; 3; 2]) = Some [8; 8; 2; 2]
 let t9b = makeChange (20, [8; 3]) = Some [8; 3; 3; 3; 3]
 let t9c = makeChange (20, [13; 11]) = None
-let t9d = makeChange (0, []) = None
+let t9d = makeChange (0, []) = Some []
 let t9e = makeChange (20, []) = None
 let t9f = makeChange (37, []) = None
-let t9g = makeChange (0, [1]) = None
+let t9g = makeChange (0, [1]) = Some []
 let t9a = makeChange (20, [8; 3; 2]) = Some [8; 8; 2; 2]
 let t9b = makeChange (20, [8; 3]) = Some [8; 3; 3; 3; 3]
 let t9c = makeChange (20, [13; 11]) = None
-let t9d = makeChange (0, []) = None
+let t9d = makeChange (0, []) = Some []
 let t9e = makeChange (20, []) = None
 let t9f = makeChange (37, []) = None
-let t9g = makeChange (0, [1]) = None
+let t9g = makeChange (0, [1]) = Some []
 let t9h = makeChange (138, [9; 6; 3; 2; 1])
         = Some [9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 3]
         (* not Some [9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 6; 6]
            nor Some [9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 6; 3; 3]
        *);;
-let t9h = makeChange (137, [9; 6; 3; 2; 1])
+let t92 = makeChange (137, [9; 6; 3; 2; 1])
         = Some [9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 2]
-let t9h = makeChange (136, [9; 6; 3; 2])
+let t93 = makeChange (136, [9; 6; 3; 2])
         = Some [9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 9; 6; 2; 2]
+(* Some unexpected cases @...@ *)
+let t94 = makeChange (0, [9; 6; 3; 2; 1])
+        = Some []
+let t95 = makeChange (-136, [9; 6; 3; 2])
+        = None        
