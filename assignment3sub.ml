@@ -51,7 +51,15 @@ type play = shape list
    returns the result of that check.
    Type: check -> result
 *)
-
+let result check1 =
+    match check1 with
+    | (s1, s2) -> if s1 = s2 then Tie
+                 else
+                    if (s1 = Rock && s2 = Scissors)
+                        || (s1 = Paper && s2 = Rock)
+                        || (s1 = Scissors && s2 = Paper)
+                    then FstWin
+                    else SndWin
 
 
 (*
@@ -59,7 +67,7 @@ type play = shape list
    whether the check's result is a tie.
    Type: check -> bool
 *)
-
+let is_tie check1 = result check1 = Tie
 
 
 
@@ -70,7 +78,14 @@ type play = shape list
    other, stop at the shortest one.
    Type: play * play -> game
 *)
-
+let rec game_from_plays (x, y) =
+        match (x, y) with
+        | ([], _) -> []
+        | (_, []) -> []
+        | (x1 :: xrest, y1 :: yrest) -> if (x1 = Rock || x1 = Paper || x1 = Scissors)
+                                           && (y1 = Rock || y1 = Paper || y1 = Scissors)
+                                        then (x1, y1) :: game_from_plays (xrest, yrest)
+                                        else raise (Failure "game_from_plays")
 
 
 (*
@@ -78,14 +93,34 @@ type play = shape list
    a valid game as described above.
    Type: game -> bool
 *)
-
+let rec valid_game game1 =
+    match game1 with
+    | [] -> true
+    | x :: rest -> if is_tie x
+                   then (rest != []) && valid_game rest
+                   else rest = [] 
 
 
 (*
    Write a function `play_game` that plays the game as described above.
    Type: game -> result
 *)
-
+let play_game game1 =
+        if valid_game game1
+        then let rec winner trial =
+                 match trial with
+                 | [] -> Tie
+                 | x :: rest -> if is_tie x
+                                then winner rest
+                                else result x
+              in winner game1
+        else let rec invalid trial =
+                 match trial with
+                 | [] -> Tie
+                 | x :: rest -> if is_tie x
+                                then invalid rest
+                                else result x
+             in invalid game1
 
 (* --------------------------------------
             TEMPERATURES
@@ -106,7 +141,10 @@ type temp = C of float | F of float
    them to distinguish from the integer ones. For example "2.1 +. 5.2"
    Type: temp -> float
 *)
-
+let to_f t =
+        match t with
+        | F x -> x
+        | C x -> 1.8 *. x +. 32.0
 
 (*
    Write a function `temp_compare` that takes as input a pair of temperatures and
@@ -114,7 +152,12 @@ type temp = C of float | F of float
    equal and -1 if the second temperature is higher.
    Type: temp * temp -> int
 *)
-
+let temp_compare (t1, t2) =
+        let (f1, f2) = (to_f t1, to_f t2)
+        in if f1 = f2 then 0
+           else
+               if f1 < f2 then -1
+               else 1
 
 
 (*
@@ -125,8 +168,10 @@ type temp = C of float | F of float
    to strings.
    Type: temp -> string
 *)
-
-
+let string_of_temp t =
+        match t with
+        | F x -> string_of_float x ^ "F"
+        | C x -> string_of_float x ^ "C"
 
 
 (*
@@ -135,8 +180,27 @@ type temp = C of float | F of float
    if the list is empty.
    Type: temp list -> temp
 *)
+let rec max_temp tlst =
+        match tlst with
+        | [] -> raise (Failure "max_temp")
+        | x :: [] -> x
+        | x :: rest -> let nt = max_temp rest
+                       in if temp_compare (x, nt) = 1
+                          then x
+                          else nt
+
 (*
    Write a function `max_temp2` that behaves like `max_temp` but where all the
    recursive calls are tail calls. You will likely need to define an auxiliary
    function and use state recursion.
 *)
+let max_temp2 tlst =
+        match tlst with
+        | [] -> raise (Failure "max_temp2")
+        | x :: rest -> let rec find_max (t, lst) =
+                           match lst with
+                           | [] -> t
+                           | t1 :: t1rest -> if temp_compare (t, t1) = -1
+                                           then find_max (t1, t1rest)
+                                           else find_max (t, t1rest)
+                       in find_max (x, rest)

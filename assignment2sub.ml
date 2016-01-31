@@ -175,8 +175,7 @@ let rec makeChange ((u,v) : int * int list) =
         else
             match v with
             | [] -> None
-            | x :: rest -> let  t  = makeChange (u - x, v)
-                           in match t with
-                              | None -> makeChange (u, rest)
-                              | Some i -> Some (x::i)
+            | x :: rest -> match makeChange (u - x, v) with
+                           | None -> makeChange (u, rest)
+                           | Some i -> Some (x::i)
 
