@@ -39,3 +39,26 @@ let t7a = let f = fun () -> raise (Failure "")
 let t7b = let f = fun () -> 5
           in thunk_of_list [f; f] () = [5; 5]
 
+let t8a = insert (empty, "foo", 3) = [("foo", 3)]
+
+let t9a = has ([("foo", 2)], "foo") = true
+
+let t10a = lookup ([("bar", 3); ("foo", 2)], "bar") = 3
+let t10b = try (lookup ([("bar", 3); ("foo", 2)], "baz"); false)
+           with Not_found -> true
+(* In the following test the search should fail because your code
+   should stop looking after baz, since "baz" > "bar".
+   This is of course not a "proper" table, but it is a good test that
+   your code behaves properly. *)
+let t10c = try (lookup ([("baz", 3); ("bar", 2)], "bar"); false)
+           with Not_found -> true
+
+let t11a = lookup_opt ([("bar", 3); ("foo", 2)], "bar") = Some 3
+(* Again the search should be stopping after "foo" *)
+let t11b = lookup_opt ([("foo", 2); ("bar", 3)], "bar") = None
+
+let t12a = delete ([("bar", 3); ("baz", 1); ("foo", 2)], "baz") = [("baz", 1); ("foo", 2)]
+
+let t13a = keys [("bar", 3); ("foo", 2)] = ["bar"; "foo"]
+
+let t14a = is_proper [("bar", 3); ("foo", 2)] = true
