@@ -2,10 +2,9 @@
 (*
    You should write your functions in this file.
    You should NOT specify the types of your functions. Let the system determine
-   them for you. In the first set of problems this will result in types that
-   the system may report to you different than the instructions, because of
-   the type alias. You should make sure that the resulting types are equivalent
-   to the requested ones.
+   them for you. This will result in types that the system may report to you
+   different than the instructions, because of the type alias. You should make
+   sure that the resulting types are equivalent to the requested ones.
    Write your code right below the corresponding comment describing the
    function you are asked to write.
 *)
@@ -96,5 +95,120 @@ type 'a thunk = unit -> 'a
    Make sure that no thunks on the list are evaluated until the returned thunk is
    called.
    It should have type: 'a thunk list -> 'a list thunk
+*)
+
+
+
+
+(* ----------------------------------------
+               LOOKUP TABLES
+   ---------------------------------------- *)
+(*
+   In this section we will create the basis for a simple lookup table system.
+   A lookup table stores values of some type 'a indexed by "keys". The important
+   operation for keys is that they should be comparable. We will use plain strings
+   for that purpose. So the table holds pairs (key, value). We can store such a
+   pair, or we can ask for the value stored for a particular key. Then the system
+   is supposed to look through the various pairs stored in the table in search of
+   a pair where the key matches the looked-for key. It then would return the
+   corresponding value. If the key cannot be found, it would raise an exception.
+   You will implement this basic idea here.
+
+   We will represent a lookup table, or simply table, via a list of key-value
+   pairs. You will need to maintain the invariant that the keys are all in
+   increasing order. So when in search for a key you can always stop (and should
+   stop) when the key you are searching for is larger than the next key in the
+   list.
+
+   You should never have two pairs with the same key in your list.
+
+   It will be important when creating examples to keep in mind how strings compare.
+   It is what is known as lexicographic ordering: Their first letters are compared,
+   and if one is "earlier" then that string is smaller; if they are equal then the
+   second letters are compared, and so on. We end up exhausting one of the strings
+   in the process, then that one is smaller. For example:
+   "foe" < "foo" < "fool" < "for"
+   This is the default string behavior in OCAML, you do not need to do anything
+   special for it.
+
+   These lookup tables are often called symbol tables, and we will call the string
+   keys symbols via a type alias.
+*)
+
+type symbol = string
+type 'a table = (symbol * 'a) list
+
+let empty : 'a table = []   (* A more intuitive notation for the empty list/table *)
+
+(*
+   Write a function `insert` that takes as input a triple of a symbol table, a symbol
+   and a value, and it will return an updated table where we have inserted the pair
+   of the symbol and the value in the table. If the table already has a pair with the
+   same symbol, you must replace that pair. As a trivial example of inserting in the
+   empty table we defined above:
+   insert (empty, "foo", 3) = [("foo", 3)]
+   It should have type: 'a table * symbol * 'a -> 'a table
+*)
+
+
+
+(*
+   Write a function `has` that takes as input a pair of a symbol table and a symbol
+   and returns a boolean of whether the symbol table contains a pair with key that
+   symbol.
+   It should not look any further in the list than is necessary, i.e. once the stored
+   keys are bigger than the searched-for key there is no need to continue the search.
+   It should have type: 'a table * symbol -> bool
+*)
+
+
+
+(*
+   Write a function `lookup` that takes as input a pair of a symbol table and a
+   symbol. If it finds in the table a pair with that symbol as a key then it
+   returns the corresponding value. If the key does not appear in the table, then
+   it should raise the exception `Not_found`.
+   It should not use `has`.
+   It should not look any further in the list than is necessary.
+   It should have type: 'a table * symbol -> 'a
+*)
+
+
+
+(*
+   Write a function `lookup_opt` that takes as input a pair of a symbol table and a
+   symbol. If it finds in the table a pair with that symbol as a key then it
+   returns `Some v` where `v` is the corresponding value. If the key does not appear
+   in the table, then it should return `None`.
+   It should not use `has` or `lookup`.
+   It should not look any further in the list than is necessary.
+   It should have type: 'a table * symbol -> 'a option
+*)
+
+
+
+(*
+   Write a function `delete` that takes as input a pair of a symbol table and a
+   symbol. It returns the symbol table that results from the removal of the pair
+   with key that symbol, if there was any such key.
+   It should not use `has` or any of the other functions.
+   It should have type: 'a table * symbol -> 'a table
+*)
+
+
+
+(*
+   Write a function `keys` that takes as input a symbol table and returns a list
+   of the keys in the table.
+   It should have type: 'a table -> symbol list
+*)
+
+
+
+(*
+   Write a function `is_proper` that takes as input a symbol table and returns
+   a boolean indicating if the table is "proper", namely if the invariant is
+   maintained that they keys appear in strictly increasing order.
+   It should have type: 'a table -> bool
 *)
 
