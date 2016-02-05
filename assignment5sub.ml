@@ -3,10 +3,8 @@
 (*
    You should write your functions in this file.
    You should NOT specify the types of your functions. Let the system determine
-   them for you. In the first set of problems this will result in types that
-   the system may report to you different than the instructions, because of
-   the type alias. You should make sure that the resulting types are equivalent
-   to the requested ones.
+   them for you.
+
    Write your code right below the corresponding comment describing the
    function you are asked to write.
 *)
