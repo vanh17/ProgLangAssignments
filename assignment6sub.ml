@@ -1,5 +1,4 @@
 (* Programming Languages, Assignment 6 *)
-(* NOT READY *)
 (*
    You should write your functions in this file.
    You should NOT specify the types of your functions. Let the system determine
@@ -42,6 +41,34 @@ type 'a stream = St of (unit -> 'a * 'a stream)
 let take1 (St th) =      (* Pattern match on the stream variant. *)
    let (v, st') = th () in v   (* Call the corresponding thunk to get value and the remaining stream *)
 
+(*
+   TIPS:
+   - As in the example of `take1` above, you will often find it beneficial to use the
+   pattern `(St th)` in place of `st` in your function arguments. This will not always
+   be the case, but it often will. Think of whether you need to call on the thunk that
+   is in the stream or just pass it on as a whole to a helper function.
+   - Most of your returns that need to produce a stream will look like:
+   `St (fun () -> ....)` with possibly a lot of work happening in those dots.
+   - When trying to write a function that turns one type of stream into another, you
+   may find it convenient to write a helper function that takes as input the pair
+   (v, st) of next input value and next input stream and returns the pair (v', st')
+   of next output value and next output stream. You can then often use that function
+   as suitable in the dots on the previous tip.
+   - Some of these are not easy. Do not be discouraged if you don't see how to do it
+   right away.
+*)
+(* IMPORTANT NOTE:
+   In all stream problems you need to make sure that stream values are not evaluated
+   too soon, before they are needed. For instance in the map function that takes a
+   'a stream and produces a 'b stream you need to make sure that the first element of
+   the 'a stream is not calculated until the first element of the 'b stream has to be
+   calculated, and so on. There is a test provided for the map case to ensure that does
+   not happen in that case.
+
+   As another example, if the function in `from_f` simply raises an exception when
+   called, then creating the stream should NOT raise an exception, but trying to get
+   the first value of the stream via say `take1` should.
+*)
 
 (* Stream generators. These functions create streams.
    Before you implement these functions, you may want to implement the function `take`
