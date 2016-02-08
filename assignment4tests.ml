@@ -6,6 +6,8 @@ let t1a = let f = fun () -> raise (Failure "")
                 | _ -> false
 
 let t1b = (thunk (fun () -> 5)) () = 5
+let t1c = (thunk (fun () -> -3)) () = -3
+let t1d = (thunk (fun () -> (fun x -> x * x) 3)) () = 9
 
 let t2a = (thunk_of_value 4) () = 4
 
