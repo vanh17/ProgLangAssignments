@@ -27,7 +27,7 @@
    Start by looking at the type definition of a thunk.
 *)
 type 'a thunk = unit -> 'a
-(*do somethinkhere*)
+
 (*
    Write a function `thunk` that takes as input a function of type `unit -> 'a`
    and returns the `'a thunk` from it. This is an incredibly simple function.
