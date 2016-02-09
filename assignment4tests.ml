@@ -11,6 +11,7 @@ let t1d = (thunk (fun () -> (fun x -> x * x) 3)) () = 9
 
 let t2a = (thunk_of_value 4) () = 4
 let t2b = (thunk_of_value ((fun (x, y) -> x * y) (5, 6))) () = 30
+let t2c = (thunk_of_value ((thunk (fun () -> 5 + 6)) ())) () = 11
 
 let t3a = try (try (thunk_of_eval ((fun x -> raise (Failure "")), 4))
                with Failure "" -> (fun () -> false)) ()
