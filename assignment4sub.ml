@@ -190,7 +190,14 @@ let has (st, s) = let rec aux (lst, x) =
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a
 *)
-
+let lookup (st, s) = let rec aux (lst, x) =
+	                     match lst with
+	                     | [] -> raise Not_found
+	                     | (y, t) :: rest -> if (y = x) then t
+	                                         else 
+	                                            if (y > x) then raise Not_found
+	                                            else aux (rest, x)
+	                 in aux (st, s)
 
 
 (*
@@ -202,7 +209,14 @@ let has (st, s) = let rec aux (lst, x) =
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a option
 *)
-
+let lookup_opt (st, s) = let rec aux (lst, x) =
+	                     match lst with
+	                     | [] -> None
+	                     | (y, t) :: rest -> if (y = x) then Some t
+	                                         else 
+	                                            if (y > x) then None
+	                                            else aux (rest, x)
+	                 in aux (st, s)
 
 
 (*
