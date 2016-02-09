@@ -66,6 +66,7 @@ let thunk_of_eval (f, x) = fun () -> f x
    It should have type: 'a thunk -> 'a option
 *)
 let try_thunk f = try (f ()) with 
+                  | Failure e -> None
                   | v -> Some v
 
 
@@ -87,7 +88,7 @@ let thunk_of_pair (f, g) = fun () -> (f (), g ())
    the returned thunk is called.
    It should have type: 'a thunk * ('a -> 'b) -> 'b thunk
 *)
-
+let thunk_map (f, g) = fun () -> g (f ())
 
 
 (*
