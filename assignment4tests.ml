@@ -36,6 +36,12 @@ let t3a = try (try (thunk_of_eval ((fun x -> raise (Failure "")), 4))
 let t3b = thunk_of_eval ((fun x -> x + 1), 5) () = 6
 let t3c = (thunk_of_eval ((thunk_of_value), ((fun (x, y) -> x * y) (5, 6))) ()) () = 30
 let t3d = (thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ()) () = 25
+let t3e = thunk_of_eval ((thunk_of_value (thunk (thunk_map ((fun () -> 4), (fun x -> 2 * x)))) ()), ()) () = 8
+let t3f = (thunk_of_eval ((thunk_of_value), ((fun (x, y) -> x * y) (5, 6))) ()) () = 30
+let t3g = thunk_of_eval ((thunk_of_value (try_thunk (fun () -> raise (Failure "hi")))), ()) () = None
+let t3h = thunk_of_eval ((thunk_of_value (try_thunk (fun () -> 5 + 6))), ()) () = Some 11
+let t3i = thunk_of_eval (thunk (fun () -> 5), ()) () = 5
+let t3j = thunk_of_eval (thunk_of_pair ((fun () -> 4), (fun () -> 5)), ()) () = (4, 5)
 
 let t4a = try_thunk (fun () -> raise (Failure "hi")) = None
 let t4b = try_thunk (fun () -> 5 + 6) = Some 11
