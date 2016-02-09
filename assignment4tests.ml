@@ -19,6 +19,15 @@ let t1k = (thunk (thunk_map ((fun () -> 4), (fun x -> 2 * x)))) () = 8
 let t2a = (thunk_of_value 4) () = 4
 let t2b = (thunk_of_value ((fun (x, y) -> x * y) (5, 6))) () = 30
 let t2c = (thunk_of_value ((thunk (fun () -> 5 + 6)) ())) () = 11
+let t2d = (thunk_of_value (thunk (fun () -> 5) ())) () = 5
+let t2e = (thunk_of_value ((thunk (thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ())) ())) () = 25
+let t2f = (thunk_of_value ((thunk (thunk_of_pair ((thunk_of_eval ((fun x -> x + 1), 5)), ((thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ()))))) ())) () = (6, 25)
+let t2g = (thunk_of_value (fun () -> ()) ()) () = ()
+let t2h = (thunk_of_value ((thunk_of_value ((fun (x, y) -> x * y) (5, 6))) ())) () = 30
+let t2i = (thunk_of_value ((thunk_of_value (thunk (fun () -> 5) ())) ())) () = 5
+let t2g = (thunk_of_value (thunk (thunk_map ((fun () -> 4), (fun x -> 2 * x)))) ()) () = 8
+let t2k = (thunk_of_value (try_thunk (fun () -> raise (Failure "hi")))) () = None
+let t2l = (thunk_of_value (try_thunk (fun () -> 5 + 6))) () = Some 11
 
 let t3a = try (try (thunk_of_eval ((fun x -> raise (Failure "")), 4))
                with Failure "" -> (fun () -> false)) ()
