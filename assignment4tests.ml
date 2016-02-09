@@ -108,6 +108,15 @@ let t7i = let f = let t = let g = thunk_of_eval ((fun x -> x + 1), 5)
           in thunk_of_list [f; f] () = [[[6; 6]; [6; 6]]; [[6; 6]; [6; 6]]] 
 
 let t8a = insert (empty, "foo", 3) = [("foo", 3)]
+let t8b = insert (insert (empty, "foo", 3), "foz", 3) = [("foo", 3); ("foz", 3)]
+let t8c = insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5) = [("aoo", 5); ("foo", 3); ("foz", 3)]
+let t8d = insert (insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5), "boo", 3) = [("aoo", 5); ("boo", 3); ("foo", 3); ("foz", 3)]
+let t8e = insert (insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5), "boo", 5) = [("aoo", 5); ("boo", 5); ("foo", 3); ("foz", 3)]
+let t8f = insert (insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5), "foz", 5) = [("aoo", 5); ("foo", 3); ("foz", 5)]
+let t8g = insert (insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5), "toz", 10) = [("aoo", 5);("foo", 3); ("foz", 3); ("toz", 10)]
+let t8h = insert (insert (insert (insert (empty, "foo", 3), "foz", 3), "aoo", 5), "aoz", 10) = [("aoo", 5); ("aoz", 10); ("foo", 3); ("foz", 3)]
+let t8i = insert ([("foo", 5)], "foo", 3) = [("foo", 3)]
+let t8j = insert ([("zoo", 5)], "foo", 3) = [("foo", 3); ("zoo", 5)]
 
 let t9a = has ([("foo", 2)], "foo") = true
 let t9b = has ([], "foo") = false
