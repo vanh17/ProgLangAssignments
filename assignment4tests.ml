@@ -8,6 +8,13 @@ let t1a = let f = fun () -> raise (Failure "")
 let t1b = (thunk (fun () -> 5)) () = 5
 let t1c = (thunk (fun () -> -3)) () = -3
 let t1d = (thunk (fun () -> (fun x -> x * x) 3)) () = 9
+let t1e = (thunk (thunk (fun () -> (fun x -> x * x) 3))) () = 9
+let t1f = (thunk (thunk (thunk_of_value ((fun (x, y) -> x * y) (5, 6))))) () = 30
+let t1g = (thunk (thunk_of_eval ((fun x -> x + 1), 5))) () = 6
+let t1h = (thunk (thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ())) () = 25
+let t1i = (thunk (thunk_of_pair ((thunk_of_eval ((fun x -> x + 1), 5)), ((thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ()))))) () = (6, 25)
+let t1j = (thunk (thunk_of_pair ((fun () -> 4), (fun () -> 5)))) () = (4, 5)
+let t1k = (thunk (thunk_map ((fun () -> 4), (fun x -> 2 * x)))) () = 8
 
 let t2a = (thunk_of_value 4) () = 4
 let t2b = (thunk_of_value ((fun (x, y) -> x * y) (5, 6))) () = 30
