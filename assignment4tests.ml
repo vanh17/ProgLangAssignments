@@ -127,8 +127,7 @@ let t9f = has ([("foo", 2)], "foe") = false
 let t9g = has ([("foo", 2)], "foo") = true
 let t9h = has ([], "foo") = false
 let t9i = has ([("foo", 2)], "foe") = false
-let t9j = has ([("foo", 2); ("foe", 3)], "foe") = false
-
+let t9j = has ([("aoo", 5); ("aoz", 10); ("foo", 3); ("foa", 5); ("foz", 3); ], "foa") = false
 
 let t10a = lookup ([("bar", 3); ("foo", 2)], "bar") = 3
 let t10b = try (lookup ([("bar", 3); ("foo", 2)], "baz"); false)
@@ -139,6 +138,11 @@ let t10b = try (lookup ([("bar", 3); ("foo", 2)], "baz"); false)
    your code behaves properly. *)
 let t10c = try (lookup ([("baz", 3); ("bar", 2)], "bar"); false)
            with Not_found -> true
+let t10d = try (lookup (empty, "bar"); false)
+           with Not_found -> true
+let t10e = lookup ([("bar", 3); ("bar", 2)], "bar") = 3
+let t10f = lookup ([("aoo", 5); ("aoz", 10); ("bar", 5); ("bar", 6); ("foo", 3); ("foz", 3)], "bar") = 5
+
 
 let t11a = lookup_opt ([("bar", 3); ("foo", 2)], "bar") = Some 3
 (* Again the search should be stopping after "foo" *)
