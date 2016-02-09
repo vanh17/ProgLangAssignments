@@ -251,4 +251,9 @@ let rec keys st = match st with
    maintained that they keys appear in strictly increasing order.
    It should have type: 'a table -> bool
 *)
-
+let is_proper st = let rec aux lst = 
+	                   match lst with 
+                       | [] -> true
+                       | x :: [] -> true
+                       | (y, t) :: (z, s) :: rest -> (y < z) && (aux ((z, s) :: rest))
+                   in aux st
