@@ -120,7 +120,15 @@ let t8j = insert ([("zoo", 5)], "foo", 3) = [("foo", 3); ("zoo", 5)]
 
 let t9a = has ([("foo", 2)], "foo") = true
 let t9b = has ([], "foo") = false
-let t9c = has ([("foo", 2)], "foe") = false
+let t9c = has ([("foo", 2); ("aoe", 2)], "aoe") = false
+let t9d = has ([("foo", 2)], "food") = false
+let t9e = has ([], "two") = false
+let t9f = has ([("foo", 2)], "foe") = false
+let t9g = has ([("foo", 2)], "foo") = true
+let t9h = has ([], "foo") = false
+let t9i = has ([("foo", 2)], "foe") = false
+let t9j = has ([("foo", 2); ("foe", 3)], "foe") = false
+
 
 let t10a = lookup ([("bar", 3); ("foo", 2)], "bar") = 3
 let t10b = try (lookup ([("bar", 3); ("foo", 2)], "baz"); false)

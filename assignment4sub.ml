@@ -177,7 +177,8 @@ let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
 let has (st, s) = let rec aux (lst, x) = 
 	                  match lst with
 	                  | [] -> false
-	                  | (y, _) :: rest -> (x = y) || (aux (rest, x))
+	                  | (y, _) :: rest -> if (y > x) then false 
+	                                      else (x = y) || (aux (rest, x))
 	              in aux (st, s)
 
 
