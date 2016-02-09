@@ -226,7 +226,13 @@ let lookup_opt (st, s) = let rec aux (lst, x) =
    It should not use `has` or any of the other functions.
    It should have type: 'a table * symbol -> 'a table
 *)
-
+let delete (st, s) = let rec aux (lst, x) =
+	                     match lst with
+	                     | [] -> []
+	                     | (y, t) :: rest -> if (y = x) then rest
+	                                         else 
+	                                            (y, t) :: aux (rest, x)
+	                 in aux (st, s)
 
 
 (*
