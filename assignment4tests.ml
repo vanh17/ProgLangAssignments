@@ -89,6 +89,23 @@ let t7a = let f = fun () -> raise (Failure "")
                 | _ -> false
 let t7b = let f = fun () -> 5
           in thunk_of_list [f; f] () = [5; 5]
+let t7c = let f = thunk_map ((fun () -> thunk_of_pair ((fun () -> 4), (fun () -> 5))), thunk) ()
+          in thunk_of_list [f; f; f] () = [(4, 5); (4, 5) ; (4, 5)]
+let t7d = let f = fun () -> try_thunk (fun () -> try_thunk (fun () -> raise (Failure "hi")))
+          in thunk_of_list [f; f] () = [Some None; Some None]
+let t7e = let f = thunk_map ((fun () -> 4), (fun x -> 2 * x))
+          in thunk_of_list [f; f] () = [8; 8]
+let t7f = let f = thunk_of_eval ((fun x -> x + 1), 5)
+          in thunk_of_list [f; f] () = [6; 6]
+let t7g = let f = let g = thunk_of_eval ((fun x -> x + 1), 5)
+                  in thunk_of_list [g; g]
+          in thunk_of_list [f; f] () = [[6; 6]; [6; 6]]
+let t7h = let f = thunk_map ((fun () -> ()), (fun () -> ((), ())))
+          in thunk_of_list [f; f] () = [((), ()); ((), ())]
+let t7i = let f = let t = let g = thunk_of_eval ((fun x -> x + 1), 5)
+                          in thunk_of_list [g; g]
+                  in thunk_of_list [t; t]
+          in thunk_of_list [f; f] () = [[[6; 6]; [6; 6]]; [[6; 6]; [6; 6]]] 
 
 let t8a = insert (empty, "foo", 3) = [("foo", 3)]
 
