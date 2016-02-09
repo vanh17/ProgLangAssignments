@@ -240,7 +240,9 @@ let delete (st, s) = let rec aux (lst, x) =
    of the keys in the table.
    It should have type: 'a table -> symbol list
 *)
-
+let rec keys st = match st with
+              | [] -> []
+              | (x, _) :: rest -> x :: keys rest
 
 
 (*
