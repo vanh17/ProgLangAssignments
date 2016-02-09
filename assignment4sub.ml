@@ -174,7 +174,11 @@ let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
    keys are bigger than the searched-for key there is no need to continue the search.
    It should have type: 'a table * symbol -> bool
 *)
-
+let has (st, s) = let rec aux (lst, x) = 
+	                  match lst with
+	                  | [] -> false
+	                  | (y, _) :: rest -> (x = y) || (aux (rest, x))
+	              in aux (st, s)
 
 
 (*

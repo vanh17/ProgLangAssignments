@@ -53,6 +53,8 @@ let t7b = let f = fun () -> 5
 let t8a = insert (empty, "foo", 3) = [("foo", 3)]
 
 let t9a = has ([("foo", 2)], "foo") = true
+let t9b = has ([], "foo") = false
+let t9c = has ([("foo", 2)], "foe") = false
 
 let t10a = lookup ([("bar", 3); ("foo", 2)], "bar") = 3
 let t10b = try (lookup ([("bar", 3); ("foo", 2)], "baz"); false)
