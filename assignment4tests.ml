@@ -29,6 +29,8 @@ let t5a = let f = fun () -> raise (Failure "")
              with Failure "" -> true
                 | _ -> false
 let t5b = thunk_of_pair ((fun () -> 4), (fun () -> 5)) () = (4, 5)
+let t5c = thunk_of_pair ((thunk_of_eval ((fun x -> x + 1), 5)), ((thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ()))) () = (6, 25)
+let t5d = thunk_of_pair ((thunk_of_value ((thunk (fun () -> 5 + 6)) ())), (thunk_of_value ((fun (x, y) -> x * y) (5, 6)))) () = (11, 30)
 
 let t6a = let f = fun () -> raise (Failure "")
           in try (try thunk_map (f, f)
