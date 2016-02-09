@@ -158,9 +158,11 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
 let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
                             match lst with
                             | [] -> (x, t) :: lst
-                            | (y, z) :: rest  -> if x <= y 
+                            | (y, z) :: rest  -> if x < y 
                                                then (x, t) :: lst 
-                                               else (y, z) :: sortedInsert (x, t, rest)
+                                               else 
+                                                  if x = y then (x, t) :: rest
+                                                  else (y, z) :: sortedInsert (x, t, rest)
                         in sortedInsert (s, v, st)
 
 
