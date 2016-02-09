@@ -171,8 +171,8 @@ let t13e = keys empty = []
 let t13f = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bard")) = ["bar"; "baz"; "foo"]
 let t13g = keys (insert ([("bar", 3); ("foo", 2)], "aoz", 10)) = ["aoz"; "bar"; "foo"]
 let t13h = keys (delete (insert (empty, "fpp", 3), "fpp")) = []
-let t13c = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar")) = ["baz"; "foo"]
-let t13a = keys [("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2)] 
+let t13i = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar")) = ["baz"; "foo"]
+let t13j = keys [("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2)] 
          = ["bar"; "foo"; "bar"; "foo"; "bar"; "foo"; "bar"; "foo"; "bar"; "foo"]
 
 let t14a = is_proper [("bar", 3); ("foo", 2)] = true
