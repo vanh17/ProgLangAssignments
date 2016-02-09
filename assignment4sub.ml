@@ -155,7 +155,13 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    insert (empty, "foo", 3) = [("foo", 3)]
    It should have type: 'a table * symbol * 'a -> 'a table
 *)
-
+let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
+                            match lst with
+                            | [] -> (x, t) :: lst
+                            | (y, z) :: rest  -> if x <= y 
+                                               then (x, t) :: lst 
+                                               else (y, z) :: sortedInsert (x, t, rest)
+                        in sortedInsert (s, v, st)
 
 
 (*
