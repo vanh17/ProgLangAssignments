@@ -166,7 +166,25 @@ let t12i = delete (empty, "bar") = empty
 let t13a = keys [("bar", 3); ("foo", 2)] = ["bar"; "foo"]
 let t13b = keys [] = []
 let t13c = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar")) = ["baz"; "foo"]
+let t13d = keys [("bar", 3); ("foo", 2)] = ["bar"; "foo"]
+let t13e = keys empty = []
+let t13f = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bard")) = ["bar"; "baz"; "foo"]
+let t13g = keys (insert ([("bar", 3); ("foo", 2)], "aoz", 10)) = ["aoz"; "bar"; "foo"]
+let t13h = keys (delete (insert (empty, "fpp", 3), "fpp")) = []
+let t13c = keys (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar")) = ["baz"; "foo"]
+let t13a = keys [("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2); ("bar", 3); ("foo", 2)] 
+         = ["bar"; "foo"; "bar"; "foo"; "bar"; "foo"; "bar"; "foo"; "bar"; "foo"]
 
 let t14a = is_proper [("bar", 3); ("foo", 2)] = true
 let t14b = is_proper [("bar", 3); ("a", 2)] = false
 let t14c = is_proper [("a", 5); ("bar", 3); ("", 2)] = false
+let t14d = is_proper empty = true
+let t14e = is_proper [("bar", 3); ("bar", 3); ("foo", 3); ("foo", 2)] = false
+let t14f = is_proper (delete ([("bar", 3); ("bar", 5); ("foo", 2)], "bar")) = true
+let t14g = is_proper (delete (delete ([("bar", 3); ("bar", 5); ("foo", 2)], "bar"), "bar")) = true
+let t14h = is_proper (delete (delete (delete ([("bar", 3); ("bar", 5); ("foo", 2)], "bar"), "bar"), "foo")) = true
+let t14i = is_proper (insert (insert (insert ([("bar", 3); ("foo", 2)], "aoo", 3), "dee", 10), "yolo", 5)) = true
+let t14j = is_proper [("bar", 3); ("a", 5); ("foo", 2)] = false
+let t14k = is_proper (delete ([("bar", 3); ("foo", 2); ("bard", 5)], "foo")) = true
+
+
