@@ -154,6 +154,14 @@ let t11f = lookup_opt ([("aoo", 5); ("aoz", 10); ("bar", 5); ("bar", 6); ("foz",
 
 let t12a = delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar") = [("baz", 1); ("foo", 2)]
 let t12b = delete (delete (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar"), "baz"), "foo") = []
+let t12c = has (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar"), "bar") = false
+let t12d = has (delete (delete (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar"), "baz"), "foo"), "bar") = false
+let t12e = lookup_opt (delete ([("aoo", 5); ("aoz", 10); ("bar", 5); ("bar", 6); ("foz", 3); ("foy", 3)], "bar"), "bar") = Some 6
+let t12f = try (lookup (delete (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar"), "foo"), "foo"); false) 
+           with Not_found -> true
+let t12g = lookup (delete ([("aoo", 5); ("aoz", 10); ("bar", 5); ("bar", 6); ("foz", 3); ("foy", 3)], "foz"), "foy") = 3
+let t12h = delete (delete (delete ([("bar", 3); ("baz", 1); ("foo", 2)], "bar"), "baz"), "foo") = []
+let t12i = delete (empty, "bar") = empty
 
 let t13a = keys [("bar", 3); ("foo", 2)] = ["bar"; "foo"]
 let t13b = keys [] = []
