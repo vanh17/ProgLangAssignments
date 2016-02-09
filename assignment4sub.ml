@@ -53,7 +53,7 @@ let thunk_of_value x = fun () -> x
    is not applied until the thunk is evaluated.
    It should have type: ('a -> 'b) * 'a -> 'a thunk
 *)
-
+let thunk_of_eval (f, x) = fun () -> f x
 
 
 
