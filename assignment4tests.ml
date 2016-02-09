@@ -46,6 +46,13 @@ let t3j = thunk_of_eval (thunk_of_pair ((fun () -> 4), (fun () -> 5)), ()) () = 
 let t4a = try_thunk (fun () -> raise (Failure "hi")) = None
 let t4b = try_thunk (fun () -> 5 + 6) = Some 11
 let t4c = try_thunk ((thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ())) = Some 25
+let t4d = try_thunk (fun () -> raise (Failure "try_thunk")) = None
+let t4e = try_thunk (thunk_of_eval ((thunk_of_value (thunk (thunk_map ((fun () -> 4), (fun x -> 2 * x)))) ()), ())) = Some 8
+let t4f = try_thunk ((thunk_of_eval ((thunk_of_eval), ((fun x -> fun () -> x + 2) 5, ())) ())) = Some 7
+let t4g = try_thunk (thunk_of_eval (thunk_of_pair ((fun () -> 4), (fun () -> 5)), ())) = Some (4, 5)
+let t4h = try_thunk (fun () -> try_thunk (fun () -> raise (Failure "hi"))) = Some None
+let t4i = try_thunk (fun () -> try_thunk (fun () -> try_thunk (fun () -> raise (Failure "hi")))) = Some (Some None)
+let t4j = try_thunk (fun () -> ()) = Some ()
 
 let t5a = let f = fun () -> raise (Failure "")
           in try (try (thunk_of_pair (f, f)) with Failure "" -> (fun () -> (1, 1))) () =
