@@ -65,9 +65,7 @@ let thunk_of_eval (f, x) = fun () -> f x
    after the "with" is a pattern.
    It should have type: 'a thunk -> 'a option
 *)
-let try_thunk f = try (f ()) with 
-                  | Failure e -> None
-                  | v -> Some v
+let try_thunk f = try (match f () with v -> Some v) with Failure e -> None
 
 
 (*

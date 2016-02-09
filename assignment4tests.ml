@@ -22,6 +22,8 @@ let t3c = (thunk_of_eval ((thunk_of_value), ((fun (x, y) -> x * y) (5, 6))) ()) 
 let t3d = (thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ()) () = 25
 
 let t4a = try_thunk (fun () -> raise (Failure "hi")) = None
+let t4b = try_thunk (fun () -> 5 + 6) = Some 11
+let t4c = try_thunk ((thunk_of_eval ((thunk_of_eval), ((fun x -> x * x), 5)) ())) = Some 25
 
 let t5a = let f = fun () -> raise (Failure "")
           in try (try (thunk_of_pair (f, f)) with Failure "" -> (fun () -> (1, 1))) () =
