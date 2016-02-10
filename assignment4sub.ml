@@ -33,6 +33,7 @@ type 'a thunk = unit -> 'a
    and returns the `'a thunk` from it. This is an incredibly simple function.
    It should have type: (unit -> 'a) -> 'a thunk
 *)
+let thunk f = fun () -> f ()
 
 
 
@@ -42,7 +43,7 @@ type 'a thunk = unit -> 'a
    simple function.
    Should have type: 'a -> 'a thunk
 *)
-
+let thunk_of_value x = fun () -> x
 
 
 (*
@@ -52,7 +53,7 @@ type 'a thunk = unit -> 'a
    is not applied until the thunk is evaluated.
    It should have type: ('a -> 'b) * 'a -> 'a thunk
 *)
-
+let thunk_of_eval (f, x) = fun () -> f x
 
 
 
@@ -64,7 +65,7 @@ type 'a thunk = unit -> 'a
    after the "with" is a pattern.
    It should have type: 'a thunk -> 'a option
 *)
-
+let try_thunk f = try (Some (f ())) with Failure e -> None
 
 
 (*
@@ -74,7 +75,7 @@ type 'a thunk = unit -> 'a
    returned thunk is called.
    It should have type: 'a thunk * 'b thunk -> ('a * 'b) thunk
 *)
-
+let thunk_of_pair (f, g) = fun () -> (f (), g ())
 
 
 (*
@@ -85,7 +86,7 @@ type 'a thunk = unit -> 'a
    the returned thunk is called.
    It should have type: 'a thunk * ('a -> 'b) -> 'b thunk
 *)
-
+let thunk_map (f, g) = fun () -> g (f ())
 
 
 (*
@@ -96,6 +97,11 @@ type 'a thunk = unit -> 'a
    called.
    It should have type: 'a thunk list -> 'a list thunk
 *)
+let thunk_of_list lst = fun () -> let rec aux l = 
+	                                  match l with
+                        			  | [] -> (fun () -> []) ()
+                        		      | f :: rest -> ((fun () -> f ()) ()) :: (aux rest)
+                        		  in aux lst
 
 
 
@@ -149,7 +155,12 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    insert (empty, "foo", 3) = [("foo", 3)]
    It should have type: 'a table * symbol * 'a -> 'a table
 *)
-
+let rec insert (st, s, v) = if st = empty then (s, v) :: st
+                            else match st with
+                                 | (y, z) :: rest  -> if s < y 
+                                                      then (s, v) :: st 
+                                                      else if s = y then (s, v) :: rest
+                                                      else (y, z) :: insert (rest, s, v)
 
 
 (*
@@ -160,7 +171,10 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    keys are bigger than the searched-for key there is no need to continue the search.
    It should have type: 'a table * symbol -> bool
 *)
-
+let rec has (st, s) = if st = empty then false
+	                  else match st with 
+	                       | (y, _) :: rest -> if y > s then false 
+	                                           else s = y || has (rest, s)
 
 
 (*
@@ -172,7 +186,11 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a
 *)
-
+let rec lookup (st, s) = if st = empty then raise Not_found 
+	                     else match st with
+	                          | (y, t) :: rest -> if y = s then t
+	                                              else if y > s then raise Not_found
+	                                              else lookup (rest, s)
 
 
 (*
@@ -184,7 +202,11 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a option
 *)
-
+let rec lookup_opt (st, s) = if st = empty then None
+	                         else match st with
+	                              | (y, t) :: rest -> if y = s then Some t
+	                                                  else if y > s then None
+	                                                  else lookup_opt (rest, s)
 
 
 (*
@@ -194,7 +216,10 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    It should not use `has` or any of the other functions.
    It should have type: 'a table * symbol -> 'a table
 *)
-
+let rec delete (st, s) = if st = empty then empty
+	                     else match st with
+	                          | (y, t) :: rest -> if y = s then rest
+	                                              else (y, t) :: delete (rest, s)
 
 
 (*
@@ -202,7 +227,9 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    of the keys in the table.
    It should have type: 'a table -> symbol list
 *)
-
+let rec keys st = if st = empty then []
+                  else match st with
+                       | (x, _) :: rest -> x :: keys rest
 
 
 (*
@@ -211,4 +238,8 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    maintained that they keys appear in strictly increasing order.
    It should have type: 'a table -> bool
 *)
-
+let rec is_proper st = if st = empty then true
+                       else match st with
+                            | x :: [] -> true
+                            | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
+                        
