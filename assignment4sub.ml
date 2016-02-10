@@ -155,15 +155,12 @@ let empty : 'a table = []   (* A more intuitive notation for the empty list/tabl
    insert (empty, "foo", 3) = [("foo", 3)]
    It should have type: 'a table * symbol * 'a -> 'a table
 *)
-let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
-                            match lst with
-                            | [] -> (x, t) :: lst
-                            | (y, z) :: rest  -> if x < y 
-                                               then (x, t) :: lst 
-                                               else 
-                                                  if x = y then (x, t) :: rest
-                                                  else (y, z) :: sortedInsert (x, t, rest)
-                        in sortedInsert (s, v, st)
+let rec insert (st, s, v) = if st = empty then (s, v) :: st
+                            else match st with
+                                 | (y, z) :: rest  -> if s < y 
+                                                      then (s, v) :: st 
+                                                      else if s = y then (s, v) :: rest
+                                                      else (y, z) :: insert (rest, s, v)
 
 
 (*
@@ -174,12 +171,10 @@ let insert (st, s, v) = let rec sortedInsert (x, t, lst) =
    keys are bigger than the searched-for key there is no need to continue the search.
    It should have type: 'a table * symbol -> bool
 *)
-let has (st, s) = let rec aux (lst, x) = 
-	                  match lst with
-	                  | [] -> false
-	                  | (y, _) :: rest -> if (y > x) then false 
-	                                      else (x = y) || (aux (rest, x))
-	              in aux (st, s)
+let rec has (st, s) = if st = empty then false
+	                  else match st with 
+	                       | (y, _) :: rest -> if y > s then false 
+	                                           else s = y || has (rest, s)
 
 
 (*
@@ -191,14 +186,11 @@ let has (st, s) = let rec aux (lst, x) =
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a
 *)
-let lookup (st, s) = let rec aux (lst, x) =
-	                     match lst with
-	                     | [] -> raise Not_found
-	                     | (y, t) :: rest -> if (y = x) then t
-	                                         else 
-	                                            if (y > x) then raise Not_found
-	                                            else aux (rest, x)
-	                 in aux (st, s)
+let rec lookup (st, s) = if st = empty then raise Not_found 
+	                     else match st with
+	                          | (y, t) :: rest -> if y = s then t
+	                                              else if y > s then raise Not_found
+	                                              else lookup (rest, s)
 
 
 (*
@@ -210,14 +202,11 @@ let lookup (st, s) = let rec aux (lst, x) =
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a option
 *)
-let lookup_opt (st, s) = let rec aux (lst, x) =
-	                     match lst with
-	                     | [] -> None
-	                     | (y, t) :: rest -> if (y = x) then Some t
-	                                         else 
-	                                            if (y > x) then None
-	                                            else aux (rest, x)
-	                 in aux (st, s)
+let rec lookup_opt (st, s) = if st = empty then None
+	                         else match st with
+	                              | (y, t) :: rest -> if y = s then Some t
+	                                                  else if y > s then None
+	                                                  else lookup_opt (rest, s)
 
 
 (*
@@ -227,13 +216,10 @@ let lookup_opt (st, s) = let rec aux (lst, x) =
    It should not use `has` or any of the other functions.
    It should have type: 'a table * symbol -> 'a table
 *)
-let delete (st, s) = let rec aux (lst, x) =
-	                     match lst with
-	                     | [] -> []
-	                     | (y, t) :: rest -> if (y = x) then rest
-	                                         else 
-	                                            (y, t) :: aux (rest, x)
-	                 in aux (st, s)
+let rec delete (st, s) = if st = empty then empty
+	                     else match st with
+	                          | (y, t) :: rest -> if y = s then rest
+	                                              else (y, t) :: delete (rest, s)
 
 
 (*
@@ -241,9 +227,9 @@ let delete (st, s) = let rec aux (lst, x) =
    of the keys in the table.
    It should have type: 'a table -> symbol list
 *)
-let rec keys st = match st with
-              | [] -> []
-              | (x, _) :: rest -> x :: keys rest
+let rec keys st = if st = empty then []
+                  else match st with
+                       | (x, _) :: rest -> x :: keys rest
 
 
 (*
@@ -252,9 +238,7 @@ let rec keys st = match st with
    maintained that they keys appear in strictly increasing order.
    It should have type: 'a table -> bool
 *)
-let is_proper st = let rec aux lst = 
-	                   match lst with 
-                       | [] -> true
-                       | x :: [] -> true
-                       | (y, t) :: (z, s) :: rest -> (y < z) && (aux ((z, s) :: rest))
-                   in aux st
+let rec is_proper st = if st = empty then true
+                       else match st with
+                            | (_, _) :: [] -> true
+                            | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)

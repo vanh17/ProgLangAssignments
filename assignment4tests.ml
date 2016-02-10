@@ -186,5 +186,6 @@ let t14h = is_proper (delete (delete (delete ([("bar", 3); ("bar", 5); ("foo", 2
 let t14i = is_proper (insert (insert (insert ([("bar", 3); ("foo", 2)], "aoo", 3), "dee", 10), "yolo", 5)) = true
 let t14j = is_proper [("bar", 3); ("a", 5); ("foo", 2)] = false
 let t14k = is_proper (delete ([("bar", 3); ("foo", 2); ("bard", 5)], "foo")) = true
+let t14l = is_proper [("dp", 5)] = true
 
 
