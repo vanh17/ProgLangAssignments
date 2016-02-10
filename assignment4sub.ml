@@ -186,11 +186,11 @@ let rec has (st, s) = match st with
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a
 *)
-let rec lookup (st, s) = if st = empty then raise Not_found 
-	                     else match st with
-	                          | (y, t) :: rest -> if y = s then t
-	                                              else if y > s then raise Not_found
-	                                              else lookup (rest, s)
+let rec lookup (st, s) = match st with
+                         | [] -> raise Not_found
+	                     | (y, t) :: rest -> if y = s then t
+	                                         else if y > s then raise Not_found
+	                                         else lookup (rest, s)
 
 
 (*
