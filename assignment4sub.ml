@@ -230,6 +230,9 @@ let rec delete (st, s) = if st = empty then empty
 let rec keys st = if st = empty then []
                   else match st with
                        | (x, _) :: rest -> x :: keys rest
+let rec keys st = match st with
+					   | [] -> []
+                       | (x, _) :: rest -> x :: keys rest
 
 
 (*
@@ -238,8 +241,8 @@ let rec keys st = if st = empty then []
    maintained that they keys appear in strictly increasing order.
    It should have type: 'a table -> bool
 *)
-let rec is_proper st = if st = empty then true
-                       else match st with
+let rec is_proper st = match st with
+                            | [] -> []
                             | x :: [] -> true
                             | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
                         
