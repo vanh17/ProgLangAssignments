@@ -202,11 +202,10 @@ let rec lookup (st, s) = match st with
    It should have type: 'a table * symbol -> 'a option
 *)
 let rec lookup_opt (st, s) = match st with
-                             | [] -> []
+                             | [] -> None
 	                         | (y, t) :: rest -> if y = s then Some t
 	                                             else if y > s then None
 	                                             else lookup_opt (rest, s)
-                             }
 
 
 (*
@@ -239,7 +238,7 @@ let rec keys st = match st with
    It should have type: 'a table -> bool
 *)
 let rec is_proper st = match st with
-                            | [] -> []
+                            | [] -> true
                             | x :: [] -> true
                             | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
                         
