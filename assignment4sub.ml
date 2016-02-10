@@ -216,9 +216,9 @@ let rec lookup_opt (st, s) = if st = empty then None
    It should not use `has` or any of the other functions.
    It should have type: 'a table * symbol -> 'a table
 *)
-let rec delete (st, s) = if st = empty then empty
-	                     else match st with
-	                          | (y, t) :: rest -> if y = s then rest
+let rec delete (st, s) = match st with
+                         | [] -> []
+	                     | (y, t) :: rest -> if y = s then rest
 	                                              else (y, t) :: delete (rest, s)
 
 
