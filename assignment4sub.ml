@@ -227,9 +227,6 @@ let rec delete (st, s) = if st = empty then empty
    of the keys in the table.
    It should have type: 'a table -> symbol list
 *)
-let rec keys st = if st = empty then []
-                  else match st with
-                       | (x, _) :: rest -> x :: keys rest
 let rec keys st = match st with
 					   | [] -> []
                        | (x, _) :: rest -> x :: keys rest
