@@ -202,11 +202,12 @@ let rec lookup (st, s) = if st = empty then raise Not_found
    It should not look any further in the list than is necessary.
    It should have type: 'a table * symbol -> 'a option
 *)
-let rec lookup_opt (st, s) = if st = empty then None
-	                         else match st with
-	                              | (y, t) :: rest -> if y = s then Some t
-	                                                  else if y > s then None
-	                                                  else lookup_opt (rest, s)
+let rec lookup_opt (st, s) = match st with
+                             | [] -> []
+	                         | (y, t) :: rest -> if y = s then Some t
+	                                             else if y > s then None
+	                                             else lookup_opt (rest, s)
+                             }
 
 
 (*
