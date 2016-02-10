@@ -171,10 +171,10 @@ let rec insert (st, s, v) = if st = empty then (s, v) :: st
    keys are bigger than the searched-for key there is no need to continue the search.
    It should have type: 'a table * symbol -> bool
 *)
-let rec has (st, s) = if st = empty then false
-	                  else match st with 
-	                       | (y, _) :: rest -> if y > s then false 
-	                                           else s = y || has (rest, s)
+let rec has (st, s) = match st with
+                      | [] -> false 
+	                  | (y, _) :: rest -> if y > s then false 
+	                                      else s = y || has (rest, s)
 
 
 (*
