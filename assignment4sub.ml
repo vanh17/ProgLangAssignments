@@ -240,5 +240,6 @@ let rec keys st = if st = empty then []
 *)
 let rec is_proper st = if st = empty then true
                        else match st with
-                            | (_, _) :: [] -> true
+                            | x :: [] -> true
                             | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
+                        
