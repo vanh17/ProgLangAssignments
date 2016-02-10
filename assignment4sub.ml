@@ -98,10 +98,10 @@ let thunk_map (f, g) = fun () -> g (f ())
    It should have type: 'a thunk list -> 'a list thunk
 *)
 let thunk_of_list lst = fun () -> let rec aux l = 
-	                                  match l with
-                        			  | [] -> (fun () -> []) ()
-                        		      | f :: rest -> ((fun () -> f ()) ()) :: (aux rest)
-                        		  in aux lst
+                                      match l with
+                                      | [] -> (fun () -> []) ()
+                                      | f :: rest -> ((fun () -> f ()) ()) :: (aux rest)
+                                  in aux lst
 
 
 
@@ -172,8 +172,8 @@ let rec insert (st, s, v) = match st with
 *)
 let rec has (st, s) = match st with
                       | [] -> false 
-	                  | (y, _) :: rest -> if y > s then false 
-	                                      else s = y || has (rest, s)
+                      | (y, _) :: rest -> if y > s then false 
+                                          else s = y || has (rest, s)
 
 
 (*
@@ -187,9 +187,9 @@ let rec has (st, s) = match st with
 *)
 let rec lookup (st, s) = match st with
                          | [] -> raise Not_found
-	                     | (y, t) :: rest -> if y = s then t
-	                                         else if y > s then raise Not_found
-	                                         else lookup (rest, s)
+                         | (y, t) :: rest -> if y = s then t
+                                             else if y > s then raise Not_found
+                                             else lookup (rest, s)
 
 
 (*
@@ -203,9 +203,9 @@ let rec lookup (st, s) = match st with
 *)
 let rec lookup_opt (st, s) = match st with
                              | [] -> None
-	                         | (y, t) :: rest -> if y = s then Some t
-	                                             else if y > s then None
-	                                             else lookup_opt (rest, s)
+                             | (y, t) :: rest -> if y = s then Some t
+                                                 else if y > s then None
+                                                 else lookup_opt (rest, s)
 
 
 (*
@@ -217,8 +217,8 @@ let rec lookup_opt (st, s) = match st with
 *)
 let rec delete (st, s) = match st with
                          | [] -> []
-	                     | (y, t) :: rest -> if y = s then rest
-	                                              else (y, t) :: delete (rest, s)
+                         | (y, t) :: rest -> if y = s then rest
+                                             else (y, t) :: delete (rest, s)
 
 
 (*
@@ -227,8 +227,8 @@ let rec delete (st, s) = match st with
    It should have type: 'a table -> symbol list
 *)
 let rec keys st = match st with
-					   | [] -> []
-                       | (x, _) :: rest -> x :: keys rest
+                  | [] -> []
+                  | (x, _) :: rest -> x :: keys rest
 
 
 (*
@@ -238,7 +238,7 @@ let rec keys st = match st with
    It should have type: 'a table -> bool
 *)
 let rec is_proper st = match st with
-                            | [] -> true
-                            | x :: [] -> true
-                            | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
+                       | [] -> true
+                       | x :: [] -> true
+                       | (y, t) :: (z, s) :: rest -> y < z && is_proper ((z, s) :: rest)
                         
