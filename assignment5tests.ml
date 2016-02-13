@@ -9,6 +9,9 @@ let t8g = not (has_vars (Mul (Mul (Add (Mul (Add (Int 2, Int 2), Mul(Int 2, Int 
 
 let t9a = count_vars (Add (Var, Int 2)) = 1
 let t9b = count_vars (Add (Int 1, Int 2)) = 0
+let t9c = count_vars (Parity (Mul (Add(Var, Mul (Add(Var, Int 3),Add (Var, Mul (Add(Var, Int 3),Add (Var, Int 2))))),Add (Var, Int 2)))) = 6
+let t9d = count_vars (Add (Mul (Add (Mul (Add (Mul (Add (Var, Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2)) = 1
+let t9e = count_vars (Mul (Mul (Add (Mul (Add (Int 2, Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2)) = 0
 
 let t10a = calc_eval (Add (Var, Int 2), 3) = 5
 
