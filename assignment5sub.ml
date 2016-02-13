@@ -122,8 +122,11 @@ let rec subst (c1, c2) = match c2 with
    n = 1, when the result should be the calculation itself.
    It should have type: calc * int -> calc
 *)
-
-
+let rec power (cal, n) = match (cal, n) with
+                         | (cal, 0) -> Int 1
+                         | (cal, 1) -> cal
+                         | _ -> Mul (power (cal, n-1), cal)
+                          
 
 (*
    Write a function `term` that takes as input a pair of integers `(a, n)` and
