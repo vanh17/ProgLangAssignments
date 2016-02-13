@@ -93,7 +93,7 @@ let rec calc_eval (cal, x) = match cal with
    It should have type: calc -> (int -> int)
    (though the parentheses will not show)
 *)
-
+let func_of_calc cal = fun x -> calc_eval (cal, x)
 
 
 (*
