@@ -61,7 +61,13 @@ let rec has_vars cal = match cal with
    number of references to the variable in that calculation. Do NOT use `has_vars`.
    It should have type: calc -> int
 *)
-
+let rec count_vars cal = match cal with
+                         | Var -> 1
+                         | Int i -> 0
+                         | Parity c1 -> count_vars c1
+                         | Add (c1, c2) -> (count_vars c1) + (count_vars c2) 
+                         | Sub (c1, c2) -> (count_vars c1) + (count_vars c2)
+                         | Mul (c1, c2) -> (count_vars c1) + (count_vars c2)
 
 (*
    Write a function `calc_eval` that takes as input a pair of a calculation and an
