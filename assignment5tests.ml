@@ -43,6 +43,16 @@ let t13c = power (power (Var, 4), 4) = Mul (Mul (Mul (Mul (Mul (Mul (Var, Var), 
 let t13d = power (Add (Var, Int 2), 5) = Mul (Mul (Mul (Mul (Add (Var, Int 2), Add (Var, Int 2)), Add (Var, Int 2)), Add (Var, Int 2)), Add (Var, Int 2))
 
 let t14a = term (2, 1) = Mul(Int 2, Var)
+let t14b = term (0, 1) = Int 0
+let t14c = term (0, 3) = Int 0
+let t14d = term (0, 0) = Int 0
+let t14e = term (3, 0) = Int 3
+let t14f = term (1, 0) = Int 1
+let t14g = term (22, 0) = Int 22
+let t14h = term (1, 1) = Var
+let t14i = term (1, 3) = Mul (Mul (Var, Var), Var)
+let t14j = term (3, 3) = Mul (Int 3, Mul (Mul (Var, Var), Var))
+
 
 let t15a = poly [(2, 1); (1, 4)] = Add (term (2, 1), term (1, 4))
 
