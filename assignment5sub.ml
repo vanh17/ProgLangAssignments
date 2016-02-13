@@ -102,7 +102,13 @@ let func_of_calc cal = fun x -> calc_eval (cal, x)
    the variable in c2 with c1.
    It should have type: calc * calc -> calc
 *)
-
+let rec subst (c1, c2) = match c2 with
+                         | Var -> c1
+                         | Int i -> Int i
+                         | Parity c3 -> Parity (subst (c1, c3))
+                         | Add (c3, c4) -> Add (subst (c1, c3), subst (c1, c4))
+                         | Sub (c3, c4) -> Sub (subst (c1, c3), subst (c1, c4))
+                         | Mul (c3, c4) -> Mul (subst (c1, c3), subst (c1, c4))
 
 
 (*
