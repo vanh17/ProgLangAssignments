@@ -37,8 +37,10 @@ let t12c = subst (subst (Mul (Add (Var, Int 2), Mul(Int 2, Int 3)), Mul (Add (Va
                 Mul (Add (Mul (Add (Mul (Add (Mul (Add (Var, Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3))
 
 
-let t13a = power 3 = Mul (Mul (Var, Var), Var)
-
+let t13a = power (Var, 3) = Mul (Mul (Var, Var), Var)
+let t13b = power (Var, 4) = Mul (Mul (Mul (Var, Var), Var), Var)
+let t13c = power (power (Var, 4), 4) = Mul (Mul (Mul (Mul (Mul (Mul (Var, Var), Var), Var), Mul (Mul (Mul (Var, Var), Var), Var)), Mul (Mul (Mul (Var, Var), Var), Var)), Mul (Mul (Mul (Var, Var), Var), Var))
+let t13d = power (Add (Var, Int 2), 5) = Mul (Mul (Mul (Mul (Add (Var, Int 2), Add (Var, Int 2)), Add (Var, Int 2)), Add (Var, Int 2)), Add (Var, Int 2))
 
 let t14a = term (2, 1) = Mul(Int 2, Var)
 
