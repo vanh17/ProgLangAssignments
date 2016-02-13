@@ -51,9 +51,9 @@ let rec has_vars cal = match cal with
                        | Var -> true
                        | Int i -> false
                        | Parity c1 -> has_vars c1
-                       | Add (c1, c2) -> (has_vars c1) || (has_vars c2) 
-                       | Sub (c1, c2) -> (has_vars c1) || (has_vars c2)
-                       | Mul (c1, c2) -> (has_vars c1) || (has_vars c2)
+                       | Add (c1, c2) -> has_vars c1 || has_vars c2
+                       | Sub (c1, c2) -> has_vars c1 || has_vars c2
+                       | Mul (c1, c2) -> has_vars c1 || has_vars c2
 
 
 (*
@@ -65,9 +65,9 @@ let rec count_vars cal = match cal with
                          | Var -> 1
                          | Int i -> 0
                          | Parity c1 -> count_vars c1
-                         | Add (c1, c2) -> (count_vars c1) + (count_vars c2) 
-                         | Sub (c1, c2) -> (count_vars c1) + (count_vars c2)
-                         | Mul (c1, c2) -> (count_vars c1) + (count_vars c2)
+                         | Add (c1, c2) -> count_vars c1 + count_vars c2 
+                         | Sub (c1, c2) -> count_vars c1 + count_vars c2
+                         | Mul (c1, c2) -> count_vars c1 + count_vars c2
 
 (*
    Write a function `calc_eval` that takes as input a pair of a calculation and an
@@ -75,6 +75,13 @@ let rec count_vars cal = match cal with
    described above.
    It should have type: calc * int -> int
 *)
+let rec calc_eval (cal, x) = match cal with
+                             | Var -> x
+                             | Int i -> i
+                             | Parity c1 -> if calc_eval (c1, x) mod 2 = 0 then 0 else 1
+                             | Add (c1, c2) -> calc_eval (c1, x) + calc_eval (c2, x)
+                             | Sub (c1, c2) -> calc_eval (c1, x) - calc_eval (c2, x)
+                             | Mul (c1, c2) -> calc_eval (c1, x) * calc_eval (c2, x)
 
 
 
