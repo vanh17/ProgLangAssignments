@@ -14,6 +14,10 @@ let t9d = count_vars (Add (Mul (Add (Mul (Add (Mul (Add (Var, Int 2), Mul(Int 2,
 let t9e = count_vars (Mul (Mul (Add (Mul (Add (Int 2, Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2)) = 0
 
 let t10a = calc_eval (Add (Var, Int 2), 3) = 5
+let t10b = calc_eval (Mul (Mul (Add (Mul (Add (Int 2, Int 2), Mul(Int 2, Int 3)), Int 2), Mul(Int 2, Int 3)), Int 2), 5) = 312
+let t10c = calc_eval (Parity (Mul (Add(Var, Mul (Add(Var, Int 3),Add (Var, Mul (Add(Var, Int 3),Add (Var, Int 2))))),Add (Var, Int 2))), 4) = 0
+let t10d = calc_eval (Parity (Mul (Add(Var, Mul (Add(Var, Int 3),Add (Var, Mul (Add(Var, Int 3),Add (Var, Int 2))))),Add (Var, Int 2))), 3) = 1
+let t10e = calc_eval (Mul (Add(Var, Mul (Add(Var, Int 3),Add (Var, Mul (Add(Var, Int 3),Add (Var, Int 2))))),Add (Var, Int 2)), 3) = 1005
 
 let t11a = func_of_calc (Add (Var, Int 2)) 3 = 5
 
