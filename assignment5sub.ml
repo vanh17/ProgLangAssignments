@@ -157,7 +157,17 @@ let term (a, n) = match (a,n) with
    - If a "term" has zero coefficient, it should be skipped.
    It should have type: (int * int) list -> calc
 *)
-
+let poly lst = let rec dopoly lst1 = match lst1 with 
+                                     | [] -> Int 0
+                                     | (a, n) :: [] -> term (a, n)
+                                     | (a, n) :: rest -> if a = 0 then dopoly rest else Add (dopoly rest, term (a, n))
+               in let rev list = let rec aux acc = function
+                                     | [] -> acc
+                                     | h :: t -> match h with 
+                                                 | (0, _) -> aux (acc) t
+                                                 | _ -> aux (h::acc) t 
+                                  in aux [] list
+               in dopoly (rev lst)
 
 
 (*
