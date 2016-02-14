@@ -55,6 +55,18 @@ let t14j = term (3, 3) = Mul (Int 3, Mul (Mul (Var, Var), Var))
 
 
 let t15a = poly [(2, 1); (1, 4)] = Add (term (2, 1), term (1, 4))
+let t15b = poly [(2, 1)] = term (2, 1)
+let t15c = poly [(2, 1); (0, 3); (1, 4)] = Add (term (2, 1), term (1, 4))
+let t15d = poly [(2, 1); (0, 3); (0, 4)] = term (2, 1)
+let t15e = poly [(0, 1); (0, 3); (0, 4)] = Int 0
+let t15f = poly [] = Int 0
+let t15g = poly [(2, 1); (1, 3); (1, 4); (4, 1); (5, 3); (5, 4)] = Add (Add (Add (Add (Add (term (2, 1), term (1, 3)), term (1, 4)), term (4,1)), term (5, 3)), term (5, 4))
+let t15h = poly [(0, 3); (0, 4); (2, 1)] = term (2, 1)
+let t15i = poly [(2, 3); (0, 3); (0, 4); (2, 1)] = Add (term (2, 3), term (2, 1))
+let t15j = poly [(0, 3); (0, 4); (2, 3); (2, 1)] = Add (term (2, 3), term (2, 1))
+let t15k = poly [(0, 3); (0, 4); (2, 3); (2, 1); (2, 1)] = Add (Add (term (2, 3), term (2, 1)), term (2, 1))
+let t15l = poly [(5, 6); (0, 3); (0, 4); (2, 3); (2, 1); (0, 4); (0, 4); (2, 1); (0, 4)] = Add (Add (Add (term (5, 6), term (2, 3)), term (2, 1)), term (2, 1))
+
 
 let t16a = simplify (Add (Int 0, Var)) = Var
 let t16b = simplify (Add (Int 3, Int 4)) = Int 7
