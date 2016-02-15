@@ -237,7 +237,8 @@ let rec simplify c =
       | Add (Int 0, c1) -> simplify c1
       | Add (c1, Int 0) -> simplify c1
       | Add (c1, Int i) -> Add (Int i, simplify c1)    (* special add case here *)
-      | Add (Mul (c1, c2), Mul (c3, c4)) -> if c1 = c3 then Mul (simplify c1, simplify (Add (c2, c3)))
+      | Add (Mul (c1, c2), Mul (c3, c4)) -> if Mul (c1, c2) = Mul (c3, c4) then Mul (Int 2, simplify (Mul (c1, c2)))
+                                            else if c1 = c3 then Mul (simplify c1, simplify (Add (c2, c3)))
                                             else if c2 = c4 then Mul (simplify (Add (c2, c4)), simplify c1)
                                             else Add (simplify (Mul (c1, c2)), simplify (Mul (c3, c4)))
       | Add (c1, Mul (c2, c3)) -> if c1 = c2 then Mul (simplify c1, simplify (Add (Int 1, c3)))
