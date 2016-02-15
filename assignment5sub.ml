@@ -220,16 +220,36 @@ let poly lst = let rec dopoly lst1 = match lst1 with
 *)
 (* This function stub is commented out for now so as not to throw errors when
    you work on the previous part. Delete the comment part when you want to start
-   working on this function.
+   working on this function.*)
 
 let rec simplify c =
    let c' =
       match c with
-      | Var -> ...        (* this one's easy *)
-      | Int i -> ...      (* so is this *)
-      | Add ... -> ...    (* special add case here *)
-      | Add (c1, c2) -> Add (simplify c1, simplify c2)
+      | Var -> Var        (* this one's easy *)
+      | Int i -> Int i     (* so is this *)
+      | Add (Int x, Int y) -> Int (x + y)
+      | Mul (Int x, Int y) -> Int (x * y)
+      | Mul (c1, Int 1) -> simplify c1
+      | Mul (Int 1, c1) -> simplify c1
+      | Mul (c1, Int i) -> Mul (Int i, simplify c1)
+      | Mul (c1, c2) -> Mul (simplify c1, simplify c2)
+      | Mul (c1, Mul (c2, c3)) -> Mul (simplify (Mul (c1, c2)), simplify c3)
+      | Add (Int 0, c1) -> simplify c1
+      | Add (c1, Int 0) -> simplify c1
+      | Add (c1, Int i) -> Add (Int i, simplify c1)    (* special add case here *)
+      | Add (Mul (c1, c2), Mul (c3, c4)) -> if c1 = c3 then Mul (simplify c1, simplify (Add (c2, c3)))
+                                            else if c2 = c4 then Mul (simplify (Add (c2, c4)), simplify c1)
+                                            else Add (simplify (Mul (c1, c2)), simplify (Mul (c3, c4)))
+      | Add (c1, Mul (c2, c3)) -> if c1 = c2 then Mul (simplify c1, simplify (Add (Int 1, c3)))
+                                  else if c1 = c3 then Mul (simplify c1, simplify (Add (Int 1, c2)))
+                                  else Add (simplify c1, simplify (Mul (c2, c3)))
+      | Add (Mul (c2, c3), c1) -> if c1 = c2 then Mul (simplify (Add (Int 1, c3)), simplify c1)
+                                  else if c1 = c3 then Mul (simplify (Add (Int 1, c2)), simplify c1)
+                                  else Add (simplify (Mul (c2, c3)), simplify c1)
+      | Add (c1, c2) -> if c1 = c2 then Mul (Int 2, simplify c1) else Add (simplify c1, simplify c2)
+      | Add (c1, Add (c2, c3)) -> Add (simplify (Add (c1, c2)), simplify c3)
+      | Sub (c1, Int x) -> Add (simplify c1, simplify (Mul (Int (-1), Int x)))
+      | Sub (c1, c2) -> if c1 = c2 then Int 0 else Sub (simplify c1, simplify c2)
    (* more cases here. Do not use the catchall *)
    in if c' = c then c' else simplify c'
 
-*)
