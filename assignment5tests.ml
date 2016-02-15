@@ -71,7 +71,18 @@ let t15l = poly [(5, 6); (0, 3); (0, 4); (2, 3); (2, 1); (0, 4); (0, 4); (2, 1);
 let t16a = simplify (Add (Int 0, Var)) = Var
 let t16b = simplify (Add (Int 3, Int 4)) = Int 7
 let t16c = calc_eval (simplify (poly [(2, 1); (1, 0)]), 3) = 7
-let t16d = simplify (Add (Mul (Var, Var), Mul (Var, Var))) = Mul (Int 2, Mul (Var, Var))
-let t16e = simplify (Add (Mul (Var, Int 2), Mul (Int 2, Var))) = Mul (Int 2, Mul (Int 2, Var))
+let t16d = simplify (Add (Mul (Var, Var), Mul (Var, Var))) = Mul (Mul (Int 2, Var), Var))
+let t16e = simplify (Add (Mul (Var, Int 2), Mul (Int 2, Var))) = Mul (Int 4, Var)
 let t16f = simplify (Add (Mul (Var, Int 2), Var)) = Mul (Int 3, Var)
 let t16g = calc_eval (simplify (poly [(0, 4); (2, 3); (0, 3); (0, 4); (2, 1); (0,5)]), 2) = 20
+let t16h = simplify (Add (Mul (Int 15, Int 4), Mul (Mul (Int 6, Int 10), Var))) 
+	     = simplify (Add (Mul (Int 15, Int 4), Mul (Var, Mul (Int 6, Int 10))))
+let t16i = simplify (Add (Mul (Int 15, Int 4), Mul (Mul (Int 6, Int 10), Var))) 
+	     = Mul (Int 60, Add (Int 1, Var))
+let t16j = calc_eval (simplify (Add (Mul (Int 15, Int 4), Mul (Mul (Int 6, Int 10), Var))), 5) = 360
+let t16k = simplify (term (1, 3)) = Mul (Mul (Var, Var), Var)
+let t16l = simplify (Mul (Var, Add (Mul (Var, Var), Mul (Var, Var)))) = Mul (Mul (Mul (Int 2, Var), Var), Var)
+let t16m = simplify (Mul (Var, Mul (Int 3, Int 6))) = Mul (Int 18, Var)
+let t16n = simplify (Mul (Var, Mul (Var, Mul (Int 6, Int 3)))) = Mul (Mul (Int 18, Var), Var)
+let t16o = simplify (Mul (Add (Mul (Var, Mul (Var, Var)), Mul (Int 3, Int 6)), Mul (Var, Mul (Int 6, Int 3)))) 
+         = Mul (Mul (Int 18, Add (Int 18, Mul (Mul (Var, Var), Var))), Var)
