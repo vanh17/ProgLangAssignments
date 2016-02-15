@@ -72,3 +72,6 @@ let t16a = simplify (Add (Int 0, Var)) = Var
 let t16b = simplify (Add (Int 3, Int 4)) = Int 7
 let t16c = calc_eval (simplify (poly [(2, 1); (1, 0)]), 3) = 7
 let t16d = simplify (Add (Mul (Var, Var), Mul (Var, Var))) = Mul (Int 2, Mul (Var, Var))
+let t16e = simplify (Add (Mul (Var, Int 2), Mul (Int 2, Var))) = Mul (Int 2, Mul (Int 2, Var))
+let t16f = simplify (Add (Mul (Var, Int 2), Var)) = Mul (Int 3, Var)
+let t16g = calc_eval (simplify (poly [(0, 4); (2, 3); (0, 3); (0, 4); (2, 1); (0,5)]), 2) = 20
