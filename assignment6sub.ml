@@ -86,7 +86,7 @@ let rec const a = St (fun () -> (a, const a))
    a stream of type `'a stream` that keeps alternating between those two values.
    It should have type `'a -> 'a -> 'a stream`.
 *)
-
+let rec alt a b = St (fun () -> (a, alt b a))
 
 
 (*
