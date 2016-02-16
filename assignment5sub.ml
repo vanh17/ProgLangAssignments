@@ -160,7 +160,8 @@ let term (a, n) = match (a,n) with
 let poly lst = let rec dopoly lst1 = match lst1 with 
                                      | [] -> Int 0
                                      | (a, n) :: [] -> term (a, n)
-                                     | (a, n) :: rest -> if a = 0 then dopoly rest else Add (dopoly rest, term (a, n))
+                                     | (a, n) :: rest -> if a = 0 then dopoly rest 
+                                                         else Add (dopoly rest, term (a, n))
                in let rev list = let rec aux acc = function
                                      | [] -> acc
                                      | h :: t -> match h with 
