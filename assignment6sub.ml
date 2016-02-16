@@ -137,6 +137,9 @@ let rec take n st = if n <= 0 then []
    So for instance when n<=0 the original stream would be returned.
    It should have type `int -> 'a stream -> 'a stream`.
 *)
+let rec drop n st = if n <= 0 then st
+                    else let aux (St th) = let (v, st') = th () in st'
+                         in drop (n - 1) (aux st)
 
 
 (*
