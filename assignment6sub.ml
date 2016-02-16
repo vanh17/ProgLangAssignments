@@ -148,6 +148,9 @@ let rec drop n st = if n <= 0 then st
    the provided stream.
    It should have type: `'a list -> 'a stream -> 'a stream`.
 *)
+let rec prepend lst st = match lst with
+                         | [] -> st
+                         | x :: rest ->  St (fun () -> (x, prepend rest st))
 
 
 (*
