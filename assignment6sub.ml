@@ -113,6 +113,10 @@ let from_f f = let rec aux a = St (fun () -> (f a, aux (a + 1)))
    in search of the (nonexistent) next value, and that is OK.
    It should have type `'a list -> 'a stream`.
 *)
+let from_list lst = let rec aux (l1, l2) = match l1 with
+                                           | [] -> aux (l2, l2)
+                                           | x :: rest -> St (fun () -> (x, aux (rest, l2)))
+                    in aux (lst, lst)
 
 
 (* Stream users. These functions take as input a stream, and either produce some value
