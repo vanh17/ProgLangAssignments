@@ -71,7 +71,7 @@ let t15l = poly [(5, 6); (0, 3); (0, 4); (2, 3); (2, 1); (0, 4); (0, 4); (2, 1);
 let t16a = simplify (Add (Int 0, Var)) = Var
 let t16b = simplify (Add (Int 3, Int 4)) = Int 7
 let t16c = calc_eval (simplify (poly [(2, 1); (1, 0)]), 3) = 7
-let t16d = simplify (Add (Mul (Var, Var), Mul (Var, Var))) = Mul (Mul (Int 2, Var), Var))
+let t16d = simplify (Add (Mul (Var, Var), Mul (Var, Var))) = Mul (Mul (Int 2, Var), Var)
 let t16e = simplify (Add (Mul (Var, Int 2), Mul (Int 2, Var))) = Mul (Int 4, Var)
 let t16f = simplify (Add (Mul (Var, Int 2), Var)) = Mul (Int 3, Var)
 let t16g = calc_eval (simplify (poly [(0, 4); (2, 3); (0, 3); (0, 4); (2, 1); (0,5)]), 2) = 20
@@ -86,3 +86,24 @@ let t16m = simplify (Mul (Var, Mul (Int 3, Int 6))) = Mul (Int 18, Var)
 let t16n = simplify (Mul (Var, Mul (Var, Mul (Int 6, Int 3)))) = Mul (Mul (Int 18, Var), Var)
 let t16o = simplify (Mul (Add (Mul (Var, Mul (Var, Var)), Mul (Int 3, Int 6)), Mul (Var, Mul (Int 6, Int 3)))) 
          = Mul (Mul (Int 18, Add (Int 18, Mul (Mul (Var, Var), Var))), Var)
+let t16p = simplify (Mul (Mul (Var, Mul (Add (Int 5, Int 1), Var)), Mul (Var, Mul (Int 6, Int 3)))) = Mul (Mul (Mul (Int 108, Var), Var), Var)
+let t16q = simplify (Sub (Add (Mul (Int 15, Int 4), Mul (Mul (Int 6, Int 10), Var)), Add (Mul (Int 15, Int 4), Mul (Var, Mul (Int 6, Int 10))))) = Int 0
+let t16r = simplify (Sub (Var, Int 3)) = Add (Int (-3), Var)
+let t16s = simplify (Sub (Var, Int 0)) = Var
+let t16t = simplify (Sub (Int 0, Var)) = Sub (Int 0, Var)
+let t16u = simplify (Mul (Mul (Var, Mul (Add (Int 6, Var), Mul (Var, Var))), Int 0)) = Int 0
+let t16v = simplify (Mul (Mul (Int 0, Var), Mul (Var, Mul (Add (Int 6, Var), Mul (Var, Var))))) = Int 0
+let t16w = simplify (Mul (Parity (Mul (Var, Add (Var, Int 6))), Mul (Var, Int 6))) 
+         = Mul (Mul (Int 6, Parity (Mul (Var, Add (Int 6, Var)))), Var)
+let t16s = simplify (Add (Var, Int 0)) = Var
+let t16y = simplify (Parity (Mul (Add (Int 6, Mul (Var, Var)), Var))) 
+         = Parity (Mul (Add (Int 6, Mul (Var, Var)), Var))
+let t16z = simplify (Sub (Mul (Var, Mul (Int 6, Mul (Var, Var))), Int 6))
+         = Add (Int (-6), Mul (Mul (Mul (Int 6, Var), Var), Var))
+let t161 = simplify (Sub (Mul (Var, Var), Mul (Add (Int 6, Int 5), Int 0)))
+         = Mul (Var, Var)
+let t162 = simplify (Mul (Mul (Int 0, Var), Var)) = Int 0
+let t163 = simplify (Sub (Add (Sub (Var, Int 6), Mul (Var, Int 0)), Mul (Mul (Var, Add (Int 0, Mul (Var, Int 0))), Var)))
+         = Add (Int (-6), Var)
+let t164 = calc_eval (simplify (Parity (Sub (Add (Sub (Var, Int 6), Mul (Var, Int 0)), Mul (Mul (Var, Add (Int 0, Mul (Var, Int 0))), Var)))), 6)
+         = 0
