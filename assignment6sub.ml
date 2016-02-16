@@ -127,7 +127,9 @@ let from_list lst = let rec aux (l1, l2) = match l1 with
    returns a list of the first n elements of the stream (and the empty list if n<=0).
    It should have type `int -> 'a stream -> 'a list`.
 *)
-
+let rec take n st = if n <= 0 then []
+                    else let aux (St th) = let (v, st') = th () in st'
+                         in take1 st :: take (n - 1) (aux st)
 
 (*
    Write a function `drop` that takes as input a number `n` and a stream `st` and
