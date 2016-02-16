@@ -79,7 +79,7 @@ let take1 (St th) =      (* Pattern match on the stream variant. *)
    a stream of type `'a stream` that keeps producing that value over and over.
    It should have type `'a -> 'a stream`.
 *)
-
+let rec const a = St (fun () -> (a, const a))
 
 (*
    Write a function `alt` that takes as input two values of some type `'a` and returns
