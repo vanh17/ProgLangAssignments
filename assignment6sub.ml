@@ -182,9 +182,9 @@ let rec pair_up st = let aux (St th) = let (v, st') = th () in st'
    returns a `('a * 'b) stream` by pairing together the corresponding values.
    It should have type `'a stream -> 'b stream -> ('a * 'b) stream`.
 *)
-let rec pair_up st1 st2 = let aux (St th) = let (v, st') = th () in st'
+let rec zip2 st1 st2 = let aux (St th) = let (v, st') = th () in st'
                           in let (nst1, nst2) = (aux st1, aux st2)
-                          in St (fun () -> ((take1 st1, take1 st2), pair_up nst1 nst2))
+                          in St (fun () -> ((take1 st1, take1 st2), zip2 nst1 nst2))
 
 (*
    Write a function `accum` that takes as input a function `'b -> 'a -> 'b`, an initial
@@ -196,6 +196,7 @@ let rec pair_up st1 st2 = let aux (St th) = let (v, st') = th () in st'
 *)
 
 
+
 (*
    Write a function `filter` that takes as input a predicate function `'a -> bool` and
    a `'a stream`, and returns a `'a stream` of those values that are true. For instance
@@ -205,7 +206,10 @@ let rec pair_up st1 st2 = let aux (St th) = let (v, st') = th () in st'
    value, if for example the predicate returns always false.
    It should have type `('a -> bool) -> 'a stream -> 'a stream`.
 *)
-
+let rec filter f st = let aux (St th) = let (v, st') = th () in st'
+                      in let t = take1 st
+                      in if f t then St (fun () -> (t, filter f (aux st)))
+                         else filter f (aux st)
 
 (*
    Write a function `collect` that takes as input an integer `n > 0` and a `'a stream`
