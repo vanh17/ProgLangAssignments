@@ -40,7 +40,6 @@ type 'a stream = St of (unit -> 'a * 'a stream)
 *)
 let take1 (St th) =      (* Pattern match on the stream variant. *)
    let (v, st') = th () in v   (* Call the corresponding thunk to get value and the remaining stream *)
-
 (*
    TIPS:
    - As in the example of `take1` above, you will often find it beneficial to use the
@@ -218,6 +217,10 @@ let rec filter f st = let aux (St th) = let (v, st') = th () in st'
    then `collect 3 st` is the stream [1;2;3], [4;5;6], [7;8;9], ...
    It should have type `int -> 'a stream -> 'a list stream`.
 *)
+let rec collect n st = let rec naux n1 st = if n1 = 0 then st 
+                                           else let aux (St th) = let (v, st') = th () in st'
+                                                in naux (n1 - 1) (aux st)
+                       in St (fun () -> (take n st, collect n (naux n st)))
 
 
 (*
