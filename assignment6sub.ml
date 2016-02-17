@@ -172,6 +172,9 @@ let rec map f st = let aux (St th) = let (v, st') = th () in st'
    would have values (1, 2), (3, 4), (5, 6), ...
    It should have type `'a stream -> ('a * 'a) stream`.
 *)
+let rec pair_up st = let aux (St th) = let (v, st') = th () in st'
+                     in let nst = aux st
+                     in St (fun () -> ((take1 st, take1 nst), pair_up (aux nst)))
 
 
 (*
