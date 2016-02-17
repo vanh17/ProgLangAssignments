@@ -234,7 +234,10 @@ let rec collect n st = let rec naux n1 st = if n1 = 0 then st
    the lists are empty.
    It should have type: `'a list stream -> 'a stream`,
 *)
-
+let rec flatten lst = let aux (St th) = let (v, st') = th () in st'
+                      in match take1 lst with
+                         | [] -> flatten (aux lst)
+                         | x :: rest -> St (fun () -> (x, flatten (St (fun () -> (rest, aux lst)))))
 
 (*
    Write a function `list_combos` that takes as input a `'a stream` st1 and a `'b stream`,
