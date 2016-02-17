@@ -161,6 +161,8 @@ let rec prepend lst st = match lst with
    be 1, 4, 9, ...
    It should have type `('a -> 'b) -> 'a stream -> 'b stream`.
 *)
+let rec map f st = let aux (St th) = let (v, st') = th () in st'
+                   in St (fun () -> (f (take1 st), map f (aux st)))
 
 
 (*
