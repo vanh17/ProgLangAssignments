@@ -182,7 +182,9 @@ let rec pair_up st = let aux (St th) = let (v, st') = th () in st'
    returns a `('a * 'b) stream` by pairing together the corresponding values.
    It should have type `'a stream -> 'b stream -> ('a * 'b) stream`.
 *)
-
+let rec pair_up st1 st2 = let aux (St th) = let (v, st') = th () in st'
+                          in let (nst1, nst2) = (aux st1, aux st2)
+                          in St (fun () -> ((take1 st1, take1 st2), pair_up nst1 nst2))
 
 (*
    Write a function `accum` that takes as input a function `'b -> 'a -> 'b`, an initial
