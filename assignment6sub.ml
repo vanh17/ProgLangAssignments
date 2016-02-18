@@ -301,5 +301,6 @@ let list_combos st1 st2 = let rec nextstage l1 l2 (s1, s2) = let aux (St th) = l
    solution.
    It should have type: 'a stream -> 'b stream -> ('a * 'b) stream
 *)
+
 let list_combos_flat st1 st2 = flatten (list_combos st1 st2)
 
