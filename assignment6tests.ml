@@ -1,5 +1,12 @@
 (* These tests assume that you have implemented the function `take` as suggested *)
 let t1a = take 4 (const 3) = [3; 3; 3; 3]
+let t1b = match take 4 (const (alt 3 4)) with 
+          | x :: y :: z :: t :: [] -> (take 4 x, take 5 y, take 6 z, take 7 t) = (take 4 (alt 3 4), take 5 (alt 3 4), take 6 (alt 3 4), take 7 (alt 3 4))
+let t1c = take 5 (const 6) = [6; 6; 6; 6; 6]
+let t1d = take 0 (const 1) = []
+let t1e = take 1 (const 5) = take1 (const 5) :: []
+let t1f = take 1 (const 5) = [5]
+
 
 let t2a = take 5 (alt 3 4) = [3; 4; 3; 4; 3]
 
