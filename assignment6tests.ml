@@ -9,6 +9,11 @@ let t1f = take 1 (const 5) = [5]
 
 
 let t2a = take 5 (alt 3 4) = [3; 4; 3; 4; 3]
+let t2b = take 4 (alt 3 4) = [3; 4; 3; 4]
+let t2c = match take 4 (alt (const 3) (const 4)) with 
+          | x :: y :: z :: t :: [] -> (take 4 x, take 5 y, take 6 z, take 7 t) = (take 4 (const 3), take 5 (const 4), take 6 (const 3), take 7 (const 4))
+let t2d = take 4 (alt (take 4 (alt 3 4)) (take 5 (alt 4 3))) = [[3; 4; 3; 4]; [4; 3; 4; 3; 4]; [3; 4; 3; 4]; [4; 3; 4; 3; 4]]
+
 
 let t3a = take 3 (seq 2 6) = [2; 8; 14]
 
