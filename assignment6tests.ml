@@ -70,6 +70,10 @@ let t8d = match take 4 (map (fun x -> fun y -> seq x y) (seq 1 1)) with
           | x1 :: x2 :: x3 :: x4 :: [] -> (take 3 (x1 1), take 3 (x2 2), take 3 (x3 3), take 3 (x4 4)) = (take 3 (seq 1 1), take 3 (seq 2 2), take 3 (seq 3 3), take 3 (seq 4 4))
 
 let t9a = take 3 (pair_up (seq 1 1)) = [(1, 2); (3, 4); (5, 6)]
+let t9b = take 5 (pair_up (alt 3 4)) = [(3, 4); (3, 4); (3, 4); (3, 4); (3, 4)]
+let t9c = take 3 (pair_up (map (fun x -> x * x) (seq 1 1))) = [(1, 4); (9, 16); (25, 36)]
+let t9d = take 3 (pair_up (drop 3 (seq 2 4))) = [(14, 18); (22, 26); (30, 34)]
+let t9e = take 3 (pair_up (pair_up (seq 1 1))) = [((1, 2), (3, 4)); ((5, 6), (7, 8)); ((9, 10), (11, 12))]
 
 let t10a = take 3 (zip2 (seq 1 2) (seq 2 3)) = [(1, 2); (3, 5); (5, 8)]
 
