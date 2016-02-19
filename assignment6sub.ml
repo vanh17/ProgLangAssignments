@@ -131,8 +131,8 @@ let from_list lst = let rec aux (l1, l2) = match l1 with
                          in take1 st :: take (n - 1) (aux st)*)
 let rec take n st = if n <= 0 then []
                     else let aux (St th) = let (v, st') = th () in (v, st')
-                         in match aux st with
-                            | (v, st') -> v :: take (n - 1) st'
+                         in let (v, st') = aux st
+                            in v :: take (n - 1) st'
 
 (*
    Write a function `drop` that takes as input a number `n` and a stream `st` and
@@ -167,8 +167,8 @@ let rec prepend lst st = match lst with
 (*let rec map f st = let aux (St th) = let (v, st') = th () in st'
                    in St (fun () -> (f (take1 st), map f (aux st)))*)
 let rec map f st = let aux (St th) = let (v, st') = th () in (v, st')
-                   in match aux st with 
-                      | (v, st') -> St (fun () -> (f v, map f st'))
+                   in let (v, st') = aux st
+                      in St (fun () -> (f v, map f st'))
 
 
 (*
@@ -183,9 +183,9 @@ let rec pair_up st = let aux (St th) = let (v, st') = th () in st'
                      in let nst = aux st
                      in St (fun () -> ((take1 st, take1 nst), pair_up (aux nst)))*)
 let rec pair_up st = let aux (St th) = let (v, st') = th () in (v, st')
-                     in match aux st with
-                        | (v, st') -> match aux st' with
-                                      | (v1, st1') -> St (fun () -> ((v, v1), pair_up st1'))
+                     in let (v, st') = aux st
+                        in let (v1, st1') = aux st'
+                           in St (fun () -> ((v, v1), pair_up st1'))
 
 
 (*
@@ -197,8 +197,8 @@ let rec pair_up st = let aux (St th) = let (v, st') = th () in (v, st')
                           in let (nst1, nst2) = (aux st1, aux st2)
                           in St (fun () -> ((take1 st1, take1 st2), zip2 nst1 nst2)) *)
 let rec zip2 st1 st2 = let aux (St th) = let (v, st') = th () in (v, st')
-                          in match (aux st1, aux st2) with 
-                             | ((v1, s1'), (v2, s2')) -> St (fun () -> ((v1, v2), zip2 s1' s2'))
+                          in let ((v1, s1'), (v2, s2')) = (aux st1, aux st2) 
+                             in St (fun () -> ((v1, v2), zip2 s1' s2'))
 
 (*
    Write a function `accum` that takes as input a function `'b -> 'a -> 'b`, an initial
@@ -212,8 +212,8 @@ let rec zip2 st1 st2 = let aux (St th) = let (v, st') = th () in (v, st')
                         in let acc = take1 st
                         in St (fun () -> (b, accum f ( f b acc) (aux st))) *)
 let rec accum f  b st = let aux (St th) = let (v, st') = th () in (v, st')
-                        in match aux st with
-                           | (acc, st') -> St (fun () -> (b, accum f ( f b acc) st')) 
+                        in let (acc, st') = aux st
+                           in  St (fun () -> (b, accum f ( f b acc) st')) 
 
 
 (*
@@ -229,11 +229,14 @@ let rec accum f  b st = let aux (St th) = let (v, st') = th () in (v, st')
                       in let t = take1 st
                       in if f t then St (fun () -> (t, filter f (aux st)))
                          else filter f (aux st)*)
-let rec filter f st = let aux (St th) = let (v, st') = th () in (v, st')
+(*let rec filter f st = let aux (St th) = let (v, st') = th () in (v, st')
                       in match aux st with 
                          | (t, st') -> if f t then St (fun () -> (t, filter f st'))
-                                       else filter f st'
-
+                                       else filter f st' *)
+let rec filter f st = let aux (St th) = let (v, st') = th () in (v, st')
+                      in let (t, st') = aux st 
+                         in if f t then St (fun () -> (t, filter f st'))
+                            else filter f st'
 (*
    Write a function `collect` that takes as input an integer `n > 0` and a `'a stream`
    and returns a `'a list stream` where each value is formed out of taking the next `n`
@@ -260,11 +263,11 @@ let rec collect n st = let rec naux n1 st = if n1 = 0 then st
                       in match take1 lst with
                          | [] -> flatten (aux lst)
                          | x :: rest -> St (fun () -> (x, flatten (St (fun () -> (rest, aux lst)))))*)
-
 let rec flatten lst = let aux (St th) = let (v, st') = th () in (v, st')
                       in match aux lst with
                          | ([], st') -> flatten (st')
                          | (x :: rest, st') -> St (fun () -> (x, flatten (St (fun () -> (rest, st')))))
+
 
 (*
    Write a function `list_combos` that takes as input a `'a stream` st1 and a `'b stream`,
@@ -287,11 +290,16 @@ let rec flatten lst = let aux (St th) = let (v, st') = th () in (v, st')
    Reference solution is 7 lines.
    It should have type: 'a stream -> 'b stream -> ('a * 'b) list stream
 *)
-let list_combos st1 st2 = let rec nextstage l1 l2 (s1, s2) = let aux (St th) = let (v, st') = th () in (v, st')
+(*let list_combos st1 st2 = let rec nextstage l1 l2 (s1, s2) = let aux (St th) = let (v, st') = th () in (v, st')
                               in match (aux s1, aux s2) with 
                               | ((v1, s1'), (v2, s2')) -> let (l1', l2') = (v1 :: l1, v2 :: l2) 
                                  in St (fun () -> (List.combine l1' (List.rev l2') , nextstage l1' l2' (s1', s2')))
-                          in nextstage [] [] (st1, st2)
+                          in nextstage [] [] (st1, st2) *)
+let list_combos st1 st2 = let rec nextstage l1 l2 (St th1) (St th2) = 
+                              let ((v1, st1'), (v2, st2')) = (th1 (), th2 ())
+                              in let (l1', l2') = (v1 :: l1, v2 :: l2) 
+                                 in St (fun () -> (List.combine l1' (List.rev l2') , nextstage l1' l2' st1' st2'))
+                          in nextstage [] [] st1 st2
 
 
 (*
