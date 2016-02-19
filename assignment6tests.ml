@@ -16,6 +16,9 @@ let t2d = take 4 (alt (take 4 (alt 3 4)) (take 5 (alt 4 3))) = [[3; 4; 3; 4]; [4
 
 
 let t3a = take 3 (seq 2 6) = [2; 8; 14]
+let t3b = take 5 (seq 0 10) = [0; 10; 20; 30; 40]
+let t3c = match take 5 (alt (seq 5 6) (seq 6 5)) with
+          | x1 :: x2 :: x3 :: x4 :: x5 :: [] -> (take 3 x1, take 4 x2, take 5 x3, take 6 x4, take 7 x5) = ([5; 11; 17], [6; 11; 16; 21], [5; 11; 17; 23; 29], [6; 11; 16; 21; 26; 31], [5; 11; 17; 23; 29; 35; 41])
 
 let t4a = take 5 (from_f (fun x -> x * x)) = [1; 4; 9; 16; 25]
 (* The next test ensures that the function is not called until the corresponding
