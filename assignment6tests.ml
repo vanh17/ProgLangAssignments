@@ -80,6 +80,9 @@ let t10b = take 3 (zip2 (seq 1 2) (zip2 (seq 2 3) (alt 3 4))) = [(1, (2, 3)); (3
 let t10c = take 3 (zip2 (St (fun () -> (5, seq 3 4))) (seq 2 3)) = [(5, 2); (3, 5); (7, 8)]
 
 let t11a = take 4 (accum (+) 0 (seq 1 1)) = [0; 1; 3; 6]
+let t11b = take 4 (accum ( * ) 0 (seq 1 1)) = [0; 0; 0; 0]
+let t11c = take 4 (accum ( * ) 6 (seq 1 1)) = [6; 6; 12; 36]
+let t11d = take 5 (accum (fun x y -> x * y) 5 (seq 1 1)) = [5; 5; 10; 30; 120]
 
 let t12a = take 4 (filter (fun x -> x mod 2 = 0) (seq 1 1)) = [2; 4; 6; 8]
 
