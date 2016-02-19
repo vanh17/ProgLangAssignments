@@ -13,7 +13,10 @@ let t2b = take 4 (alt 3 4) = [3; 4; 3; 4]
 let t2c = match take 4 (alt (const 3) (const 4)) with 
           | x :: y :: z :: t :: [] -> (take 4 x, take 5 y, take 6 z, take 7 t) = (take 4 (const 3), take 5 (const 4), take 6 (const 3), take 7 (const 4))
 let t2d = take 4 (alt (take 4 (alt 3 4)) (take 5 (alt 4 3))) = [[3; 4; 3; 4]; [4; 3; 4; 3; 4]; [3; 4; 3; 4]; [4; 3; 4; 3; 4]]
-
+let t2e = match take 4 (alt (seq 3 6) (seq 0 5)) with 
+          | x :: y :: z :: t :: [] -> (take 2 x, take 3 y, take 2 z, take 3 t) = ([3; 9], [0; 5; 10], [3; 9], [0; 5; 10])
+let t2f = match take 3 (alt (seq 3 6) (seq 0 5)) with 
+          | x :: y :: z :: [] -> (take 2 x, take 3 y, take 2 z) = ([3; 9], [0; 5; 10], [3; 9])
 
 let t3a = take 3 (seq 2 6) = [2; 8; 14]
 let t3b = take 5 (seq 0 10) = [0; 10; 20; 30; 40]
@@ -31,6 +34,11 @@ let t4e = match take 3 (from_f (fun x -> fun y -> x * y)) with
           | f1 :: f2 :: f3 :: [] -> (f1 2, f2 4, f3 6) = (2, 8, 18)
 
 let t5a = take 5 (from_list [3; 5; 6]) = [3; 5; 6; 3; 5]
+let t5b = take 5 (from_list (take 5 (from_f (fun n -> take n (seq 5 6))))) = [[5]; [5; 11]; [5; 11; 17]; [5; 11; 17; 23]; [5; 11; 17;23; 29]]
+let t5c = match take 4 (from_list (take 3 (from_f (fun x -> fun y -> x * y)))) with
+          | f1 :: f2 :: f3 :: f4 :: [] -> (f1 2, f2 2, f3 2, f4 2) = (2, 4, 6, 2)
+let t5d = match take 4 (from_list (take 3 (alt (seq 5 6) (const 5)))) with
+          | s1 :: s2 :: s3 :: s4 :: [] -> (take 3 s1, take 4 s2, take 5 s3, take 3 s4) = ([5; 11; 17], [5; 5; 5; 5], [5; 11; 17; 23; 29], [5; 11; 17])
 
 let t6a = take 3 (drop 3 (seq 2 6)) = [20; 26; 32]
 
