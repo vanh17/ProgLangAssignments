@@ -40,6 +40,7 @@ let t5c = match take 4 (from_list (take 3 (from_f (fun x -> fun y -> x * y)))) w
 let t5d = match take 4 (from_list (take 3 (alt (seq 5 6) (const 5)))) with
           | s1 :: s2 :: s3 :: s4 :: [] -> (take 3 s1, take 4 s2, take 5 s3, take 3 s4) = ([5; 11; 17], [5; 5; 5; 5], [5; 11; 17; 23; 29], [5; 11; 17])
 
+
 let t6a = take 3 (drop 3 (seq 2 6)) = [20; 26; 32]
 let t6b = take 3 (drop 4 (seq 2 6)) = [26; 32; 38]
 let t6c = match take 3 (drop 5 (alt (seq 2 6) (const 5))) with
