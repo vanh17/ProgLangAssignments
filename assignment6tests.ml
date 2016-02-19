@@ -25,6 +25,10 @@ let t4a = take 5 (from_f (fun x -> x * x)) = [1; 4; 9; 16; 25]
    value is actually needed. *)
 let t4b = try (ignore (from_f (fun _ -> raise (Failure ""))); true) with
           | _ -> false
+let t4c = take 5 (from_f (fun n -> take n (seq 5 6))) = [[5]; [5; 11]; [5; 11; 17]; [5; 11; 17; 23]; [5; 11; 17;23; 29]]
+let t4d = take 6 (from_f (fun x -> 0)) =[0; 0; 0; 0; 0; 0]
+let t4e = match take 3 (from_f (fun x -> fun y -> x * y)) with
+          | f1 :: f2 :: f3 :: [] -> (f1 2, f2 4, f3 6) = (2, 8, 18)
 
 let t5a = take 5 (from_list [3; 5; 6]) = [3; 5; 6; 3; 5]
 
