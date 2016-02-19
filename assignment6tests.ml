@@ -76,6 +76,8 @@ let t9d = take 3 (pair_up (drop 3 (seq 2 4))) = [(14, 18); (22, 26); (30, 34)]
 let t9e = take 3 (pair_up (pair_up (seq 1 1))) = [((1, 2), (3, 4)); ((5, 6), (7, 8)); ((9, 10), (11, 12))]
 
 let t10a = take 3 (zip2 (seq 1 2) (seq 2 3)) = [(1, 2); (3, 5); (5, 8)]
+let t10b = take 3 (zip2 (seq 1 2) (zip2 (seq 2 3) (alt 3 4))) = [(1, (2, 3)); (3, (5, 4)); (5, (8, 3))]
+let t10c = take 3 (zip2 (St (fun () -> (5, seq 3 4))) (seq 2 3)) = [(5, 2); (3, 5); (7, 8)]
 
 let t11a = take 4 (accum (+) 0 (seq 1 1)) = [0; 1; 3; 6]
 
