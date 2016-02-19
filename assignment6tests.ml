@@ -65,6 +65,9 @@ let t8a = take 6 (map (fun x -> x * x) (seq 1 1)) = [1; 4; 9; 16; 25; 36]
    value is actually needed. *)
 let t8b = try (ignore (map (fun _ -> raise (Failure "")) (seq 1 1)); true) with
           | _ -> false
+let t8c = take 6 (map (fun x -> string_of_int x) (seq 1 1)) = ["1"; "2"; "3"; "4"; "5"; "6"]
+let t8d = match take 4 (map (fun x -> fun y -> seq x y) (seq 1 1)) with
+          | x1 :: x2 :: x3 :: x4 :: [] -> (take 3 (x1 1), take 3 (x2 2), take 3 (x3 3), take 3 (x4 4)) = (take 3 (seq 1 1), take 3 (seq 2 2), take 3 (seq 3 3), take 3 (seq 4 4))
 
 let t9a = take 3 (pair_up (seq 1 1)) = [(1, 2); (3, 4); (5, 6)]
 
