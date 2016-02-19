@@ -40,7 +40,6 @@ let t5c = match take 4 (from_list (take 3 (from_f (fun x -> fun y -> x * y)))) w
 let t5d = match take 4 (from_list (take 3 (alt (seq 5 6) (const 5)))) with
           | s1 :: s2 :: s3 :: s4 :: [] -> (take 3 s1, take 4 s2, take 5 s3, take 3 s4) = ([5; 11; 17], [5; 5; 5; 5], [5; 11; 17; 23; 29], [5; 11; 17])
 
-
 let t6a = take 3 (drop 3 (seq 2 6)) = [20; 26; 32]
 let t6b = take 3 (drop 4 (seq 2 6)) = [26; 32; 38]
 let t6c = match take 3 (drop 5 (alt (seq 2 6) (const 5))) with
@@ -57,6 +56,9 @@ let t6g = match take 3 (drop 5 (alt (seq 2 6) (const 5))) with
                                                                   | x1 :: y1 :: z1 :: [] -> (take 3 x1, take 3 y1, take 3 z1)
 
 let t7a = take 6 (prepend [1; 2] (const 3)) = [1; 2; 3; 3; 3; 3]
+let t7b = take 6 (prepend [] (const 3)) = take 6 (const 3)
+let t7c = match take 4 (prepend [alt 3 4; seq 3 4; const 3] (const (const 3))) with
+          | x1 :: x2 :: x3 :: x4 :: [] -> (take 3 x1, take 3 x2, take 3 x3, take 3 x4) = (take 3 (alt 3 4), take 3 (seq 3 4), take 3 (const 3), take 3 (const 3))
 
 let t8a = take 6 (map (fun x -> x * x) (seq 1 1)) = [1; 4; 9; 16; 25; 36]
 (* The next test ensures that the function is not called until the corresponding
