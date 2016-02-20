@@ -295,6 +295,7 @@ let rec flatten lst = let aux (St th) = let (v, st') = th () in (v, st')
                               | ((v1, s1'), (v2, s2')) -> let (l1', l2') = (v1 :: l1, v2 :: l2) 
                                  in St (fun () -> (List.combine l1' (List.rev l2') , nextstage l1' l2' (s1', s2')))
                           in nextstage [] [] (st1, st2) *)
+
 let list_combos st1 st2 = let rec nextstage l1 l2 (St th1) (St th2) = 
                               let ((v1, st1'), (v2, st2')) = (th1 (), th2 ())
                               in let (l1', l2') = (v1 :: l1, v2 :: l2) 
