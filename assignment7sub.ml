@@ -114,4 +114,9 @@ let dims_pic pic =
 This is a very simple function. Should have type: `pixel -> string`*)
 let string_of_pxl pxl = if pxl = D then "." else "#"
 
+(* Write a function `string_of_row` that takes as input a row and returns a string 
+consisting of the concatenation of strings corresponding to the pixels in the row.  
+The resulting string should include a newline `"\n"` at the end. 
+Reference solution is 1 line. Should have type: `row -> string`*)
+let string_of_row row = List.fold_right (fun x acc-> (string_of_pxl x) ^ acc) row "\n"
 
