@@ -172,4 +172,14 @@ image of the first one as produced for example by `flip_horizontal`
 It will have twice as long rows as the original one. 
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
-let mirror_horizontal pic = List.fold_right (fun x acc -> x :: (List.rev x) :: acc) pic []
+let mirror_horizontal pic = List.fold_right (fun x acc -> (x @ List.rev x) :: acc) pic []
+
+(* 
+Write a function `mirror_both` that takes as input a picture and 
+returns a picture that contains four copies of the original picture, 
+arranged in a 2x2 format, and each obtained from the nearby one via
+a flip in that direction. When applied to the sword picture, 
+it should produce four swords emanating from its center. 
+Reference solution is 1 line. Should have type: `pic -> pic`
+*)
+let mirror_both pic = mirror_vertical (mirror_horizontal pic)
