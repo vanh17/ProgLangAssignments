@@ -97,3 +97,16 @@ let t8c = flip_horizontal [[H; H; H; H; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; H; D; D; H; H; H; H; D];
            [D; D; D; D; H; H; H; D; H; H; H; H; H]]
 
+
+let t9a = flip_both [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+                     [H; H; H; H; H; H; H; H; H; H; H; H; H]]
+        =  [[H; H; H; H; H; H; H; H; H; H; H; H; H];
+            [D; D; D; D; D; D; D; D; D; D; D; D; D]]
+let t8b = flip_both [] = []
+let t8c = flip_both [[H; H; H; H; D; D; D; D; D; D; D; D; D]; 
+                     [D; H; H; H; H; D; D; H; H; H; H; H; H];
+                     [H; H; H; H; H; D; H; H; H; D; D; D; D]]
+        = [[D; D; D; D; H; H; H; D; H; H; H; H; H]; 
+           [H; H; H; H; H; H; D; D; H; H; H; H; D];
+           [D; D; D; D; D; D; D; D; D; H; H; H; H]]
+
