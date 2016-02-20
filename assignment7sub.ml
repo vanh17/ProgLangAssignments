@@ -193,3 +193,12 @@ is determined by the value of the function `f`. Use `tabulate` from earlier (in 
 Reference solution is 1-2 lines. Should have type: `(int -> int -> pixel) -> int -> int -> pic`
 *)
 let pixelate f m n = tabulate (fun x -> tabulate (f x) n) m
+
+(*
+Write a function `stack_vertical` that takes as input two pictures and 
+places them one atop the other in a vertical fashion. It should raise 
+the exception `IncompatibleDims` if the pictures have different number of columns. 
+Reference solution is 2 lines. Should have type: `pic -> pic -> pic`.
+*)
+let stack_vertical pic1 pic2 = if dims_pic pic1 = dims_pic pic2 then List.fold_right (fun x acc -> x :: acc) pic1 pic2 
+                               else raise (IncompatibleDims)
