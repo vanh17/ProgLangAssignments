@@ -183,3 +183,13 @@ it should produce four swords emanating from its center.
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
 let mirror_both pic = mirror_vertical (mirror_horizontal pic)
+
+(*
+Write a function `pixelate` that takes as input a function 
+`f` of type `int -> int -> pixel` and two integers `m` and `n`, in that order, 
+and produces a picture of `m` rows and `n` "columns". 
+The pixel at the i-th row and j-th column (in other words the j-th pixel in the i-th row) 
+is determined by the value of the function `f`. Use `tabulate` from earlier (in two places). 
+Reference solution is 1-2 lines. Should have type: `(int -> int -> pixel) -> int -> int -> pic`
+*)
+let pixelate f m n = tabulate (fun x -> tabulate (f x) n) m
