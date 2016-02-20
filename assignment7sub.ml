@@ -130,3 +130,10 @@ The rows already contain newline characters. You do not need to add any extra ne
 Reference solution is 1 line. Should have type: `pic -> string`
 *)
 let string_of_pic pic = List.fold_right (fun x acc -> (string_of_row x) ^ acc) pic ""
+
+(*
+Write a function `flip_vertical` that takes as input a picture and 
+returns a picture that is a vertical flip of the original one. 
+Reference solution is 1 line.Should have type: `pic -> pic`
+*)
+let flip_vertical pic = List.fold_left (fun acc x -> x :: acc) [] pic
