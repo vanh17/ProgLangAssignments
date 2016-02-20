@@ -1,0 +1,5 @@
+let t1a = range1 0 = []
+let t1b = range1 1 = [1]
+let t1c = range1 2 = [1; 2]
+let t1d = range1 5 = [1; 2; 3; 4; 5]
+let t1e = range1 10 = [1; 2; 3; 4; 5; 6; 7; 8; 9; 10]
