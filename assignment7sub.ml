@@ -162,3 +162,14 @@ It will have twice the number of rows as the original one.
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
 let mirror_vertical pic = List.fold_right (fun x acc -> x :: acc) pic (flip_vertical pic)  
+
+(*
+Write a function `mirror_horizontal` that takes as input a picture and 
+returns a picture that contains two copies of the original picture, 
+one next the other horizontally, but where the second copy is a mirror 
+image of the first one as produced for example by `flip_horizontal` 
+(but you will likely not be able to call `flip_horizontal`). 
+It will have twice as long rows as the original one. 
+Reference solution is 1 line. Should have type: `pic -> pic`
+*)
+let mirror_horizontal pic = List.fold_right (fun x acc -> x :: (List.rev x) :: acc) pic []
