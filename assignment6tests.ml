@@ -8,6 +8,7 @@ let t1e = take 1 (const 5) = take1 (const 5) :: []
 let t1f = take 1 (const 5) = [5]
 
 
+
 let t2a = take 5 (alt 3 4) = [3; 4; 3; 4; 3]
 let t2b = take 4 (alt 3 4) = [3; 4; 3; 4]
 let t2c = match take 4 (alt (const 3) (const 4)) with 
