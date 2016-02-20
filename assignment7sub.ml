@@ -14,7 +14,10 @@
    Place your "helpers" implementations here.
 *)
 let rec range a b = if a > b then [] else a :: range (a + 1) b
-
+(* Write a function `range1` that takes as input a single integer as input and returns 
+the list of integers from 1 to that integer. This should be extremely easy. Use `range`. 
+It should have type `int -> int list`.*)
+let range1 n = range 1 n
 
 
 (* ---------------------------------
