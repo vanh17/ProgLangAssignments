@@ -19,3 +19,14 @@ let t3b = dims_pic doodad = (24, 43)
 let t4a = string_of_pxl D = "."
 let t4b = string_of_pxl H ="#"
 
+let t5a = string_of_row [D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;
+                         D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D] 
+        = "..#........................................\n"
+let t5b = string_of_row [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D] = "................\n"
+let t5c = string_of_row [D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;
+                         H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D] 
+        = "..##.....######################............\n"
+let t5d = string_of_row [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;
+                        D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D]
+        = "...............##......#...................\n"
+let t5e = string_of_row [] = "\n"
