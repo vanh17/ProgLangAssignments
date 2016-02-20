@@ -12,3 +12,5 @@ let t2c = tabulate (fun x -> ()) 0 = []
 let t2d = tabulate (fun x -> tabulate (fun y -> y * y) x) 4 = [[1]; [1; 4]; [1; 4; 9]; [1; 4; 9; 16]]
 let t2e = tabulate (fun x-> []) (-2) =[]
 
+
+

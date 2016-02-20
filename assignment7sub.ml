@@ -59,7 +59,38 @@ let sword = [
 (*
    You need to fix this.
 *)
-let doodad = []
+(* Create your own "picture", named `doodad`, in a manner similar to "sword" above. The picture can be anything you like, but it must satisfy the following conditions which will be checked by the grading tests:
+    - It must be bound to the variable `doodad`.
+    - It must be of type "pic".
+    - It must be "rectangular", in other words all rows must have the same number of elements.
+    - The two "dimensions" (number of rows, number of columns) do not have to be equal but they have to each be at least 6. (no 4x2 doodads)
+
+    Should have type: `pic`*)
+let doodad = [
+[D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];]
 
 (*
    These two functions provided to you. Study how they work before continuing!
