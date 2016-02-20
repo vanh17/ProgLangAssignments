@@ -186,3 +186,38 @@ let t13e = pixelate (fun x y -> if (x + y) mod 2 = 0 then D else H) 4 5
             [H; D; H; D; H];
             [D; H; D; H; D];
             [H; D; H; D; H]]
+
+
+let t14a = stack_vertical sword (flip_vertical sword) = mirror_vertical sword
+let t14b = try (stack_vertical sword [[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+                                     [D;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D];
+                                     [D;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D];
+                                     [D;D;H;H;H;H;D;D;D;D;D;D;D;D;D;D];
+                                     [D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D];
+                                     [D;D;D;H;H;H;H;D;D;D;D;D;D;D;D;D];
+                                     [D;D;D;D;H;H;H;H;D;D;D;D;D;D;D;D];
+                                     [D;D;D;D;D;D;H;H;H;D;D;D;D;D;D;D];
+                                     [D;D;D;D;D;D;D;H;H;H;D;D;H;D;D;D];
+                                     [D;D;D;D;D;D;D;D;H;H;D;H;H;D;D;D];
+                                     [D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D];
+                                     [D;D;D;D;D;D;D;D;D;H;H;H;D;D;D;D];
+                                     [D;D;D;D;D;D;D;D;H;H;D;D;H;D;D;D];
+                                     [D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D];
+                                     [D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H]]; false)
+           with IncompatibleDims -> true
+           | _ -> false
+let t14c = try (stack_vertical [] sword; false) with IncompatibleDims -> true
+           | _ -> false
+let t14d = stack_vertical [[D;H;D;D;D;D];
+                           [D;D;D;D;D;D]]
+                           [[H;H;H;H;H;H];
+                            [H;H;H;H;H;H]]
+         = [[D;H;D;D;D;D];
+            [D;D;D;D;D;D];
+            [H;H;H;H;H;H];
+            [H;H;H;H;H;H]]
+let t14e = stack_vertical [] [] = []
+let t14f = stack_vertical [[];[];[]] [[];[];[]] = [[];[];[];[];[];[]]
+let t14g = stack_vertical [[]] [[]] = [[];[]]
+let t14h = try (stack_vertical [] [[]]; false) with IncompatibleDims -> true
+           | _ -> false
