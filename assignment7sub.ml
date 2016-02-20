@@ -108,3 +108,10 @@ let dims_pic pic =
 (*
    Add your other functions here
 *)
+
+(*  Write a function `string_of_pxl` that takes as input a pixel and it returns a string,
+ a single dot if the pixel is a D, the hash/pound sign # if the pixel is H. 
+This is a very simple function. Should have type: `pixel -> string`*)
+let string_of_pxl pxl = if pxl = D then "." else "#"
+
+
