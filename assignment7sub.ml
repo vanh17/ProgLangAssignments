@@ -137,3 +137,10 @@ returns a picture that is a vertical flip of the original one.
 Reference solution is 1 line.Should have type: `pic -> pic`
 *)
 let flip_vertical pic = List.fold_left (fun acc x -> x :: acc) [] pic
+
+(*
+Write a function `flip_horizontal` that takes as input a picture and 
+returns a picture that is a horizontal flip of the original one. 
+Reference solution is 1 line. Should have type: `pic -> pic`
+*)
+let flip_horizontal pic = List.fold_right (fun x acc -> (List.fold_left (fun acc y -> y :: acc) [] x) :: acc) pic []
