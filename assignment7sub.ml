@@ -152,3 +152,13 @@ let flip_horizontal pic = List.fold_right (fun x acc -> (List.fold_left (fun acc
  Reference solution is 1 line. Should have type: `pic -> pic`
 *)
 let flip_both pic = flip_vertical (flip_horizontal pic)
+
+(*
+Write a function `mirror_vertical` that takes as input a picture and 
+returns a picture that contains two copies of the original picture, 
+one below the other but where the second copy is a mirror image of the first one, 
+as produced by `flip_vertical`. You do not have to use `flip_vertical` along the way. 
+It will have twice the number of rows as the original one. 
+Reference solution is 1 line. Should have type: `pic -> pic`
+*)
+let mirror_vertical pic = List.fold_right (fun x acc -> x :: acc) pic (flip_vertical pic)  
