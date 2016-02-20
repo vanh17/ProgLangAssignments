@@ -110,3 +110,32 @@ let t8c = flip_both [[H; H; H; H; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; H; D; D; H; H; H; H; D];
            [D; D; D; D; D; D; D; D; D; H; H; H; H]]
 
+let t10a = mirror_vertical [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+                            [H; H; H; H; H; H; H; H; H; H; H; H; H]]
+        =  [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+            [H; H; H; H; H; H; H; H; H; H; H; H; H];
+            [H; H; H; H; H; H; H; H; H; H; H; H; H];
+            [D; D; D; D; D; D; D; D; D; D; D; D; D]]
+let t10b = mirror_vertical [] = []
+let t10c = mirror_vertical [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+                            [H; H; H; H; H; H; H; H; H; H; H; H; H];
+                            [H; H; H; H; H; D; H; H; H; H; H; H; H]]
+        = [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [H; H; H; H; H; D; H; H; H; H; H; H; H];
+           [H; H; H; H; H; D; H; H; H; H; H; H; H]; 
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [D; D; D; D; D; D; D; D; D; D; D; D; D]]
+let t10d = mirror_vertical [[H; H; H; H; H; D; H; H; H; H; H; H; H]; 
+                            [H; H; H; H; H; H; H; H; H; H; H; H; H];
+                            [D; D; D; D; D; D; D; D; D; D; D; D; D];
+                            [H; H; H; H; H; H; H; H; H; H; H; H; H]]
+        = [[H; H; H; H; H; D; H; H; H; H; H; H; H]; 
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [D; D; D; D; D; D; D; D; D; D; D; D; D];
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [D; D; D; D; D; D; D; D; D; D; D; D; D];
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [H; H; H; H; H; D; H; H; H; H; H; H; H]]
+
