@@ -169,3 +169,20 @@ let t12c = mirror_both [[H; H; H; H; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; D; H; H; H; D; D; D; D; D; D; D; D; H; H; H; D; H; H; H; H; H];
            [D; H; H; H; H; D; D; H; H; H; H; H; H; H; H; H; H; H; H; D; D; H; H; H; H; D];
            [H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H]]
+
+
+let t13a = pixelate (fun x y -> if x * y mod 2 = 0 then D else H) 2 3
+         = [[H; D; H];
+            [D; D; D]]
+let t13b = pixelate (fun x y -> if x * y mod 2 = 0 then D else H) 0 3 = []
+let t13c = pixelate (fun x y -> if x * y mod 2 = 0 then D else H) 0 3 = []
+let t13d = pixelate (fun x y -> if x * y mod 2 = 0 then D else H) 4 5
+         = [[H; D; H; D; H];
+            [D; D; D; D; D];
+            [H; D; H; D; H];
+            [D; D; D; D; D]]
+let t13e = pixelate (fun x y -> if (x + y) mod 2 = 0 then D else H) 4 5
+         = [[D; H; D; H; D];
+            [H; D; H; D; H];
+            [D; H; D; H; D];
+            [H; D; H; D; H]]
