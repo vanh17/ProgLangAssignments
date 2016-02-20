@@ -89,21 +89,29 @@ let t12b = take 4 (filter (fun x -> x = 4) (alt 3 4)) = take 4 (const 4)
 (*let t12c = take 4 (filter (fun x -> not (x = x)) (seq 1 1)) = [] :run forever tests*)
 
 let t13a = take 3 (collect 3 (seq 1 1)) = [[1; 2; 3]; [4; 5; 6]; [7; 8; 9]]
-let t13b = take 3 (collect 3 (zip2 (alt 3 4) (seq 1 1))) = [[(3, 1); (4, 2); (3, 3)]; [(4, 4); (3, 5); (4, 6)]; [(3, 7); (4, 8); (3, 9)]]
+let t13b = take 3 (collect 3 (zip2 (alt 3 4) (seq 1 1))) = [[(3, 1); (4, 2); (3, 3)]; [(4, 4); (3, 5); (4, 6)]; 
+                                                           [(3, 7); (4, 8); (3, 9)]]
 
 let t14a = take 5 (flatten (collect 3 (seq 1 1))) = [1; 2; 3; 4; 5]
-let t14b = take 9 (flatten (collect 3 (zip2 (alt 3 4) (seq 1 1)))) = [(3, 1); (4, 2); (3, 3); (4, 4); (3, 5); (4, 6); (3, 7); (4, 8); (3, 9)]
+let t14b = take 9 (flatten (collect 3 (zip2 (alt 3 4) (seq 1 1)))) = [(3, 1); (4, 2); (3, 3); (4, 4); (3, 5); 
+                                                                      (4, 6); (3, 7); (4, 8); (3, 9)]
 
 let t15a = take 4 (list_combos (seq 1 1) (seq 1 1)) =
                   [[(1, 1)]; [(2, 1); (1, 2)]; [(3, 1); (2, 2); (1, 3)];
                    [(4, 1); (3, 2); (2, 3); (1, 4)]]
 let t15b = take 4 (list_combos (list_combos (seq 1 1) (seq 1 1)) (seq 1 1)) =
-                  [[([(1, 1)], 1)]; [([(2, 1); (1, 2)], 1); ([(1, 1)], 2)]; [([(3, 1); (2, 2); (1, 3)], 1); ([(2, 1); (1, 2)], 2); ([(1, 1)], 3)];
+                  [[([(1, 1)], 1)]; [([(2, 1); (1, 2)], 1); ([(1, 1)], 2)]; 
+                  [([(3, 1); (2, 2); (1, 3)], 1); ([(2, 1); (1, 2)], 2); ([(1, 1)], 3)];
                    [([(4, 1); (3, 2); (2, 3); (1, 4)], 1); ([(3, 1); (2, 2); (1, 3)], 2); ([(2, 1); (1, 2)], 3); ([(1, 1)], 4)]]
 
 let t16a = take 10 (list_combos_flat (seq 1 1) (seq 1 1)) =
                   [(1, 1); (2, 1); (1, 2); (3, 1); (2, 2); (1, 3);
                    (4, 1); (3, 2); (2, 3); (1, 4)]
+let t16b = take 10 (list_combos_flat (list_combos (seq 1 1) (seq 1 1)) (seq 1 1)) =
+                  [([(1, 1)], 1); ([(2, 1); (1, 2)], 1); ([(1, 1)], 2); ([(3, 1); (2, 2); (1, 3)], 1); 
+                  ([(2, 1); (1, 2)], 2); ([(1, 1)], 3); ([(4, 1); (3, 2); (2, 3); (1, 4)], 1); ([(3, 1); (2, 2); (1, 3)], 2); 
+                  ([(2, 1); (1, 2)], 3); ([(1, 1)], 4)]
+
 (*
    The following test is an integration test putting together some of the things
    you've build so far. It builds a stream that produces (albeit not terribly
