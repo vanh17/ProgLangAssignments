@@ -89,8 +89,8 @@ let doodad = [
 [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
 [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
 [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
-[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
-[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];]
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D]]
 
 (*
    These two functions provided to you. Study how they work before continuing!
@@ -111,12 +111,22 @@ let dims_pic pic =
 
 (*  Write a function `string_of_pxl` that takes as input a pixel and it returns a string,
  a single dot if the pixel is a D, the hash/pound sign # if the pixel is H. 
-This is a very simple function. Should have type: `pixel -> string`*)
+This is a very simple function. Should have type: `pixel -> string`
+*)
 let string_of_pxl pxl = if pxl = D then "." else "#"
 
-(* Write a function `string_of_row` that takes as input a row and returns a string 
+(* 
+Write a function `string_of_row` that takes as input a row and returns a string 
 consisting of the concatenation of strings corresponding to the pixels in the row.  
 The resulting string should include a newline `"\n"` at the end. 
-Reference solution is 1 line. Should have type: `row -> string`*)
+Reference solution is 1 line. Should have type: `row -> string`
+*)
 let string_of_row row = List.fold_right (fun x acc-> (string_of_pxl x) ^ acc) row "\n"
 
+(* 
+Write a function `string_of_pic` that takes as input a picture and 
+returns a string consisting of the concatenation of the strings produced by each row. 
+The rows already contain newline characters. You do not need to add any extra newlines. 
+Reference solution is 1 line. Should have type: `pic -> string`
+*)
+let string_of_pic pic = List.fold_right (fun x acc -> (string_of_row x) ^ acc) pic ""
