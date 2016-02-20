@@ -64,3 +64,23 @@ let t6d = string_of_pic doodad = "..#........................................\n"
 "...............############................\n" ^
 "...............##.....#....................\n" ^
 ".....................#.....................\n"
+
+let t7a = flip_vertical [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+                         [H; H; H; H; H; H; H; H; H; H; H; H; H]]
+        =  [[H; H; H; H; H; H; H; H; H; H; H; H; H];
+            [D; D; D; D; D; D; D; D; D; D; D; D; D]]
+let t7b = flip_vertical [] = []
+let t7c = flip_vertical [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
+                         [H; H; H; H; H; H; H; H; H; H; H; H; H];
+                         [H; H; H; H; H; D; H; H; H; H; H; H; H]]
+        = [[H; H; H; H; H; D; H; H; H; H; H; H; H]; 
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [D; D; D; D; D; D; D; D; D; D; D; D; D]]
+let t7d = flip_vertical [[H; H; H; H; H; D; H; H; H; H; H; H; H]; 
+                         [H; H; H; H; H; H; H; H; H; H; H; H; H];
+                         [D; D; D; D; D; D; D; D; D; D; D; D; D];
+                         [H; H; H; H; H; H; H; H; H; H; H; H; H]]
+        = [[H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [D; D; D; D; D; D; D; D; D; D; D; D; D];
+           [H; H; H; H; H; H; H; H; H; H; H; H; H];
+           [H; H; H; H; H; D; H; H; H; H; H; H; H]]
