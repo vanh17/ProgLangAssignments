@@ -19,6 +19,11 @@ the list of integers from 1 to that integer. This should be extremely easy. Use 
 It should have type `int -> int list`.*)
 let range1 n = range 1 n
 
+(* Write a function `tabulate` that takes as input a function of type `int -> 'a` and also an integer `n` 
+and uses it to generate the `'a list` consisting of the values of the provided function on the integers `1` through `n`. 
+Reference solution is one line. Should have type: `(int -> 'a) -> int -> 'a list`*)
+let tabulate f n = List.fold_right (fun x rest -> f x :: rest) (range1 n) []
+
 
 (* ---------------------------------
               PICTURES
