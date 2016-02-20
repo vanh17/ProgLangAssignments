@@ -87,7 +87,7 @@ let t11d = take 5 (accum (fun x y -> x * y) 5 (seq 1 1)) = [5; 5; 10; 30; 120]
 
 let t12a = take 4 (filter (fun x -> x mod 2 = 0) (seq 1 1)) = [2; 4; 6; 8]
 let t12b = take 4 (filter (fun x -> x = 4) (alt 3 4)) = take 4 (const 4)
-(*let t12c = take 4 (filter (fun x -> not (x = x)) (seq 1 1)) = [] :run forever tests*)
+(*let t12c = take 4 (filter (fun x -> not (x = x)) (seq 1 1)) = [] :run forever tests probably halting problem*)
 
 let t13a = take 3 (collect 3 (seq 1 1)) = [[1; 2; 3]; [4; 5; 6]; [7; 8; 9]]
 let t13b = take 3 (collect 3 (zip2 (alt 3 4) (seq 1 1))) = [[(3, 1); (4, 2); (3, 3)]; [(4, 4); (3, 5); (4, 6)]; 
