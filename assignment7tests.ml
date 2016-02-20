@@ -12,5 +12,9 @@ let t2c = tabulate (fun x -> ()) 0 = []
 let t2d = tabulate (fun x -> tabulate (fun y -> y * y) x) 4 = [[1]; [1; 4]; [1; 4; 9]; [1; 4; 9; 16]]
 let t2e = tabulate (fun x-> []) (-2) =[]
 
+let t3a = valid_pic doodad
+let t3b = dims_pic doodad = (24, 43)
 
+let t4a = string_of_pxl D = "."
+let t4b = string_of_pxl H ="#"
 
