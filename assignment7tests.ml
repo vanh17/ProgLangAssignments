@@ -295,3 +295,32 @@ let t16a = invert sword = [
 let t16b = invert [] = []
 let t16c = invert [[]] = [[]]
 let t16d = invert [[];[]] = [[];[]]
+
+
+let t17a = transpose [[D;H;H;D;H]] = [[D]; 
+                                      [H]; 
+                                      [H]; 
+                                      [D]; 
+                                      [H]]
+let t17b = transpose [[D]] = [[D]]
+let t17c = transpose [[D;H;H;D;H;D];
+                      [H;D;D;H;D;H];]
+         = [
+            [D;H];
+            [H;D];
+            [H;D];
+            [D;H];
+            [H;D];
+            [D;H]]
+let t17d = transpose [[D;H;H;D;H;D];
+                      [H;D;D;H;D;H];
+                      [D;H;H;D;H;D];
+                      [H;D;D;H;D;H]]
+         = [
+            [D;H;D;H];
+            [H;D;H;D];
+            [H;D;H;D];
+            [D;H;D;H];
+            [H;D;H;D];
+            [D;H;D;H]]
+let t17e = transpose sword = 
