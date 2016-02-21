@@ -219,3 +219,16 @@ Write a function `invert` that takes as input a picture and returns the same pic
 Reference solution is 2-4 lines. Should have type: `pic -> pic`
 *)
 let invert pic = List.fold_right (fun x acc -> (List.fold_right (fun x1 acc1 -> if x1 = D then H :: acc1 else D :: acc1) x []) :: acc) pic []
+
+(*
+Write a function `transpose` that takes as input a picture and returns the result of "transposing" the picture, i.e. 
+turning its rows into columns. This one is short but tricky. The reference solution is 4 lines and 
+uses `List.fold_right`, `List.map` and `List.map2` along with a let binding and a conditional. 
+Start by working out manually in a small example how a recursive implementation might function 
+(but your final solution is not meant to be recursive; this would just help you figure out the kind of work that your `fold_right` would have to do). 
+Should have type: `pic -> pic`
+*)
+let transpose pic = match pic with
+                    | [] -> []
+                    | row :: rest -> List.fold_right (fun x acc -> List.map2 (fun t1 t2 -> t2 @ t1) (List.map (fun x2 -> x2 :: []) x) acc) 
+                                     rest (List.map (fun x3 -> x3 :: []) row)
