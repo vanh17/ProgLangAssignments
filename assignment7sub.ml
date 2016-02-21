@@ -213,3 +213,9 @@ Reference solution is 2-4 lines. Should have type: `pic -> pic -> pic`.
 *)
 let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then List.fold_right2 (fun x y acc-> (x @ y) :: acc) pic1 pic2 []
                                  else raise (IncompatibleDims)
+
+(*
+Write a function `invert` that takes as input a picture and returns the same picture with the two "colors" inverted. 
+Reference solution is 2-4 lines. Should have type: `pic -> pic`
+*)
+
