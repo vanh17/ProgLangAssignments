@@ -84,6 +84,8 @@ let t7d = flip_vertical [[H; H; H; H; H; D; H; H; H; H; H; H; H];
            [D; D; D; D; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; H; H; H; H; H; H; H; H];
            [H; H; H; H; H; D; H; H; H; H; H; H; H]]
+let t7e = flip_vertical sword = List.rev sword
+let t7f = flip_vertical doodad = List.rev doodad
 
 let t8a = flip_horizontal [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
                            [H; H; H; H; H; H; H; H; H; H; H; H; H]]
@@ -96,19 +98,26 @@ let t8c = flip_horizontal [[H; H; H; H; D; D; D; D; D; D; D; D; D];
         = [[D; D; D; D; D; D; D; D; D; H; H; H; H]; 
            [H; H; H; H; H; H; D; D; H; H; H; H; D];
            [D; D; D; D; H; H; H; D; H; H; H; H; H]]
+let rec aux lst = match lst with
+              | [] -> []
+              | x :: rest -> (List.rev x) :: aux rest
+let t8d = flip_horizontal sword = aux sword
+let t8e = flip_horizontal doodad = aux doodad
 
 
 let t9a = flip_both [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
                      [H; H; H; H; H; H; H; H; H; H; H; H; H]]
         =  [[H; H; H; H; H; H; H; H; H; H; H; H; H];
             [D; D; D; D; D; D; D; D; D; D; D; D; D]]
-let t8b = flip_both [] = []
-let t8c = flip_both [[H; H; H; H; D; D; D; D; D; D; D; D; D]; 
+let t9b = flip_both [] = []
+let t9c = flip_both [[H; H; H; H; D; D; D; D; D; D; D; D; D]; 
                      [D; H; H; H; H; D; D; H; H; H; H; H; H];
                      [H; H; H; H; H; D; H; H; H; D; D; D; D]]
         = [[D; D; D; D; H; H; H; D; H; H; H; H; H]; 
            [H; H; H; H; H; H; D; D; H; H; H; H; D];
            [D; D; D; D; D; D; D; D; D; H; H; H; H]]
+let t9d = flip_both sword = List.rev (aux sword)
+let t9e = flip_both doodad = aux (List.rev doodad)
 
 let t10a = mirror_vertical [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
                             [H; H; H; H; H; H; H; H; H; H; H; H; H]]
@@ -138,6 +147,8 @@ let t10d = mirror_vertical [[H; H; H; H; H; D; H; H; H; H; H; H; H];
            [D; D; D; D; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; H; H; H; H; H; H; H; H];
            [H; H; H; H; H; D; H; H; H; H; H; H; H]]
+let t10e = mirror_vertical sword = sword @ (List.rev sword)
+let t10f = mirror_vertical doodad = doodad @ (List.rev doodad)
 
 
 let t11a = mirror_horizontal [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
@@ -151,6 +162,26 @@ let t11c = mirror_horizontal [[H; H; H; H; D; D; D; D; D; D; D; D; D];
         = [[H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H]; 
            [D; H; H; H; H; D; D; H; H; H; H; H; H; H; H; H; H; H; H; D; D; H; H; H; H; D];
            [H; H; H; H; H; D; H; H; H; D; D; D; D; D; D; D; D; H; H; H; D; H; H; H; H; H]]
+let t11d = mirror_horizontal sword =
+[[D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D];
+ [D; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; D];
+ [D; H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H; D];
+ [D; D; H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H; D; D];
+ [D; D; H; H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H; H; D; D];
+ [D; D; D; H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H; D; D; D];
+ [D; D; D; D; H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H; D; D; D; D];
+ [D; D; D; D; D; D; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; H; H; H; D; D; H; D; D; D; D; D; D; H; D; D; H; H; H; D; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; D; H; H; D; H; H; D; D; D; D; D; D; H; H; D; H; H; D; D; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; D; D; D; H; H; D; D; D; D; D; D; D; D; H; H; D; D; D; D; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; D; D; H; H; H; D; D; D; D; D; D; D; D; H; H; H; D; D; D; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; D; H; H; D; D; H; D; D; D; D; D; D; H; D; D; H; H; D; D; D; D; D; D; D; D];
+ [D; D; D; D; D; D; D; D; D; D; D; D; D; H; D; D; D; D; H; D; D; D; D; D; D; D; D; D; D; D; D; D]]
+
+let rec aux1 lst = match lst with
+                   | [] -> []
+                   | x :: rest -> (x @ List.rev x) :: aux1 rest
+let t11e = mirror_horizontal doodad = aux1 doodad
 
 
 let t12a = mirror_both [[D; D; D; D; D; D; D; D; D; D; D; D; D]; 
@@ -169,7 +200,8 @@ let t12c = mirror_both [[H; H; H; H; D; D; D; D; D; D; D; D; D];
            [H; H; H; H; H; D; H; H; H; D; D; D; D; D; D; D; D; H; H; H; D; H; H; H; H; H];
            [D; H; H; H; H; D; D; H; H; H; H; H; H; H; H; H; H; H; H; D; D; H; H; H; H; D];
            [H; H; H; H; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; D; H; H; H; H]]
-
+let t12d = mirror_both doodad = aux1 doodad @ List.rev (aux1 doodad)
+let t12e = mirror_both sword = aux1 sword @ List.rev (aux1 sword)
 
 let t13a = pixelate (fun x y -> if x * y mod 2 = 0 then D else H) 2 3
          = [[H; D; H];
