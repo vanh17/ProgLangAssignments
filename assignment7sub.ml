@@ -218,4 +218,4 @@ let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then Lis
 Write a function `invert` that takes as input a picture and returns the same picture with the two "colors" inverted. 
 Reference solution is 2-4 lines. Should have type: `pic -> pic`
 *)
-
+let invert pic = List.fold_right (fun x acc -> (List.fold_right (fun x1 acc1 -> if x1 = D then H :: acc1 else D :: acc1) x []) :: acc) pic []
