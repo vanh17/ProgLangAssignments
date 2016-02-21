@@ -276,3 +276,22 @@ let t15h = try (stack_horizontal [[]; []] [[]]; false) with IncompatibleDims -> 
            | _ -> false
 let t15i = try (stack_horizontal sword doodad; false) with IncompatibleDims -> true
                                                | _ -> false
+
+let t16a = invert sword = [
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;D;D;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H];
+[H;H;H;D;D;D;D;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;D;D;D;D;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;D;D;D;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;D;D;D;H;H;D;H;H;H];
+[H;H;H;H;H;H;H;H;D;D;H;D;D;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;D;D;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;D;D;D;H;H;H;H];
+[H;H;H;H;H;H;H;H;D;D;H;H;D;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;D;H;H]]
+let t16b = invert [] = []
+let t16c = invert [[]] = [[]]
+let t16d = invert [[];[]] = [[];[]]
