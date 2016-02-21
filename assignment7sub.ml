@@ -52,9 +52,7 @@ let sword = [
 [D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D];
 [D;D;D;D;D;D;D;D;D;H;H;H;D;D;D;D];
 [D;D;D;D;D;D;D;D;H;H;D;D;H;D;D;D];
-[D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D];
-[D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H];
-[D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H]]
+[D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D]]
 
 (*
    You need to fix this.
@@ -200,5 +198,18 @@ places them one atop the other in a vertical fashion. It should raise
 the exception `IncompatibleDims` if the pictures have different number of columns. 
 Reference solution is 2 lines. Should have type: `pic -> pic -> pic`.
 *)
-let stack_vertical pic1 pic2 = if dims_pic pic1 = dims_pic pic2 then List.fold_right (fun x acc -> x :: acc) pic1 pic2 
-                               else raise (IncompatibleDims)
+let stack_vertical pic1 pic2 = let ((pic1r, pic1c), (pic2r, pic2c)) = (dims_pic pic1, dims_pic pic2) 
+                               in if pic1c = pic2c then List.fold_right (fun x acc -> x :: acc) pic1 pic2 
+                                  else raise (IncompatibleDims)
+
+(*
+Write a function `stack_horizontal` that takes as input two pictures and 
+places them next to each other in a horizontal fashion. It should 
+raise the exception `IncompatibleDims` if the pictures have different number of rows. 
+You should use `List.fold_right2`. You can handle the dimension check by either using the 
+function `dims` provided earlier or letting `List.fold_right2` 
+throw its exception (see documentation) and catching it. Or try them both! 
+Reference solution is 2-4 lines. Should have type: `pic -> pic -> pic`.
+*)
+let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then List.fold_right2 (fun x y acc-> (x @ y) :: acc) pic1 pic2 []
+                                 else raise (IncompatibleDims)
