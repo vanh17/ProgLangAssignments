@@ -234,6 +234,56 @@ let t14i = stack_vertical [[D;H;D;D;D;D];
             [H;H;H;H;H;H];
             [H;H;H;H;H;H];
             [H;H;H;H;H;H]]
+let t14j = stack_vertical doodad doodad = [
+[D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D]]
+let t14k = stack_vertical doodad (flip_vertical doodad) = mirror_vertical doodad
 
 let t15a = stack_horizontal sword sword = [
 [D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
@@ -276,6 +326,32 @@ let t15h = try (stack_horizontal [[]; []] [[]]; false) with IncompatibleDims -> 
            | _ -> false
 let t15i = try (stack_horizontal sword doodad; false) with IncompatibleDims -> true
                                                | _ -> false
+let t15j = stack_horizontal sword (flip_horizontal sword) = mirror_horizontal sword
+let t15k = stack_horizontal doodad doodad = [
+[D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D;D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D];
+[H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;H;H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D]]
 
 let t16a = invert sword = [
 [H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
@@ -295,6 +371,31 @@ let t16a = invert sword = [
 let t16b = invert [] = []
 let t16c = invert [[]] = [[]]
 let t16d = invert [[];[]] = [[];[]]
+let t16e = invert doodad = [
+[H;H;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;H;H];
+[D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;H];
+[D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;H];
+[D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;D;D;D;H;H];
+[H;H;D;D;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;D;D;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H];
+[H;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H];
+[D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D;D];
+[H;H;H;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;H;H;H;H;H;H;H];
+[H;H;H;H;H;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;H;H;H;H;H;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;D;D;D;D;D;D;D;D;D;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;D;H;H;H;H;H;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H];
+[H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;D;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H;H]]
 
 
 let t17a = transpose [[D;H;H;D;H]] = [[D]; 
@@ -323,4 +424,81 @@ let t17d = transpose [[D;H;H;D;H;D];
             [D;H;D;H];
             [H;D;H;D];
             [D;H;D;H]]
-let t17e = transpose sword = 
+let t17e = transpose sword = [
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	H;	H;	H;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	D;	D;	H;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	H;	H;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D;	H;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D]]
+let t17f = transpose [] = []
+let t17g = transpose doodad = [
+[D;	D;	H;	H;	H;	D;	D;	D;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	H;	H;	H;	D;	D;	D;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	H;	H;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	D;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	D;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	D];
+[D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	D];
+[D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	H;	D;	H;	H;	D;	H];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D];
+[D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	H;	D;	H;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	H;	H;	H;	H;	D;	D;	D;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	H;	H;	D;	D;	D;	D;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D];
+[D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	H;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D;	D]]
+let t17h = transpose [
+                      [D;H;H;D;H;D;H;D];
+                      [H;D;D;H;D;H;H;H];
+                      [D;H;H;D;H;D;D;H];
+                      [H;D;D;H;D;H;D;D];
+                      [H;H;H;D;H;D;D;H];
+                      [H;D;D;D;D;H;D;D]]
+         = [
+            [D;H;D;H;H;H];
+            [H;D;H;D;H;D];
+            [H;D;H;D;H;D];
+            [D;H;D;H;D;D];
+            [H;D;H;D;H;D];
+            [D;H;D;H;D;H];
+            [H;H;D;D;D;D];
+            [D;H;H;D;H;D]]
