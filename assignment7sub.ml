@@ -228,7 +228,11 @@ Start by working out manually in a small example how a recursive implementation 
 (but your final solution is not meant to be recursive; this would just help you figure out the kind of work that your `fold_right` would have to do). 
 Should have type: `pic -> pic`
 *)
-let transpose pic = match pic with
+(*let transpose pic = match pic with
                     | [] -> []
                     | row :: rest -> List.fold_left (fun acc x-> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
-                                     (List.map (fun x3 -> x3 :: []) row) rest 
+                                     (List.map (fun x3 -> x3 :: []) row) rest *)
+let transpose pic = match pic with
+                    | [] -> []
+                    | row :: rest -> List.fold_right (fun x acc-> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
+                                     (List.rev rest) (List.map (fun x3 -> x3 :: []) row) 
