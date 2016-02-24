@@ -22,7 +22,11 @@ let range1 n = range 1 n
 (* Write a function `tabulate` that takes as input a function of type `int -> 'a` and also an integer `n` 
 and uses it to generate the `'a list` consisting of the values of the provided function on the integers `1` through `n`. 
 Reference solution is one line. Should have type: `(int -> 'a) -> int -> 'a list`*)
-let tabulate f n = List.fold_right (fun x rest -> f x :: rest) (range1 n) []
+
+(* This implementation is for the purpose of learning fold_right *)
+(*let tabulate f n = List.fold_right (fun x rest -> f x :: rest) (range1 n) []*)
+(*shorter version*)
+let tabulate f n = List.map (fun x -> f x) (range1 n)
 
 
 (* ---------------------------------

@@ -218,6 +218,7 @@ let t13e = pixelate (fun x y -> if (x + y) mod 2 = 0 then D else H) 4 5
             [H; D; H; D; H];
             [D; H; D; H; D];
             [H; D; H; D; H]]
+let t13f = invert (pixelate (fun x y -> if x = y then D else H) 4 5) = pixelate (fun x y -> if x = y then H else D) 4 5
 
 
 let t14a = stack_vertical sword (flip_vertical sword) = mirror_vertical sword
