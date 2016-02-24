@@ -134,14 +134,22 @@ Write a function `flip_vertical` that takes as input a picture and
 returns a picture that is a vertical flip of the original one. 
 Reference solution is 1 line.Should have type: `pic -> pic`
 *)
-let flip_vertical pic = List.fold_left (fun acc x -> x :: acc) [] pic
+
+(*This implementation is for the purpose of learning fold_left*)
+(*let flip_vertical pic = List.fold_left (fun acc x -> x :: acc) [] pic*)
+(***Shorter version***)
+let flip_vertical pic = List.rev pic
 
 (*
 Write a function `flip_horizontal` that takes as input a picture and 
 returns a picture that is a horizontal flip of the original one. 
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
-let flip_horizontal pic = List.fold_right (fun x acc -> (List.fold_left (fun acc y -> y :: acc) [] x) :: acc) pic []
+
+(*This implementation is for the purpose of learning fold_left*)
+(*let flip_horizontal pic = List.fold_right (fun x acc -> (List.fold_left (fun acc y -> y :: acc) [] x) :: acc) pic []*)
+(***Shorter version***)
+let flip_horizontal pic = List.map (fun x -> List.rev x) pic
 
 (*
  Write a function `flip_both` that takes as input a picture and 
@@ -159,7 +167,11 @@ as produced by `flip_vertical`. You do not have to use `flip_vertical` along the
 It will have twice the number of rows as the original one. 
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
-let mirror_vertical pic = List.fold_right (fun x acc -> x :: acc) pic (flip_vertical pic)  
+
+(*This implementation is for the purpose of learning fold_right*)
+(*let mirror_vertical pic = List.fold_right (fun x acc -> x :: acc) pic (flip_vertical pic) *) 
+(***Shorter version***)
+let mirror_vertical pic = pic @ List.rev pic
 
 (*
 Write a function `mirror_horizontal` that takes as input a picture and 
@@ -170,7 +182,11 @@ image of the first one as produced for example by `flip_horizontal`
 It will have twice as long rows as the original one. 
 Reference solution is 1 line. Should have type: `pic -> pic`
 *)
-let mirror_horizontal pic = List.fold_right (fun x acc -> (x @ List.rev x) :: acc) pic []
+
+(*This is the implmentation for purpose of learning List.fold_right*)
+(*let mirror_horizontal pic = List.fold_right (fun x acc -> (x @ List.rev x) :: acc) pic []*)
+(***Shorter version***)
+let mirror_horizontal pic = List.map (fun x -> x @ List.rev x) pic
 
 (* 
 Write a function `mirror_both` that takes as input a picture and 
@@ -198,8 +214,14 @@ places them one atop the other in a vertical fashion. It should raise
 the exception `IncompatibleDims` if the pictures have different number of columns. 
 Reference solution is 2 lines. Should have type: `pic -> pic -> pic`.
 *)
-let stack_vertical pic1 pic2 = let ((pic1r, pic1c), (pic2r, pic2c)) = (dims_pic pic1, dims_pic pic2) 
+
+(*let stack_vertical pic1 pic2 = let ((pic1r, pic1c), (pic2r, pic2c)) = (dims_pic pic1, dims_pic pic2) 
                                in if pic1c = pic2c then List.fold_right (fun x acc -> x :: acc) pic1 pic2 
+                                  else raise (IncompatibleDims)*) 
+(* this implementation is for purpose of learning more about fold_right*)
+(***Shorter version***)
+let stack_vertical pic1 pic2 = let ((pic1r, pic1c), (pic2r, pic2c)) = (dims_pic pic1, dims_pic pic2) 
+                               in if pic1c = pic2c then pic1 @ pic2 
                                   else raise (IncompatibleDims)
 
 (*
@@ -218,7 +240,11 @@ let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then Lis
 Write a function `invert` that takes as input a picture and returns the same picture with the two "colors" inverted. 
 Reference solution is 2-4 lines. Should have type: `pic -> pic`
 *)
-let invert pic = List.fold_right (fun x acc -> (List.fold_right (fun x1 acc1 -> if x1 = D then H :: acc1 else D :: acc1) x []) :: acc) pic []
+
+(*This implementation is for the purpose of learning List.fold_right*)
+(*let invert pic = List.fold_right (fun x acc -> (List.fold_right (fun x1 acc1 -> if x1 = D then H :: acc1 else D :: acc1) x []) :: acc) pic []*)
+(***Shorter version***)
+let invert pic = List.map (fun x -> List.map (fun y -> if y = D then H else D) x) pic
 
 (*
 Write a function `transpose` that takes as input a picture and returns the result of "transposing" the picture, i.e. 
