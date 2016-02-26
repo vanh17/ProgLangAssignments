@@ -264,5 +264,5 @@ Should have type: `pic -> pic`
                                      (List.map (fun x3 -> x3 :: []) row) rest *)
 let transpose pic = match pic with
                     | [] -> []
-                    | row :: rest -> List.fold_right (fun x acc -> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
-                                     (List.rev rest) (List.map (fun x3 -> x3 :: []) row)
+                    | row :: rest -> List.fold_right (fun x acc -> List.map2 (fun t1 t2 -> t1 @ t2) (List.map (fun x2 -> x2 :: []) x) acc) 
+                                     pic (List.map (fun x3 -> []) row)
