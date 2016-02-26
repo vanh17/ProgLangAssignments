@@ -26,7 +26,7 @@ Reference solution is one line. Should have type: `(int -> 'a) -> int -> 'a list
 (* This implementation is for the purpose of learning fold_right *)
 (*let tabulate f n = List.fold_right (fun x rest -> f x :: rest) (range1 n) []*)
 (*shorter version*)
-let tabulate f n = List.map (fun x -> f x) (range1 n)
+let tabulate f n = List.map f (range1 n)
 
 
 (* ---------------------------------
@@ -123,7 +123,7 @@ consisting of the concatenation of strings corresponding to the pixels in the ro
 The resulting string should include a newline `"\n"` at the end. 
 Reference solution is 1 line. Should have type: `row -> string`
 *)
-let string_of_row row = List.fold_right (fun x acc-> (string_of_pxl x) ^ acc) row "\n"
+let string_of_row row = List.fold_right (fun x acc -> (string_of_pxl x) ^ acc) row "\n"
 
 (* 
 Write a function `string_of_pic` that takes as input a picture and 
@@ -153,7 +153,7 @@ Reference solution is 1 line. Should have type: `pic -> pic`
 (*This implementation is for the purpose of learning fold_left*)
 (*let flip_horizontal pic = List.fold_right (fun x acc -> (List.fold_left (fun acc y -> y :: acc) [] x) :: acc) pic []*)
 (***Shorter version***)
-let flip_horizontal pic = List.map (fun x -> List.rev x) pic
+let flip_horizontal pic = List.map List.rev pic
 
 (*
  Write a function `flip_both` that takes as input a picture and 
@@ -237,7 +237,7 @@ function `dims` provided earlier or letting `List.fold_right2`
 throw its exception (see documentation) and catching it. Or try them both! 
 Reference solution is 2-4 lines. Should have type: `pic -> pic -> pic`.
 *)
-let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then List.fold_right2 (fun x y acc-> (x @ y) :: acc) pic1 pic2 []
+let stack_horizontal pic1 pic2 = if List.length pic1 = List.length pic2 then List.fold_right2 (fun x y acc -> (x @ y) :: acc) pic1 pic2 []
                                  else raise (IncompatibleDims)
 
 (*
@@ -262,7 +262,11 @@ Should have type: `pic -> pic`
                     | [] -> []
                     | row :: rest -> List.fold_left (fun acc x-> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
                                      (List.map (fun x3 -> x3 :: []) row) rest *)
+(*let transpose pic = match pic with
+                    | [] -> []
+                    | row :: rest -> List.fold_right (fun x acc -> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
+                                     (List.rev rest) (List.map (fun x3 -> x3 :: []) row) *)
 let transpose pic = match pic with
                     | [] -> []
-                    | row :: rest -> List.fold_right (fun x acc-> List.map2 (fun t1 t2 -> t1 @ t2) acc (List.map (fun x2 -> x2 :: []) x)) 
-                                     (List.rev rest) (List.map (fun x3 -> x3 :: []) row) 
+                    | row :: rest -> List.fold_right (fun x acc -> List.map2 (fun t1 t2 -> t1 @ t2) (List.map (fun x2 -> x2 :: []) x) acc) 
+                                     rest (List.map (fun x3 -> x3 :: []) row) 
