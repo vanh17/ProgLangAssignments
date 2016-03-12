@@ -56,7 +56,7 @@
 (struct arith (op e1 e2) #:transparent)    ; arithmetic ops: +, -, *, /
 (struct comp (op e1 e2) #:transparent)     ; comparison ops: <, <=, >, >=
 (struct if-e (tst thn els) #:transparent)  ; conditional
-(struct eq (e1 e2) #:transparent)          ; equality
+(struct eq-e (e1 e2) #:transparent)          ; equality
 (struct let-e (s e1 e2) #:transparent)     ; let s = e1 in e2
 (struct fun (name arg body) #:transparent) ; functions
 (struct call (e1 e2) #:transparent)        ; function call
@@ -84,7 +84,7 @@
 ;; - A `comp` is valid if `op` is from the list '<, '<=, '>=, '> and
 ;;     the `e1` and `e2` components are themselves valid
 ;; - A `if-e` is valid if `tst`, `thn` and `els` are all valid
-;; - A `eq` is valid if both `e1` and `e2` are valid
+;; - A `eq-e` is valid if both `e1` and `e2` are valid
 ;; - A `let-e` is valid if the `s` is an Racket symbol, and the 
 ;;     `e1` and `e2` are themselves valid
 ;; - A `fun` is valid if `arg` is a Racket symbol, and `name` is
@@ -165,7 +165,7 @@
 ;; - A `if-e` needs to first evaluate the `tst`. Throw an error if that is
 ;;     not a bool. Otherwise evaluate the appropriate `thn` or `els` depending
 ;;     on the bool's value.
-;; - A `eq` needs to evaluate the two expressions and test them for equality
+;; - A `eq-e` needs to evaluate the two expressions and test them for equality
 ;;     using `value-eq?`
 ;; - A `let-e` needs to evaluate `e1` in the current environment, then extend
 ;;     the current environment by binding the symbol s to that value, and
@@ -234,7 +234,7 @@
 
 ;; TODO: Write a function `neq` that takes as input two source language
 ;; expressions and returns the expression that tests that they are not
-;; equal. This should be a combination of `not-e` and `eq`.
+;; equal. This should be a combination of `not-e` and `eq-e`.
 (define (neq e1 e2)
   #f)      ; <---- Need to fix this
 
@@ -285,9 +285,9 @@
     [(let-e* ([s1 e1]) e) (let-e s1 e1 e)]
     [(let-e* ([s1 e1] rest ...) e) #f]))  ; <-- Need to fix this.
 
-;; TODO: Write functions or macros `plus`, and `times` that take any number
+;; TODO: Write functions or macros `plus`, and `mult` that take any number
 ;; of source language expressions as arguments and creates a corresponding
-;; nested `plus2` or `times2` expression that computes the corresponding
+;; nested `plus2` or `mult2` expression that computes the corresponding
 ;; sum or product. For zero arguments provided it should return the `num`
 ;; for 0 or 1 respectively.
 ;; You can choose either a macro approach like in `and-e` or a function
@@ -321,7 +321,7 @@
 ;; should return the example mentioned above.
 ;; Do this as a function that uses `foldr`.
 (define racketlist->sourcelist
-  (lambda exps
+  (lambda (exps)
     #f))        ;  <--- Replace this with an appropriate foldr call.
 
 ;; TODO: Write a source language expression `map-e`. It should be a 
