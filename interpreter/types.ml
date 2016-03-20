@@ -4,10 +4,12 @@ exception Interp of string       (* Use for interpreter errors *)
 (* You will need to add more cases here. *)
 type exprS = NumS of float
              | BoolS of bool
+             | IfS of BoolS * exprS * exprS
 
 (* You will need to add more cases here. *)
 type exprC = NumC of float
              | BoolC of bool
+             | IfC of BoolC * exprC * exprC
 
 
 (* You will need to add more cases here. *)
@@ -37,12 +39,18 @@ let bind str v env = (str, v) :: env
 let rec desugar exprS = match exprS with
   | NumS i        -> NumC i
   | BoolS i       -> BoolC i
+  | IfS (cond, th, els) -> let (condC, thC, elsC) = (desugar cond, desugar th, desugar els)
+                           in IfC (condC, thC, elsC)
 
 (* You will need to add cases here. *)
 (* interp : Value env -> exprC -> value *)
 let rec interp env r = match r with
   | NumC i        -> Num i
   | BoolC i       -> Bool i
+  | IfC (i1, i2, i3) -> match (interp env i1) with
+                        | BoolC i1' -> if (i1') then interp env i2 
+                                                else interp env i3
+                        | _ -> raise Interp
 
 (* evaluate : exprC -> val *)
 let evaluate exprC = exprC |> interp []

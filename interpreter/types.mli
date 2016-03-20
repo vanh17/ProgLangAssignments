@@ -3,8 +3,10 @@ exception Interp of string       (* Use for interpreter errors *)
 
 type exprS = NumS of float
              | BoolS of bool
+             | IfS of BoolS * exprS * exprS
 type exprC = NumC of float
              | BoolC of bool
+             | IfC of BoolC * exprC * exprC
 type value = Num of float
              | Bool of bool
 
