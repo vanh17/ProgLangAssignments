@@ -15,3 +15,11 @@ let t0c = desugar (NumS 2.3) = NumC 2.3
 
 (* Or you can combine with evaluate to get to the final value. *)
 let t0d = evaluate (desugar (NumS 2.3)) = Num 2.3
+
+let t0e = evaluate (BoolC true) = Bool true
+
+let t0f = evaluate (BoolC false) = Bool false
+
+let tog = let env1 = bind "x" (Bool false) empty
+        = in interp env1 (BoolC true) = Bool true
+
