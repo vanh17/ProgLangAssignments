@@ -1,7 +1,7 @@
 %{
   open Types
 %}
-
+%token TRUE FALSE
 %token <float> FLOAT
 %token DBLSEMI
 %nonassoc FLOAT
