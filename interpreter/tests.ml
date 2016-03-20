@@ -23,3 +23,9 @@ let t0f = evaluate (BoolC false) = Bool false
 let tog = let env1 = bind "x" (Bool false) empty
         = in interp env1 (BoolC true) = Bool true
 
+let t0h = desugar (BoolS false) = BoolC false
+
+let t0i = evaluate (desugar (BoolS true)) = Bool true
+
+
+
