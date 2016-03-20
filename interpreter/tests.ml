@@ -8,7 +8,7 @@ let t0a = evaluate (NumC 2.3) = Num 2.3
 
 (* You can also use interp directly to specify a custom environment. *)
 let t0b = let env1 = bind "x" (Num 3.1) empty
-          in interp env1 (NumC 2.3) = Num 2.3
+          in interp env1 (BoolC false) = Bool false
 
 (* You can also test desugar to make sure it behaves properly. *)
 let t0c = desugar (NumS 2.3) = NumC 2.3
@@ -20,8 +20,8 @@ let t0e = evaluate (BoolC true) = Bool true
 
 let t0f = evaluate (BoolC false) = Bool false
 
-let tog = let env1 = bind "x" (Bool false) empty
-        = in interp env1 (BoolC true) = Bool true
+let tog = let env1 = bind "x" (Bool true) empty
+          in interp env1 (BoolC true) = Bool true
 
 let t0h = desugar (BoolS false) = BoolC false
 
