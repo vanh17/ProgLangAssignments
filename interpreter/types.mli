@@ -3,8 +3,10 @@ exception Interp of string       (* Use for interpreter errors *)
 
 type exprS = NumS of float
 type exprC = NumC of float
+             | BoolC of bool
 type value = Num of float
              | Bool of bool
+
 
 (* Environment lookup *)
 type 'a env
