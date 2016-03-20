@@ -20,5 +20,7 @@ headEx:
 
 expr:
   | FLOAT                        { NumS $1 }
+  | TRUE                         { BoolS $true}
+  | FALSE                        { BoolS $false}
 ;
 
