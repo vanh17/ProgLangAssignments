@@ -19,8 +19,8 @@ let false = "false" | "#f"
 rule token = parse
   | white       { token lexbuf }
   | newline     { token lexbuf }
-  | true        { token TRUE}
-  | false       { token FALSE}
+  | true        { TRUE }
+  | false       { FALSE }
   | dblsemi     { DBLSEMI }
   | float as x  { FLOAT (float_of_string x) }
   | eof         { raise Eof }

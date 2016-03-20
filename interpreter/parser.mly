@@ -1,7 +1,8 @@
 %{
   open Types
 %}
-%token TRUE FALSE
+%token TRUE 
+%token FALSE
 %token <float> FLOAT
 %token DBLSEMI
 %nonassoc FLOAT
@@ -20,7 +21,7 @@ headEx:
 
 expr:
   | FLOAT                        { NumS $1 }
-  | TRUE                         { BoolS $true}
-  | FALSE                        { BoolS $false}
+  | TRUE                         { BoolS true}
+  | FALSE                        { BoolS false}
 ;
 
