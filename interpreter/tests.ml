@@ -195,5 +195,27 @@ let t7f = evaluate (CompC ("<", NumC 2.5, NumC 2.5)) = Bool false
 
 let t7g = evaluate (CompC (">=", NumC 2.5, NumC 1.0)) = Bool true
 
+let t8a = evaluate (desugar (CompS (">=", NumS 4.2, NumS 4.2))) = Bool true
+
+
+let t8b = try (evaluate (desugar (CompS ("", NumS 2.5, NumS 2.5))); false) with Interp "interpErr: only <, <=, >, >=" -> true
+                                                                              | _ -> false
+
+let t8c = try (evaluate (desugar (CompS ("< ", NumS 2.5, NumS 2.5))); false) with Interp "interpErr: only <, <=, >, >=" -> true
+                                                                              | _ -> false
+
+
+let t8d = desugar (CompS ("< ", NumS 2.5, NumS 2.5)) = CompC ("< ", NumC 2.5, NumC 2.5) 
+
+let t8e = evaluate (desugar (CompS (">=", NumS 2.5, NumS 1.0))) = Bool true
+
+let t8f = evaluate (desugar (CompS (">=", NumS 2.5, NumS 3.0))) = Bool false
+
+let t8e = evaluate (desugar (CompS ("<=", NumS 2.5, NumS 3.0))) = Bool true
+
+let t8f = evaluate (desugar (CompS (">", NumS 2.5, NumS 2.5))) = Bool false
+
+let t8g = evaluate (desugar (CompS ("<", NumS 2.5, NumS 2.5))) = Bool false
+
 
 
