@@ -136,11 +136,43 @@ let t5i = try (evaluate (ArithC ("/.", NumC 0.0, NumC 0.00)); false) with Interp
 let t5j = try (evaluate (ArithC ("+ ", NumC 0.0, NumC 0.00)); false) with Interp "interpErr: only +, -, *" -> true
                                                                              | _ -> false
 
-let t5i = try (evaluate (ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true)); false) with Interp "interpErr: not a num" -> true
+let t5i = try (evaluate (ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true))); false) with Interp "interpErr: not a num" -> true
                                                                              | _ -> false
 
 let t5g = evaluate (ArithC ("/", ArithC ("*", NumC 4.2, NumC 2.4), ArithC ("/", ArithC ("*", NumC 4.2, NumC 2.4), ArithC ("*", NumC 4.2, NumC 2.4)))) = Num 10.08
 
+
+
+let t6a = evaluate (desugar (ArithS ("+", NumS 2.5, NumS 3.6))) = Num 6.1
+
+(* You can also use interp directly to specify a custom environment. *)
+let t6b = try (evaluate (desugar (ArithS (" ", NumS 2.5, BoolS true))); false) with Interp "interpErr: not a num" -> true
+                                                                             | _ -> false
+
+(* Or you can combine with evaluate to get to the final value. *)
+let t6c = evaluate (desugar (ArithS ("*", NumS 4.2, NumS 2.4))) = Num 10.08
+
+
+let t6d = try (evaluate (desugar (ArithS ("", BoolS false, NumS 2.5))); false) with Interp "interpErr: not a num" -> true
+                                                                              | _ -> false
+
+let t6f = try (evaluate (desugar (ArithS ("-", NumS 2.5, BoolS true))); false) with Interp "interpErr: not a num" -> true
+                                                                          | _ -> false
+
+let t6g = evaluate (desugar (ArithS ("/", NumS 2.5, NumS 1.0))) = Num 2.5
+
+let t6h = desugar (ArithS (" ", NumS 3.5, BoolS false)) = ArithC (" ", NumC 3.5, BoolC false)
+
+let t6i = desugar (ArithS ("/.", NumS 0.0, NumS 0.00)) = ArithC ("/.", NumC 0.0, NumC 0.0)
+                                                       
+
+let t6j = try (evaluate (desugar (ArithS ("+ ", NumS 0.0, NumS 0.00))); false) with Interp "interpErr: only +, -, *" -> true
+                                                                             | _ -> false
+
+let t6i = try (evaluate (desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true)))); false) with Interp "interpErr: not a num" -> true
+                                                                             | _ -> false
+
+let t6g = desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true))) = ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true)
 
 
 
