@@ -174,7 +174,26 @@ let t6i = try (evaluate (desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00
 
 let t6g = desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true))) = ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true))
 
+let t7a = evaluate (CompC ("<", NumC 2.5, NumC 3.6)) = Bool true
 
+(* You can also use interp directly to specify a custom environment. *)
+let t7b = try (evaluate (CompC (" ", NumC 2.5, BoolC true)); false) with Interp "interpErr: not a num" -> true
+                                                                             | _ -> false
+
+(* Or you can combine with evaluate to get to the final value. *)
+let t7c = evaluate (CompC (">=", NumC 4.2, NumC 4.2)) = Bool true
+
+
+let t7d = try (evaluate (CompC ("", NumC 2.5, NumC 2.5)); false) with Interp "interpErr: only <, <=, >, >=" -> true
+                                                                              | _ -> false
+
+let t7e = try (evaluate (CompC ("< ", NumC 2.5, NumC 2.5)); false) with Interp "interpErr: only <, <=, >, >=" -> true
+                                                                              | _ -> false
+
+
+let t7f = evaluate (CompC ("<", NumC 2.5, NumC 2.5)) = Bool false
+
+let t7g = evaluate (CompC (">=", NumC 2.5, NumC 1.0)) = Bool true
 
 
 
