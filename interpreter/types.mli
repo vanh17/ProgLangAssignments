@@ -9,11 +9,13 @@ type exprS = NumS of float
              | NotS of exprS
              | ArithS of string * exprS * exprS
              | CompS of string * exprS * exprS
+             | EqS of exprS * exprS
 type exprC = NumC of float
              | BoolC of bool
              | IfC of exprC * exprC * exprC
              | ArithC of string * exprC * exprC
              | CompC of string * exprC * exprC
+             | EqC of exprC * exprC
 type value = Num of float
              | Bool of bool
 
@@ -34,3 +36,5 @@ val valToString : value -> string
 
 (* helper methods *)
 val arithEval : string -> value -> value -> value
+val compEval : string -> value -> value -> value
+val eqEval : value -> value -> value

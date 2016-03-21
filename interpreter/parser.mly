@@ -2,6 +2,7 @@
   open Types
 %}
 %token <float> FLOAT
+%token <string> COMPOP
 %token TRUE FALSE
 %token IF THEN ELSE
 %token OR AND NOT
@@ -11,6 +12,7 @@
 %nonassoc ELSE
 %left OR AND
 %nonassoc NOT
+%nonassoc COMPOP
 %left  PLUS MINUS
 %left TIMES DIVIDE
 
@@ -38,5 +40,6 @@ expr:
   | expr MINUS expr              { ArithS ("-", $1, $3) }
   | expr TIMES expr              { ArithS ("*", $1, $3) }
   | expr DIVIDE expr             { ArithS ("/", $1, $3) }
+  | expr COMPOP expr             { CompS ($2, $1, $3) }
 ;
 
