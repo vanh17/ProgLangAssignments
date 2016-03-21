@@ -76,7 +76,8 @@ let rec desugar exprS = match exprS with
   | OrS (e1, e2) -> desugar (IfS (e1, BoolS true, IfS (e2, BoolS true, BoolS false)))
   | AndS (e1, e2) -> desugar (IfS (e1, IfS(e2, BoolS true, BoolS false), BoolS false))
   | ArithS (op, v1, v2) -> ArithC (op, desugar v1, desugar v2)
-  | CompS (op, v1, v2) ->CompC (op, desugar v1, desugar v2)
+  | CompS (op, v1, v2) -> CompC (op, desugar v1, desugar v2)
+  | EqS (v1, v2) -> EqC (desugar v1, desugar v2)
 
 
 (* You will need to add cases here. *)
