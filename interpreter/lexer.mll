@@ -23,5 +23,11 @@ rule token = parse
   | false       { FALSE }
   | dblsemi     { DBLSEMI }
   | float as x  { FLOAT (float_of_string x) }
+  | "if"          { IF }
+  | "then"        { THEN }
+  | "else"        { ELSE }
+  | "or"        { OR }
+  | "and"       { AND }
+  | "not"       { NOT }
   | eof         { raise Eof }
   | any         { raise Unrecognized }
