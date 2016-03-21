@@ -67,5 +67,24 @@ let t2c = desugar (NotS (IfS (BoolS false, BoolS false, BoolS true))) = IfC (IfC
 (* Or you can combine with evaluate to get to the final value. *)
 let t2d = evaluate (desugar (NotS (IfS (BoolS false, BoolS false, BoolS true)))) = Bool false
 
+let t3a = desugar (OrS (BoolS false, BoolS true)) = IfC (BoolC false, BoolC true, IfC (BoolC true, BoolC true, BoolC false))
+
+(* You can also use interp directly to specify a custom environment. *)
+let t3b = try (evaluate (desugar (OrS (NumS 2.5, BoolS true))); false) with Interp "interpErr" -> true
+                                                            | _ -> false
+
+(* You can also test desugar to make sure it behaves properly. *)
+let t3c = desugar (NotS (IfS (BoolS false, BoolS false, BoolS true))) = IfC (IfC (BoolC false, BoolC false, BoolC true), BoolC false, BoolC true)
+
+(* Or you can combine with evaluate to get to the final value. *)
+let t3d = evaluate (desugar (OrS (IfS (BoolS false, BoolS false, BoolS true), IfS (BoolS true, BoolS true. BoolS false)))) = Bool true
+
+let t3e = try (evaluate (desugar (OrS (BoolS false, NumS 2.5))); false) with Interp "interpErr" -> true
+                                                            | _ -> false
+
+let t3f = desugar (OrS (NumS 2.5, BoolS true)) = IfC (NumC 2.5, BoolC true, IfC (BoolC true, BoolC true, BoolC false))
+
+let t3g = desugar (OrS (NumS 2.5, IfS (BoolS true, NumS 0.0, BoolS false))) = IfC (NumC 2.5, BoolS true, IfC (IfC (BoolC true, NumC 0.0, BoolC false), BoolC true, BoolC false))
+
 
 
