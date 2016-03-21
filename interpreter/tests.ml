@@ -227,7 +227,19 @@ let t9d = evaluate (EqC (NumC 2.5, BoolC true)) = Bool false
 
 let t9e = evaluate (EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), NumC 4.5)) = Bool true
 
+let t10a = evaluate (desugar (EqS (NumS 4.2, NumS 4.2))) = Bool true
 
+let t10b = evaluate (desugar (EqS (NumS 2.5, NumS 2.5))) = Bool true                                                                            
 
+let t10c = evaluate (desugar (EqS (NumS 2.5, NumS 2.6))) = Bool false                                                                             
+
+let t10d = desugar (EqS (NumS 2.5, BoolS true)) = EqC (NumC 2.5, BoolC true) 
+
+let t10e = desugar (EqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9)))
+         = EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), IfC (NumC 4.5, NumC 4.5, NumC 0.9))
+
+let t10f = try (desugar (EqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9))); false)
+           with Interp "interpErr: only boolean" -> true
+           | _ -> false
 
 
