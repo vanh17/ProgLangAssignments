@@ -217,5 +217,17 @@ let t8f = evaluate (desugar (CompS (">", NumS 2.5, NumS 2.5))) = Bool false
 
 let t8g = evaluate (desugar (CompS ("<", NumS 2.5, NumS 2.5))) = Bool false
 
+let t9a = evaluate (EqC (NumC 4.2, NumC 4.2)) = Bool true
+
+let t9b = evaluate (EqC (NumC 2.5, NumC 2.5)) = Bool true                                                                            
+
+let t9c = evaluate (EqC (NumC 2.5, NumC 2.6)) = Bool false                                                                             
+
+let t9d = evaluate (EqC (NumC 2.5, BoolC true)) = Bool false 
+
+let t9e = evaluate (EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), NumC 4.5)) = Bool true
+
+
+
 
 
