@@ -5,11 +5,14 @@
 %token TRUE FALSE
 %token IF THEN ELSE
 %token OR AND NOT
+%token PLUS MINUS TIMES DIVIDE
 %token DBLSEMI
 %nonassoc FLOAT
 %nonassoc ELSE
 %left OR AND
 %nonassoc NOT
+%left  PLUS MINUS
+%left TIMES DIVIDE
 
 %start main
 %type <Types.exprS> main
@@ -31,5 +34,9 @@ expr:
   | expr OR expr                 { OrS ($1, $3) }
   | expr AND expr                { AndS ($1, $3) }
   | NOT expr                     { NotS $2 }
+  | expr PLUS expr               { ArithS ("+", $1, $3) }
+  | expr MINUS expr              { ArithS ("-", $1, $3) }
+  | expr TIMES expr              { ArithS ("*", $1, $3) }
+  | expr DIVIDE expr             { ArithS ("/", $1, $3) }
 ;
 

@@ -23,11 +23,15 @@ rule token = parse
   | false       { FALSE }
   | dblsemi     { DBLSEMI }
   | float as x  { FLOAT (float_of_string x) }
-  | "if"          { IF }
-  | "then"        { THEN }
-  | "else"        { ELSE }
+  | "if"        { IF }
+  | "then"      { THEN }
+  | "else"      { ELSE }
   | "or"        { OR }
   | "and"       { AND }
   | "not"       { NOT }
+  | "+"         { PLUS }
+  | "-"         { MINUS }
+  | "*"         { TIMES }
+  | "/"         { DIVIDE }
   | eof         { raise Eof }
   | any         { raise Unrecognized }
