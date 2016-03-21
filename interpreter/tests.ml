@@ -172,7 +172,7 @@ let t6j = try (evaluate (desugar (ArithS ("+ ", NumS 0.0, NumS 0.00))); false) w
 let t6i = try (evaluate (desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true)))); false) with Interp "interpErr: not a num" -> true
                                                                              | _ -> false
 
-let t6g = desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true))) = ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true)
+let t6g = desugar (ArithS ("/.", NumS 0.0, ArithS ("+", NumS 0.00, BoolS true))) = ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true))
 
 
 
