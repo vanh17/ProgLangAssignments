@@ -38,6 +38,13 @@ let bind str v env = (str, v) :: env
 (* INTERPRETER *)
 
 (* You will need to add cases here. *)
+(* desugar : exprS -> exprC *)
+let rec desugar exprS = match exprS with
+  | NumS i        -> NumC i
+  | BoolS i       -> BoolC i
+  | IfS (cond, th, els) -> IfC (desugar cond, desugar th, desugar els)
+  | NotS e -> desugar (IfS (e, BoolS false, BoolS true))
+
 (* You will need to add cases here. *)
 (* interp : Value env -> exprC -> value *)
 let rec interp env r = match r with
@@ -51,14 +58,6 @@ let rec interp env r = match r with
 (* evaluate : exprC -> val *)
 let evaluate exprC = exprC |> interp []
 
-(* desugar : exprS -> exprC *)
-let rec desugar exprS = match exprS with
-  | NumS i        -> NumC i
-  | BoolS i       -> BoolC i
-  | IfS (cond, th, els) -> match (evaluate (desugar cond)) with 
-                           | Bool i1' -> IfC (desugar cond, desugar th, desugar els)
-                           | _ -> raise (Desugar "desugarErr")
-  | NotS e -> desugar IfS (e, BoolS false, BoolS true)
 
 (* You will need to add cases to this function as you add new value types. *)
 let rec valToString r = match r with

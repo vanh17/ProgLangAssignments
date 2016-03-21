@@ -43,7 +43,9 @@ let t1d = evaluate (desugar (IfS (BoolS false, NumS 2.3, NumS 4.5))) = Num 4.5
 
 let t1e = evaluate (desugar (IfS (IfS (BoolS false, BoolS false, BoolS true), BoolS false, BoolS true))) = Bool false
 
-let t1f = try (desugar (IfS (NumS 2.3, BoolS true, BoolS false)); false) with Desugar "desugarErr" -> true
+let t1f = desugar (IfS (NumS 2.3, BoolS true, BoolS false)) = IfC (NumC 2.3, BoolC true, BoolC false)
+
+let t1f' = try (evaluate (desugar (IfS (NumS 2.3, BoolS true, BoolS false))); false) with Interp "interpErr" -> true
                                                                               | _ -> false
 
 let t1g = try (evaluate (IfC (NumC 2.3, BoolC true, BoolC false)); false) with Interp "interpErr" -> true
@@ -53,6 +55,17 @@ let t1h = let env1 = bind "x" (Num 3.1) empty
           in try ((interp env1 (IfC (NumC 3.5, BoolC false, BoolC true))); false) with Interp "interpErr" -> true
                                                                                        | _ -> false
 
+let t2a = desugar (NotS (BoolS false)) = IfC (BoolC false, BoolC false, BoolC true)
+
+(* You can also use interp directly to specify a custom environment. *)
+let t2b = try (evaluate (desugar (NotS (NumS 2.5))); false) with Interp "interpErr" -> true
+                                                            | _ -> false
+
+(* You can also test desugar to make sure it behaves properly. *)
+let t2c = desugar (NotS (IfS (BoolS false, BoolS false, BoolS true))) = IfC (IfC (BoolC false, BoolC false, BoolC true), BoolC false, BoolC true)
+
+(* Or you can combine with evaluate to get to the final value. *)
+let t2d = evaluate (desugar (NotS (IfS (BoolS false, BoolS false, BoolS true)))) = Bool false
 
 
 
