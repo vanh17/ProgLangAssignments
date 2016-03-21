@@ -45,20 +45,20 @@ let t1e = evaluate (desugar (IfS (IfS (BoolS false, BoolS false, BoolS true), Bo
 
 let t1f = desugar (IfS (NumS 2.3, BoolS true, BoolS false)) = IfC (NumC 2.3, BoolC true, BoolC false)
 
-let t1f' = try (evaluate (desugar (IfS (NumS 2.3, BoolS true, BoolS false))); false) with Interp "interpErr" -> true
+let t1f' = try (evaluate (desugar (IfS (NumS 2.3, BoolS true, BoolS false))); false) with Interp "interpErr: only boolean" -> true
                                                                                           | _ -> false
 
-let t1g = try (evaluate (IfC (NumC 2.3, BoolC true, BoolC false)); false) with Interp "interpErr" -> true
+let t1g = try (evaluate (IfC (NumC 2.3, BoolC true, BoolC false)); false) with Interp "interpErr: only boolean" -> true
                                                                                | _ -> false
 
 let t1h = let env1 = bind "x" (Num 3.1) empty
-          in try ((interp env1 (IfC (NumC 3.5, BoolC false, BoolC true))); false) with Interp "interpErr" -> true
+          in try ((interp env1 (IfC (NumC 3.5, BoolC false, BoolC true))); false) with Interp "interpErr: only boolean" -> true
                                                                                        | _ -> false
 
 let t2a = desugar (NotS (BoolS false)) = IfC (BoolC false, BoolC false, BoolC true)
 
 (* You can also use interp directly to specify a custom environment. *)
-let t2b = try (evaluate (desugar (NotS (NumS 2.5))); false) with Interp "interpErr" -> true
+let t2b = try (evaluate (desugar (NotS (NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
                                                                  | _ -> false
 
 (* You can also test desugar to make sure it behaves properly. *)
@@ -70,17 +70,17 @@ let t2d = evaluate (desugar (NotS (IfS (BoolS false, BoolS false, BoolS true))))
 let t3a = desugar (OrS (BoolS false, BoolS true)) = IfC (BoolC false, BoolC true, IfC (BoolC true, BoolC true, BoolC false))
 
 (* You can also use interp directly to specify a custom environment. *)
-let t3b = try (evaluate (desugar (OrS (NumS 2.5, BoolS true))); false) with Interp "interpErr" -> true
+let t3b = try (evaluate (desugar (OrS (NumS 2.5, BoolS true))); false) with Interp "interpErr: only boolean" -> true
                                                                             | _ -> false
 
 (*
-let t3c = try (evaluate (desugar (OrS (BoolS true, NumS 2.5))); false) with Interp "interpErr" -> true
+let t3c = try (evaluate (desugar (OrS (BoolS true, NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
                                                                             | _ -> false
 *)
 (* Or you can combine with evaluate to get to the final value. *)
 let t3d = evaluate (desugar (OrS (IfS (BoolS false, BoolS false, BoolS true), IfS (BoolS true, BoolS true, BoolS false)))) = Bool true
 
-let t3e = try (evaluate (desugar (OrS (BoolS false, NumS 2.5))); false) with Interp "interpErr" -> true
+let t3e = try (evaluate (desugar (OrS (BoolS false, NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
                                                                              | _ -> false
 
 let t3f = desugar (OrS (NumS 2.5, BoolS true)) = IfC (NumC 2.5, BoolC true, IfC (BoolC true, BoolC true, BoolC false))
@@ -90,14 +90,14 @@ let t3g = desugar (OrS (NumS 2.5, IfS (BoolS true, NumS 0.0, BoolS false))) = If
 let t4a = desugar (AndS (BoolS false, BoolS true)) = IfC (BoolC false, IfC (BoolC true, BoolC true, BoolC false), BoolC false)
 
 (* You can also use interp directly to specify a custom environment. *)
-let t4b = try (evaluate (desugar (AndS (NumS 2.5, BoolS true))); false) with Interp "interpErr" -> true
+let t4b = try (evaluate (desugar (AndS (NumS 2.5, BoolS true))); false) with Interp "interpErr: only boolean" -> true
                                                                              | _ -> false
 
 (* Or you can combine with evaluate to get to the final value. *)
 let t4c = evaluate (desugar (AndS (IfS (BoolS false, BoolS false, BoolS true), IfS (BoolS true, BoolS true, BoolS false)))) = Bool true
 
 (*
-let t4d = try (evaluate (desugar (AndS (BoolS false, NumS 2.5))); false) with Interp "interpErr" -> true
+let t4d = try (evaluate (desugar (AndS (BoolS false, NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
                                                                               | _ -> false
 *)
 
@@ -105,8 +105,42 @@ let t4f = desugar (AndS (NumS 2.5, BoolS true)) = IfC (NumC 2.5, IfC (BoolC true
 
 let t4g = desugar (AndS (NumS 2.5, IfS (BoolS true, NumS 0.0, BoolS false))) = IfC (NumC 2.5, IfC (IfC (BoolC true, NumC 0.0, BoolC false), BoolC true, BoolC false), BoolC false)
 
-let t4h = try (evaluate (desugar (AndS (BoolS true, NumS 2.5))); false) with Interp "interpErr" -> true
+let t4h = try (evaluate (desugar (AndS (BoolS true, NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
                                                                              | _ -> false
+
+let t5a = evaluate (ArithC ("+", NumC 2.5, NumC 3.6)) = Num 6.1
+
+(* You can also use interp directly to specify a custom environment. *)
+let t5b = try (evaluate (ArithC (" ", NumC 2.5, BoolC true)); false) with Interp "interpErr: not a num" -> true
+                                                                             | _ -> false
+
+(* Or you can combine with evaluate to get to the final value. *)
+let t5c = evaluate (ArithC ("*", NumC 4.2, NumC 2.4)) = Num 10.08
+
+(*
+let t4d = try (evaluate (desugar (AndS (BoolS false, NumS 2.5))); false) with Interp "interpErr: only boolean" -> true
+                                                                              | _ -> false
+*)
+
+let t5f = try (evaluate (ArithC ("-", NumC 2.5, BoolC true)); false) with Interp "interpErr: not a num" -> true
+                                                                          | _ -> false
+
+let t5g = evaluate (ArithC ("/", NumC 2.5, NumC 1.0)) = Num 2.5
+
+let t5h = try (evaluate (ArithC ("/", NumC 0.0, NumC 0.00)); false) with Interp "interpErr: can't divide 0.0" -> true
+                                                                             | _ -> false
+
+let t5i = try (evaluate (ArithC ("/.", NumC 0.0, NumC 0.00)); false) with Interp "interpErr: only +, -, *" -> true
+                                                                             | _ -> false
+
+let t5j = try (evaluate (ArithC ("+ ", NumC 0.0, NumC 0.00)); false) with Interp "interpErr: only +, -, *" -> true
+                                                                             | _ -> false
+
+let t5i = try (evaluate (ArithC ("/.", NumC 0.0, ArithC ("+", NumC 0.00, BoolC true)); false) with Interp "interpErr: not a num" -> true
+                                                                             | _ -> false
+
+let t5g = evaluate (ArithC ("/", ArithC ("*", NumC 4.2, NumC 2.4), ArithC ("/", ArithC ("*", NumC 4.2, NumC 2.4), ArithC ("*", NumC 4.2, NumC 2.4)))) = Num 10.08
+
 
 
 
