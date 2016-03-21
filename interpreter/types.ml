@@ -5,6 +5,9 @@ exception Interp of string       (* Use for interpreter errors *)
 type exprS = NumS of float
              | BoolS of bool
              | IfS of exprS * exprS * exprS
+             | OrS of exprS * exprS
+             | AndS of exprS * exprS
+             | NotS of exprS
 
 (* You will need to add more cases here. *)
 type exprC = NumC of float
@@ -55,6 +58,7 @@ let rec desugar exprS = match exprS with
   | IfS (cond, th, els) -> match (evaluate (desugar cond)) with 
                            | Bool i1' -> IfC (desugar cond, desugar th, desugar els)
                            | _ -> raise (Desugar "desugarErr")
+  | NotS e -> desugar IfS (e, BoolS false, BoolS true)
 
 (* You will need to add cases to this function as you add new value types. *)
 let rec valToString r = match r with
