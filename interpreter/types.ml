@@ -13,6 +13,7 @@ type exprS = NumS of float
 type exprC = NumC of float
              | BoolC of bool
              | IfC of exprC * exprC * exprC
+             | ArithC of string * exprC * exprC
 
 
 (* You will need to add more cases here. *)
@@ -35,6 +36,16 @@ let bind str v env = (str, v) :: env
    You may be asked to add methods here. You may also choose to add your own
    helper methods here.
 *)
+let arithEval op v1 v2 = match (op, v1, v2) with
+                                 | ("+", Num x, Num y) -> Num (x +. y) 
+                                 | ("-", Num x, Num y) -> Num (x -. y)
+                                 | ("*", Num x, Num y) -> Num (x *. y)
+                                 | ("/", Num x, Num y) -> if (y == 0.0) then raise (Interp "interpErr: can't divide 0.0")
+                                                          else Num (x /. y)
+                                 | (_, Num x, Num y) -> raise (Interp "interpErr: only +, -, *")
+                                 | _ -> raise (Interp "interpErr: not a num")
+
+
 (* INTERPRETER *)
 
 (* You will need to add cases here. *)
@@ -47,18 +58,22 @@ let rec desugar exprS = match exprS with
   | OrS (e1, e2) -> desugar (IfS (e1, BoolS true, IfS (e2, BoolS true, BoolS false)))
   | AndS (e1, e2) -> desugar (IfS (e1, IfS(e2, BoolS true, BoolS false), BoolS false))
 
+
 (* You will need to add cases here. *)
 (* interp : Value env -> exprC -> value *)
 let rec interp env r = match r with
   | NumC i        -> Num i
   | BoolC i       -> Bool i
-  | IfC (i1, i2, i3) -> match (interp env i1) with
-                        | Bool i1' -> if (i1') then interp env i2 
-                                                else interp env i3
-                        | _ -> raise (Interp "interpErr")
+  | IfC (i1, i2, i3) -> ( match (interp env i1) with
+                          | Bool i1' -> if (i1') then interp env i2 
+                                                 else interp env i3
+                          | _ -> raise (Interp "interpErr: only boolean") )
+  | ArithC (op, v1, v2) -> arithEval op (interp env v1) (interp env v2)
+
 
 (* evaluate : exprC -> val *)
 let evaluate exprC = exprC |> interp []
+
 
 
 (* You will need to add cases to this function as you add new value types. *)

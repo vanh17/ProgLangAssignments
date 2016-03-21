@@ -10,6 +10,7 @@ type exprS = NumS of float
 type exprC = NumC of float
              | BoolC of bool
              | IfC of exprC * exprC * exprC
+             | ArithC of string * exprC * exprC
 type value = Num of float
              | Bool of bool
 
@@ -27,3 +28,6 @@ val evaluate : exprC -> value
 
 (* result post-processing *)
 val valToString : value -> string
+
+(* helper methods *)
+val arithEval : string -> value -> value -> value
