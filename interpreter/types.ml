@@ -45,6 +45,7 @@ let rec desugar exprS = match exprS with
   | IfS (cond, th, els) -> IfC (desugar cond, desugar th, desugar els)
   | NotS e -> desugar (IfS (e, BoolS false, BoolS true))
   | OrS (e1, e2) -> desugar (IfS (e1, BoolS true, IfS (e2, BoolS true, BoolS false)))
+  | AndS (e1, e2) -> desugar (IfS (e1, IfS(e2, BoolS true, BoolS false), BoolS false))
 
 (* You will need to add cases here. *)
 (* interp : Value env -> exprC -> value *)
