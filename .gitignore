@@ -4,4 +4,9 @@ interpreter/lexer.ml
 interpreter/parser.ml
 interpreter/parser.mli
 interpreter/lang
+<<<<<<< HEAD
 *.exe
+=======
+compiled
+*.rkt~
+>>>>>>> refs/remotes/skiadas/master
