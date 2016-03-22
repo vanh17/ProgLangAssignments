@@ -227,6 +227,12 @@ let t9d = evaluate (EqC (NumC 2.5, BoolC true)) = Bool false
 
 let t9e = evaluate (EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), NumC 4.5)) = Bool true
 
+let t9f = evaluate (EqC (ArithC ("+", NumC 4.2, NumC 4.2000), ArithC("*", NumC 4.2, NumC 2.0))) = Bool true
+
+let t10 = evaluate (desugar (NeqS (ArithS ("+", NumS 4.2, NumS 4.2000), ArithS ("*", NumS 4.2, NumS 2.0)))) = Bool false
+
+let t101 = evaluate (desugar (EqS (ArithS ("+", NumS 4.2, NumS 4.2000), ArithS ("*", NumS 4.2, NumS 2.0)))) = Bool true
+
 let t10a = evaluate (desugar (EqS (NumS 4.2, NumS 4.2))) = Bool true
 
 let t10b = evaluate (desugar (EqS (NumS 2.5, NumS 2.5))) = Bool true                                                                            

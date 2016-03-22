@@ -62,8 +62,8 @@ let compEval op v1 v2 = match (op, v1, v2) with
 
 
 let eqEval v1 v2 = match (v1, v2) with
-                   | (Num n1, Num n2) -> Bool (n1 == n2)
-                   | (Bool b1, Bool b2) -> Bool (b1 == b2)
+                   | (Num n1, Num n2) -> Bool (n1 = n2)
+                   | (Bool b1, Bool b2) -> Bool (b1 = b2)
                    | _ -> Bool false
 (* INTERPRETER *)
 
