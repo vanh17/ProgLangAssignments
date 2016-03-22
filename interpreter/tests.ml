@@ -238,8 +238,29 @@ let t10d = desugar (EqS (NumS 2.5, BoolS true)) = EqC (NumC 2.5, BoolC true)
 let t10e = desugar (EqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9)))
          = EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), IfC (NumC 4.5, NumC 4.5, NumC 0.9))
 
-let t10f = try (desugar (EqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9))); false)
+let t10f = try (evaluate (desugar (EqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9)))); false)
            with Interp "interpErr: only boolean" -> true
            | _ -> false
+
+let t11a = evaluate (desugar (NeqS (NumS 4.2, NumS 4.2))) = Bool false
+
+let t11b = evaluate (desugar (NeqS (NumS 2.5, NumS 4.5))) = Bool true                                                                            
+
+let t11c = evaluate (desugar (NeqS (BoolS false, NumS 2.6))) = Bool true                                                                            
+
+let t11d = desugar (NeqS (NumS 2.5, BoolS true)) = IfC ((EqC (NumC 2.5, BoolC true)), BoolC false, BoolC true) 
+
+let t11e = desugar (NeqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9)))
+         = IfC (EqC (IfC (BoolC true, NumC 4.5, NumC 0.9), IfC (NumC 4.5, NumC 4.5, NumC 0.9)), BoolC false, BoolC true)
+
+let t11f = try (evaluate (desugar (NeqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (NumS 4.5, NumS 4.5, NumS 0.9)))); false)
+           with Interp "interpErr: only boolean" -> true
+           | _ -> false
+
+let t11g = evaluate (desugar (NeqS (IfS (BoolS true, NumS 4.5, NumS 0.9), IfS (BoolS false, NumS 4.5, NumS 0.9)))) = Bool true
+
+let t11h = evaluate (desugar (NeqS (NeqS (NumS 2.5, NumS 4.5), NeqS (NumS 2.5, NumS 4.5)))) = Bool false                                                                           
+
+let t11i = evaluate (desugar (NeqS (ArithS ("*", NumS 5.0, NumS 10.0), ArithS ("-", NumS 50.0, NumS 0.0)))) = Bool false                                                                            
 
 
