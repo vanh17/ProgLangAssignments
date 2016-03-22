@@ -11,6 +11,7 @@ type exprS = NumS of float
              | ArithS of string * exprS * exprS
              | CompS of string * exprS * exprS
              | EqS of exprS * exprS
+             | NeqS of exprS * exprS
 
 (* You will need to add more cases here. *)
 type exprC = NumC of float
@@ -78,6 +79,7 @@ let rec desugar exprS = match exprS with
   | ArithS (op, v1, v2) -> ArithC (op, desugar v1, desugar v2)
   | CompS (op, v1, v2) -> CompC (op, desugar v1, desugar v2)
   | EqS (v1, v2) -> EqC (desugar v1, desugar v2)
+  | NeqS (v1, v2) -> desugar (NotS (EqS (v1, v2)))
 
 
 (* You will need to add cases here. *)
