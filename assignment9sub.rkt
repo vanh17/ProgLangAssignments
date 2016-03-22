@@ -15,7 +15,7 @@
     (if (null? ls)
         0
         (if (number? (car ls))
-               (+ (car xs)(add-nums (cdr ls)))
+               (+ (car ls)(add-nums (cdr ls)))
                (add-nums (cdr ls)))))
 
 ;; Write a function `length`. It takes as input a list and returns the length of the
@@ -25,6 +25,7 @@
   (if (null? ls)
       0
       (+ 1 (length (cdr ls)))))
+
 
 
 
