@@ -34,6 +34,12 @@
 ;; should return `(error "negative index")`. If the list is not long enough it should
 ;; return `(error "list too short")`.
 ;; The reference solution is 5 lines.
+(define (get-nth ls n)
+  (cond
+    [(< n 0) (error "negative index")]
+    [(>= n (length ls)) (error "list too short")]
+    [(= n 0) (car ls)]
+    [(> n 0) (get-nth (cdr ls) (- n 1))]))
 
 
 ;; Write a function `every-other`. It takes as input a list, and it returns a new list
