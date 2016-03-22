@@ -11,21 +11,11 @@
 ;; in the list that are actually numbers. You can check if something is a number via
 ;; `number?`. The result for an empty list should be 0.
 ;; The reference solution is 5 lines.
-(define (add-nums ls)
-    (if (null? ls)
-        0
-        (if (number? (car ls))
-               (+ (car xs)(add-nums (cdr ls)))
-               (add-nums (cdr ls)))))
+
 
 ;; Write a function `length`. It takes as input a list and returns the length of the
 ;; list.
 ;; The reference solution is 4 lines.
-(define (length ls)
-  (if (null? ls)
-      0
-      (+ 1 (length (cdr ls)))))
-
 
 
 ;; Write a function `get-nth`. It takes as input a list and an integer, and it returns
