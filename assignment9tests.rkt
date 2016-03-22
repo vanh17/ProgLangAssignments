@@ -24,6 +24,27 @@
 (with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
                                                  "negative index"))])
     (get-nth null -2))   ;;negative index
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "list too short"))])
+    (get-nth null 2))   ;;out of bound
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "negative index"))])
+    (get-nth (list 1 2 3) -10))   ;;negative index
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "list too short"))])
+    (get-nth (list 1) 2))   ;;out of bound
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "negative index"))])
+    (get-nth (list 1 2 3) -4))   ;;negative index
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "list too short"))])
+    (get-nth (list 1 2 'a 'b) 10))   ;;out of bound
+(with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
+                                                 "list too short"))])
+    (get-nth (list 1 2 'a 'b) 4))   ;;out of bound
+(equal? (get-nth (list 1 2 'a 'b) 3) 'b) ;;last element
+(equal? (get-nth (list 1 2 'a 'b) 0) 1) ;;first element
+(equal? (get-nth (list 1 2 'a 'b 3 4 5) 4) 3) ;;middle element
 
 ;; every-other
 (equal? (every-other (list 1 2 3 4)) (list 1 3)) ;; even length
