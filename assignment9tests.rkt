@@ -9,9 +9,16 @@
 ;; add-nums
 (equal? (add-nums (list)) 0) ;;empty list
 (equal? (add-nums (list 1 2 'a 3)) 6) ;; non-number
+(equal? (add-nums (list 'a 'b 'c)) 0) ;; all non-number
+(equal? (add-nums (list 0 0 0)) 0) ;; all zero
+(equal? (add-nums (list -1 0 1)) 0) ;; negative number
+(equal? (add-nums (list (cons 1 2) (cons 3 4) (cons 'a 'b))) 0) ;;list of pair
 
 ;; length
 (equal? (length (list)) 0) ;; empty list
+(equal? (length (list 1 2 3 'a 'b 'c)) 6) ;; non-numbers and numbers
+(equal? (length (list "abc" '3 '3' 4' 5)) 5) ;; string and other elements
+(equal? (length (list (cons 1 2) (cons 3 4) (cons 4 5))) 3) ;; pair list
 
 ;; get-nth
 (with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
