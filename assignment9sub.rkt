@@ -66,6 +66,11 @@
 ;; and two lists. It then creates a single new list by applying the function to pairs
 ;; of values one from each list. The process stops when one of the lists is empty.
 ;; The reference solution is 5 lines.
+(define (map2 f ls1 ls2)
+  (if (or (null? ls1) (null? ls2))
+      null
+      (cons (f (car ls1) (car ls2))
+            (map2 f (cdr ls1) (cdr ls2)))))
 
 
 ;; Write a function `filter`. It takes as input a function and a list and returns
