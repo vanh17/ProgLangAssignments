@@ -48,7 +48,11 @@
 
 ;; every-other
 (equal? (every-other (list 1 2 3 4)) (list 1 3)) ;; even length
-(equal? (every-other (list 1 2 3)) (list 1 3))   ;; odd length
+(equal? (every-other null) null)   ;;null
+(equal? (every-other (list 1 2 3 4 5 6)) (list 1 3 5)) ;; even length
+(equal? (every-other (list 1 3)) (list 1))   ;; two element
+(equal? (every-other (list 'a)) (list 'a)) ;; one element
+(equal? (every-other (list 1)) (list 1)) ;; one number
 
 ;; map
 (equal? (map (lambda (x) (* x x)) (list 1 2 3))
