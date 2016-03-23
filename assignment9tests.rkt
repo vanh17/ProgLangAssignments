@@ -63,10 +63,38 @@
      (list null null null))       ;; map to null
 (equal? (map (lambda (x) (< 2 x)) (list 1 2 3))
      (list #f #f #t))       ;; filter
+(equal? (map (lambda (x) (* x x)) (list 1))
+     (list 1))       ;; squaring, one element
+(equal? (map (lambda (x) (* 2 x)) (list 1))
+     (list 2))       ;; double, one element
+(equal? (map (lambda (x) null) (list 1))
+     (list null))       ;; map to null, one element
+(equal? (map (lambda (x) (< 2 x)) (list 1))
+     (list #f))       ;; filter, one element
+(equal? (map (lambda (x) (* x x)) null)
+     null)       ;; squaring, null list 
+(equal? (map (lambda (x) (* 2 x)) null)
+     null)       ;; double, null list
+(equal? (map (lambda (x) null) null)
+     null)       ;; map to null, null list
+(equal? (map (lambda (x) (< 2 x)) null)
+     null)       ;; filter null list
 
 ;; map2
 (equal? (map2 (lambda (x y) (* x y)) (list 1 2 3) (list 2 3 4))
      (list 2 6 12))      ;; multiply
+(equal? (map2 (lambda (x y) (* x y)) (list 1 2 3 4) (list 2 3 4))
+     (list 2 6 12))      ;; multiply 1st list longer
+(equal? (map2 (lambda (x y) (* x y)) (list 1 2 3) (list 2 3 4 5 6))
+     (list 2 6 12))      ;; multiply 2nd list longer
+(equal? (map2 (lambda (x y) (* x y)) null (list 2 3 4 5 6))
+     null)      ;; multiply 2nd list longer
+(equal? (map2 (lambda (x y) (* x y)) (list 1 2 3) null)
+     null)      ;; multiply 1st list longer
+(equal? (map2 (lambda (x y) (* x y)) (list 1 2) (list 2 3 4 5 6))
+     (list 2 6))      ;; multiply 2nd list longer
+
+
 
 ;; filter
 (equal? (filter (lambda (x) (= (modulo x 2) 1))
