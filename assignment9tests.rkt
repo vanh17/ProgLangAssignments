@@ -57,6 +57,12 @@
 ;; map
 (equal? (map (lambda (x) (* x x)) (list 1 2 3))
      (list 1 4 9))       ;; squaring
+(equal? (map (lambda (x) (* 2 x)) (list 1 2 3))
+     (list 2 4 6))       ;; double
+(equal? (map (lambda (x) null) (list 1 2 3))
+     (list null null null))       ;; map to null
+(equal? (map (lambda (x) (< 2 x)) (list 1 2 3))
+     (list #f #f #t))       ;; filter
 
 ;; map2
 (equal? (map2 (lambda (x y) (* x y)) (list 1 2 3) (list 2 3 4))
