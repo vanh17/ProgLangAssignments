@@ -50,7 +50,7 @@
   (cond
     [(null? ls) null]
     [(null? (cdr ls)) ls]
-    [true (append (list (car ls)) (every-other (cdr (cdr ls))))]))
+    [true (cons (car ls) (every-other (cdr (cdr ls))))]))
 
 
 ;; Write a function `map`. It takes two arguments: a function and a list. It then
@@ -86,4 +86,9 @@
 ;; list of the results of calling those thunks. To call a function, you put it as the
 ;; first entry in parentheses, followed by any arguments it may have.
 ;; The reference solution is 4 lines.
-
+(define (call-all ls)
+  (if (null? ls)
+      null
+      (cons ((car ls)) (call-all (cdr ls)))))
+    
+  
