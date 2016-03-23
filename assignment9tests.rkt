@@ -100,6 +100,24 @@
 (equal? (filter (lambda (x) (= (modulo x 2) 1))
                (list 1 2 3 4))
      (list 1 3))      ;; odd
+(equal? (filter (lambda (x) (= (modulo x 2) 0))
+               (list 1 2 3 4))
+     (list 2 4))      ;; even
+(equal? (filter (lambda (x) (< x (- (* 2 x) 3)))
+               (list 1 2 3 4))
+     (list 4))      ;; x < 2x - 3
+(equal? (filter (lambda (x) (= (modulo x 2) 1))
+               (list 1))
+     (list 1))      ;; odd, one element
+(equal? (filter (lambda (x) (= (modulo x 2) 0))
+               (list 1))
+     null)      ;; odd
+(equal? (filter (lambda (x) (= (modulo x 2) 1))
+               null)
+     null)      ;; odd
+(equal? (filter (lambda (x) (= (modulo x 2) 1))
+               (list 22 2 334 4))
+     null)      ;; odd
 
 ;; call-all
 (equal? (call-all (list (lambda () 2)))
