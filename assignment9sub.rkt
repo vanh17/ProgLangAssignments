@@ -76,7 +76,11 @@
 ;; Write a function `filter`. It takes as input a function and a list and returns
 ;; a new list consisting of those elements for which the function does not return #f
 ;; The reference solution is 5 lines.
-
+(define (filter f ls)
+  (cond
+      [(null? ls) null]
+      [(f (car ls)) (cons (car ls) (filter f (cdr ls)))]
+      [#t (filter f (cdr ls))]))
 
 ;; Write a function `call-all`. It takes as input a list of "thunks", and returns a
 ;; list of the results of calling those thunks. To call a function, you put it as the
