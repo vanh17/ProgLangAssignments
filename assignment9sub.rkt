@@ -46,12 +46,21 @@
 ;; where every other term is skipped. So applied to the list `'(1 2 3)` it should return
 ;; `'(1 3)`, and the same for the list `'(1 2 3 4)`.
 ;; The reference solution is 5 lines.
+(define (every-other ls)
+  (cond
+    [(null? ls) null]
+    [(null? (cdr ls)) ls]
+    [true (append (list (car ls)) (every-other (cdr (cdr ls))))]))
 
 
 ;; Write a function `map`. It takes two arguments: a function and a list. It then
 ;; returns a new list of the result of applying the function on each element.
 ;; The reference solution is 5 lines.
-
+(define (map f ls)
+  (if (null? ls)
+      null
+      (cons (f (car ls))
+            (map f (cdr ls)))))
 
 ;; Write a function `map2`. It takes three arguments: a function that takes two inputs
 ;; and two lists. It then creates a single new list by applying the function to pairs
