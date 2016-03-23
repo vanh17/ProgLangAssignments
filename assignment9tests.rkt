@@ -122,3 +122,13 @@
 ;; call-all
 (equal? (call-all (list (lambda () 2)))
      (list 2))        ;; one-element
+(equal? (call-all (list (lambda () false)))
+     (list #f))        ;; one-element
+(equal? (call-all (list (lambda () false) (lambda () true) (lambda () 1) (lambda () 'a)))
+     (list #f #t 1 'a))        ;; four-element
+(equal? (call-all null)
+     null)        ;; no-element
+(equal? (call-all (list (lambda () false) (lambda () (list 1 2 3))))
+     (list #f (list 1 2 3)))        ;; two-element
+(equal? (call-all (list (lambda () null)))
+     (list null ))        ;; one-element
