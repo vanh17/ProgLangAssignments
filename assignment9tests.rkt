@@ -7,6 +7,7 @@
 (require "assignment9sub.rkt")
 
 ;; add-nums
+(write "add-nums")
 (equal? (add-nums (list)) 0) ;;empty list
 (equal? (add-nums (list 1 2 'a 3)) 6) ;; non-number
 (equal? (add-nums (list 'a 'b 'c)) 0) ;; all non-number
@@ -15,12 +16,14 @@
 (equal? (add-nums (list (cons 1 2) (cons 3 4) (cons 'a 'b))) 0) ;;list of pair
 
 ;; length
+(write "length")
 (equal? (length (list)) 0) ;; empty list
 (equal? (length (list 1 2 3 'a 'b 'c)) 6) ;; non-numbers and numbers
 (equal? (length (list "abc" '3 '3' 4' 5)) 5) ;; string and other elements
 (equal? (length (list (cons 1 2) (cons 3 4) (cons 4 5))) 3) ;; pair list
 
 ;; get-nth
+(write "get-nth")
 (with-handlers ([exn:fail? (lambda (exn) (equal? (exn-message exn)
                                                  "negative index"))])
     (get-nth null -2))   ;;negative index
@@ -47,6 +50,7 @@
 (equal? (get-nth (list 1 2 'a 'b 3 4 5) 4) 3) ;;middle element
 
 ;; every-other
+(write "every-other")
 (equal? (every-other (list 1 2 3 4)) (list 1 3)) ;; even length
 (equal? (every-other null) null)   ;;null
 (equal? (every-other (list 1 2 3 4 5 6)) (list 1 3 5)) ;; even length
@@ -55,6 +59,7 @@
 (equal? (every-other (list 1)) (list 1)) ;; one number
 
 ;; map
+(write "map")
 (equal? (map (lambda (x) (* x x)) (list 1 2 3))
      (list 1 4 9))       ;; squaring
 (equal? (map (lambda (x) (* 2 x)) (list 1 2 3))
@@ -81,6 +86,7 @@
      null)       ;; filter null list
 
 ;; map2
+(write "map2")
 (equal? (map2 (lambda (x y) (* x y)) (list 1 2 3) (list 2 3 4))
      (list 2 6 12))      ;; multiply
 (equal? (map2 (lambda (x y) (* x y)) (list 1 2 3 4) (list 2 3 4))
@@ -97,6 +103,7 @@
 
 
 ;; filter
+(write "filter")
 (equal? (filter (lambda (x) (= (modulo x 2) 1))
                (list 1 2 3 4))
      (list 1 3))      ;; odd
@@ -120,6 +127,8 @@
      null)      ;; odd
 
 ;; call-all
+(write "call-all")
+
 (equal? (call-all (list (lambda () 2)))
      (list 2))        ;; one-element
 (equal? (call-all (list (lambda () false)))
