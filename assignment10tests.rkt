@@ -10,10 +10,11 @@
 (displayln "bind tests")
 (define sample-env1 (list (binding 'x (num 4)) (binding 'y (num 5))))
 (define sample-env2 (list (binding 'x (num 4)) (binding 'x (num 5))))
+(define sample-env3 (list (binding 'y (num 4)) (binding 'z (num 10)) (binding 'x (num 4)) (binding 'y (num 5))))
 
 (equal? (bind 'x (num 4) empty) (list (binding 'x (num 4))))
 (equal? (bind 'x (num 4) (bind 'y (num 5) empty)) sample-env1)
-(equal? (bind 'x (num 4) (bind 'x (num 5) empty)) sample-env2)
+(equal? (bind 'y (num 4) (bind 'z (num 10) (bind 'x (num 4) (bind 'y (num 5) empty)))) sample-env3)
 
 ;; lookup
 (displayln "lookup tests")
