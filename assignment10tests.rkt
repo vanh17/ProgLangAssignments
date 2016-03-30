@@ -114,6 +114,10 @@
 (value? (num 5))
 (value? (bool #t))
 (not (value? (pair-e (arith '+ (num 2) (num 3)) (num 2))))
+(value? (num 'd))
+(value? (bool 'f))
+(value? (pair-e (nul) (num 2)))
+(value? (nul))
 
 ;; value-eq?
 (displayln "value-eq? tests")
