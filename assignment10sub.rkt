@@ -43,12 +43,12 @@
 ;; It should throw an appropriate "lookup failed" error if it can't find
 ;; the symbol.
 (define (lookup s env)
-  (if (null? env)
+  (cond
+    [(null? env)
      (error (string-append "lookup: symbol not defined: "
-                         (symbol->string s)))
-     (cond
-       [(equal? (binding-s (car env)) s) (binding-v (car env))]
-       [#t (lookup s (cdr env))])))
+                         (symbol->string s)))]
+    [(equal? (binding-s (car env)) s) (binding-v (car env))]
+    [#t (lookup s (cdr env))]))
 
 ;;            THE LANGUAGE
 ;; We define the language in terms of structs.
@@ -89,7 +89,7 @@
 ;;     the `e1` and `e2` components are themselves valid
 ;; - A `if-e` is valid if `tst`, `thn` and `els` are all valid
 ;; - A `eq-e` is valid if both `e1` and `e2` are valid
-;; - A `let-e` is valid if the `s` is an Racket symbol, and the 
+;; - A `let-e` is valid if the `s`f e is an Racket symbol, and the 
 ;;     `e1` and `e2` are themselves valid
 ;; - A `fun` is valid if `arg` is a Racket symbol, and `name` is
 ;;      either #f or a Racket symbol distinct from `arg`, and the
@@ -106,10 +106,44 @@
 ;; The arith case is done for you as an example.
 ;; You will need to add many more cases to the cond.
 (define (valid-program? e)
-  (cond [(arith? e)
+  (cond [(var? e)(symbol? (var-s e))]
+        [(num? e)(number? (num-n e))]
+        [(bool? e) (boolean? (bool-b e))]
+        [(arith? e)
          (and (memq (arith-op e) (list '+ '* '- '/))
               (valid-program? (arith-e1 e))
               (valid-program? (arith-e2 e)))]
+        [(comp? e)
+         (and (memq (comp-op e) (list '< '<= '>= '>))
+              (valid-program? (comp-e1 e))
+              (valid-program? (comp-e2 e)))]
+        [(if-e? e)
+         (and (valid-program? (if-e-tst e))
+              (valid-program? (if-e-thn e))
+              (valid-program? (if-e-els e)))]
+        [(eq-e? e)
+         (and (valid-program? (eq-e-e1 e))
+              (valid-program? (eq-e-e2 e)))]
+        [(let-e? e)
+         (and (symbol? (let-e-s e))
+              (valid-program? (let-e-e1 e))
+              (valid-program? (let-e-e2 e)))]
+        [(fun? e)
+         (and (symbol? (fun-arg e))
+              (or (equal? (fun-name e) #f)
+                  (and (symbol? (fun-name e))
+                       (not (equal? (fun-name e) (fun-arg e)))))
+              (valid-program? (fun-body e)))]
+        [(call? e)
+         (and (valid-program? (call-e1 e))
+              (valid-program? (call-e2 e)))]
+        [(nul? e) #t]
+        [(isnul? e) (valid-program? (isnul-e e))]
+        [(pair-e? e)
+         (and (valid-program? (pair-e-e1 e))
+              (valid-program? (pair-e-e2 e)))]
+        [(fst? e) (valid-program? (fst-e e))]
+        [(snd? e) (valid-program? (snd-e e))]
         [else #f]))
 
 
