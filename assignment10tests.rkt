@@ -10,11 +10,11 @@
 (displayln "bind tests")
 (define sample-env1 (list (binding 'x (num 4)) (binding 'y (num 5))))
 (define sample-env2 (list (binding 'x (num 4)) (binding 'x (num 5))))
-(define sample-env3 (list (binding 'y (num 4)) (binding 'z (num 10)) (binding 'x (num 4)) (binding 'y (num 5))))
+(define sample-env3 (list (binding 'y (num 8)) (binding 'z (num 10)) (binding 'x (num 4)) (binding 't (num 5))))
 
 (equal? (bind 'x (num 4) empty) (list (binding 'x (num 4))))
 (equal? (bind 'x (num 4) (bind 'y (num 5) empty)) sample-env1)
-(equal? (bind 'y (num 4) (bind 'z (num 10) (bind 'x (num 4) (bind 'y (num 5) empty)))) sample-env3)
+(equal? (bind 'y (num 8) (bind 'z (num 10) (bind 'x (num 4) (bind 't (num 5) empty)))) sample-env3)
 
 ;; lookup
 (displayln "lookup tests")
@@ -26,6 +26,16 @@
   (equal? (lookup 'y sample-env1) (num 5)))
 (with-handlers ([exn:fail? (lambda (exn) #t)])
   (equal? (lookup 'z sample-env1) (num 4)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (lookup 't empty)) 
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (lookup 't sample-env3) (num 5)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (lookup 'y sample-env3) (num 8)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (equal? (lookup 'z sample-env3) (num 10)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (lookup 'a sample-env3))
 
 
 ;; valid-program?
