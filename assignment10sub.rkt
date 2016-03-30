@@ -34,7 +34,7 @@
 ;; This should be a simple consing of a binding.
 ;;
 (define (bind s v env)
-  (cons (binding (s v)) env))       ;   <----- Need to implement this
+  (cons (binding s v) env))       
 
 ;;
 ;; TODO: Implement the function lookup, that looks for the symbol s in
@@ -43,8 +43,12 @@
 ;; It should throw an appropriate "lookup failed" error if it can't find
 ;; the symbol.
 (define (lookup s env)
-  (error (string-append "lookup: symbol not defined: "
-                        (symbol->string s))))
+  (if (null? env)
+     (error (string-append "lookup: symbol not defined: "
+                         (symbol->string s)))
+     (cond
+       [(equal? (binding-s (car env)) s) (binding-v (car env))]
+       [#t (lookup s (cdr env))])))
 
 ;;            THE LANGUAGE
 ;; We define the language in terms of structs.
