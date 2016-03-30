@@ -122,8 +122,17 @@
 ;; value-eq?
 (displayln "value-eq? tests")
 (value-eq? (num 5) (num 5))
-(not (value-eq? (num 5) (bool #t)))
-(not (value-eq? (num 5) (num 3.2)))
+(not (value-eq? (num 5) (num #t)))
+(not (value-eq? (num 5) (bool 5)))
+(value-eq? (num 0.0) (num 0.0))
+(not (value-eq? (num 5) (nul)))
+(not (value-eq? (nul) (bool #f)))
+(value-eq? (bool #t) (bool #t))
+(not (value-eq? (pair-e (nul) (bool #f)) (pair-e (nul) (bool #t))))
+(not (value-eq? (pair-e (nul) (arith '+ (nul) (nul))) (pair-e (nul) (arith '+ (nul) (nul)))))
+(not (value-eq? (var 'd) (var 'd)))
+(value-eq? (nul) (nul))
+
 
 ;; interp / evaluate
 (displayln "interp/evaluate tests")
