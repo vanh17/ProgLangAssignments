@@ -268,10 +268,18 @@
 (displayln "plus/times tests")
 ;; Test commented out until you implement plus
 
-;(equal? (evaluate (plus (num 2) (num 5) (num 3)))
-;        (num 10))
-;(equal? (evaluate (mult (num 2) (num 5) (num 3)))
-;        (num 30))
+(equal? (evaluate (plus (num 2) (num 5) (num 3)))
+        (num 10))
+(equal? (evaluate (plus (num -2) (num 5) (num -3)))
+        (num 0))
+(equal? (evaluate (plus (num 0) (num 0) (num 0)))
+        (num 0))
+(equal? (evaluate (plus (num 2) (num 2) (num 2)))
+        (evaluate (mult (num 2) (num 3))))
+(equal? (evaluate (mult (num 2) (num 5) (num 3) (num 1) (num 1)))
+        (num 30))
+(equal? (evaluate (mult (num 2) (num 5) (num 3)))
+        (num 30))
 
 
 ;; minus
