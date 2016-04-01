@@ -254,6 +254,14 @@
                     ['y (arith '+ (var 'x) (num 4))])
                    (arith '+ (var 'x) (var 'y))))
           (num 8)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate
+           (let-e* (['x (neq (not-e (comp '> (arith '+ (num 3) (num 5)) (num 15))) (bool #f))]
+                    ['t (arith '+ (if-e (var 'x) (num 10) (num 6)) (if-e (var 'x) (arith '* (num 5) (num 7)) (num 0)))]
+                    ['y (arith '+ (var 't) (num 4))]
+                    ['z (comp '< (var 'y) (num 44))])
+                   (var 'z)))
+          (bool #f)))
 
 
 ;; plus / times
