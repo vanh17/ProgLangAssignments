@@ -280,12 +280,19 @@
         (num 30))
 (equal? (evaluate (mult (num 2) (num 5) (num 3)))
         (num 30))
+(equal? (evaluate (mult (num 2) (num 5) (num -3)))
+        (num -30))
+
 
 
 ;; minus
-;(displayln "minus tests")
-;(equal? (evaluate (minus (num 10) (num 5) (num 3)))
-;        (num 2))
+(displayln "minus tests")
+(equal? (evaluate (minus (num 10) (num 5) (num 3)))
+        (num 2))
+(equal? (evaluate (minus (arith '+ (num 4) (arith '* (num 6) (num 7))) (num 5) (num 3)))
+        (num 38))
+(equal? (evaluate (minus (arith '/ (arith '* (num 2) (num 32)) (arith '* (num 1) (num 32)))))
+        (num -2))
 
 
 ;; racketlist->sourcelist
