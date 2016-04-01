@@ -348,7 +348,7 @@
 ;; expressions `e1` and `e2` and returns the appropriate `if-e` expression
 ;; that performs the "or" of the two expressions.
 (define (or2 e1 e2)
-  #f)   ;  <----- Need to fix this
+  (if-e e1 (bool #t) (if-e e2 (bool #t) (bool #f))))   ;  <----- Need to fix this
 
 ;; TODO: Write a function `and2` that takes as input two source language
 ;; expressions `e1` and `e2` and returns the appropriate `if-e` expression
