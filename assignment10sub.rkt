@@ -369,9 +369,8 @@
 ;; learn about the syntax for `foldr`.
 (define or-e
   (lambda es
-    (for/fold ([r (bool #f)])
-          ([i es])
-          (or2 r i))))
+    (foldr (lambda (v l) (or2 v l)) (bool #f) es)))
+
 ;; TODO: We will similarly do something for `and-e`, but for this one
 ;; we will instead build a macro. For no arguments, this should return
 ;; the language bool for true.
@@ -401,9 +400,7 @@
 ;; approach and `foldr` like in `or-e`.
 (define plus
   (lambda es
-    (for/fold ([sum (num 0)])
-              ([i es])
-      (plus2 sum i))))
+    (foldr (lambda (v l) (plus2 v l)) (num 0) es)))
 
 (define-syntax mult
   (syntax-rules ()
@@ -442,7 +439,7 @@
 ;; Do this as a function that uses `foldr`.
 (define racketlist->sourcelist
   (lambda (exps)
-    #f))        ;  <--- Replace this with an appropriate foldr call.
+    (foldr (lambda (v l) (pair-e v l)) (nul) exps)));  <--- Replace this with an appropriate foldr call.
 
 ;; TODO: Write a source language expression `map-e`. It should be a 
 ;; `fun` that takes as input a "fun" `f` and returns a `fun` that takes
