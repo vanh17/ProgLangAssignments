@@ -390,7 +390,7 @@
   (syntax-rules ()
     [(let-e* () e) e]
     [(let-e* ([s1 e1]) e) (let-e s1 e1 e)]
-    [(let-e* ([s1 e1] rest ...) e) #f]))  ; <-- Need to fix this.
+    [(let-e* ([s1 e1] rest ...) e) (let-e s1 e1 (let-e* (rest ...) e))]))  ; <-- Need to fix this.
 
 ;; TODO: Write functions or macros `plus`, and `mult` that take any number
 ;; of source language expressions as arguments and creates a corresponding
