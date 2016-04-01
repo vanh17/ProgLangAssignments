@@ -187,8 +187,8 @@
          (equal? (bool-b v1) (bool-b v2))]
         [(and (nul? v1) (nul? v2)) #t]
         [(and (pair-e? v1) (pair-e? v2))
-         (and (equal? (pair-e-e1 v1) (pair-e-e1 v2))
-              (equal? (pair-e-e2 v1) (pair-e-e2 v2)))]
+         (and (value-eq? (pair-e-e1 v1) (pair-e-e1 v2))
+              (value-eq? (pair-e-e2 v1) (pair-e-e2 v2)))]
         [else #f]))          ;; <---- Need to add more cases
               
 
@@ -245,7 +245,10 @@
 ;; description.
 ;; Some cases done for you.
 (define (interp env e)
-  (cond [(num? e) e]
+  (cond [(or (num? e)
+             (bool? e)
+             (nul? e)) e]
+        [(var? e) (lookup (var-s e) env)]
         [(arith? e)
          (let ([v1 (interp env (arith-e1 e))]
                [v2 (interp env (arith-e2 e))]
@@ -254,6 +257,59 @@
            (if (and (num? v1) (num? v2))
                (num (op (num-n v1) (num-n v2)))
                (error "interp: arithmetic on non-numbers")))]
+        [(comp? e)
+         (let ([v1 (interp env (comp-e1 e))]
+               [v2 (interp env (comp-e2 e))]
+               [op (case (comp-op e)
+                     ['< <] ['<= <=] ['>= >=] ['> >])])
+           (if (and (num? v1) (num? v2))
+               (bool (op (num-n v1) (num-n v2)))
+               (error "interp: compare on non-numbers")))]
+        [(if-e? e)
+         (let ([tst (interp env (if-e-tst e))])
+           (if (bool? tst)
+               (if (bool-b tst)
+                   (interp env (if-e-thn e))
+                   (interp env (if-e-els e)))
+               (error "interp: condtion on if-e non-boolean")))]
+        [(eq-e? e)
+         (let ([v1 (interp env (eq-e-e1 e))]
+               [v2 (interp env (eq-e-e2 e))])
+           (bool (value-eq? v1 v2)))]
+        [(let-e? e)
+         (let* ([v1 (interp env (let-e-e1 e))]
+                [env2 (bind (let-e-s e) v1 env)])
+           (interp env2 (let-e-e2 e)))]
+        [(fun? e)
+         (clos e env)]
+        ;[(call? e)
+         ;(let* ([e1c (interp env (call-e1 e))]
+          ;     [e2c (interp env (call-e2 e))])
+           ;(if (clos? e1c)
+            ;   (if (equal? (fun-name (clos-f e1c)) #f)
+             ;      (interp (bind (fun-arg (clos-f e1c))
+              ;                   e2c
+               ;                  (clos-env e1c))
+                ;           (fun-body (clos-f e1c)))
+                 ;  ())
+               ;()))]               
+        [(isnul? e)
+         (let ([v1 (interp env (isnul-e e))])
+           (nul? v1))]
+        [(pair-e? e)
+         (let ([v1 (interp env (pair-e-e1 e))]
+               [v2 (interp env (pair-e-e2 e))])
+           (pair-e v1 v2))]
+        [(fst? e)
+         (let ([v1 (interp env (fst-e e))])
+           (if (pair-e? v1)
+               (pair-e-e1 v1)
+               (error "interp: not a pair-e")))]
+        [(snd? e)
+         (let ([v1 (interp env (snd-e e))])
+           (if (pair-e? v1)
+               (pair-e-e2 v1)
+               (error "interp: not a pair-e")))]
         [else (error "interp: unknown expression")]))
  
 ;;         EVALUATE
@@ -286,7 +342,7 @@
 ;; expressions and returns the expression that tests that they are not
 ;; equal. This should be a combination of `not-e` and `eq-e`.
 (define (neq e1 e2)
-  #f)      ; <---- Need to fix this
+  (not-e (eq-e e1 e2)))     ; <---- Need to fix this
 
 ;; TODO: Write a function `or2` that takes as input two source language
 ;; expressions `e1` and `e2` and returns the appropriate `if-e` expression
