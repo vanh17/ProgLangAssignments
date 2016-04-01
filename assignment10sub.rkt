@@ -422,8 +422,8 @@
 ;; Do this as a macro, similar to `and-e`.
 (define-syntax minus
   (syntax-rules ()
-    [(minus arg) (mult (num -1) (evaluate arg))]
-    [(minus arg1 arg2 ...) (arith '+ (evaluate arg1) (minus (minus arg2 ...)))]))
+    [(minus arg) (arith '- (num 0) arg)]
+    [(minus arg1 arg2 ...) (arith '+ arg1 (minus (minus arg2 ...)))]))
 
 
 
