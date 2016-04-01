@@ -189,6 +189,18 @@
   (equal? (evaluate (and2 (comp '> (num 2) (num 3))
                          (bool #t)))
           (bool #f)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (equal? (evaluate (and2 (comp '> (num 2) (num 3))
+                         (num 3)))
+          (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (and2 (comp '>= (num 2) (num 2))
+                         (bool #t)))
+          (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (and2 (neq (comp '> (num 2) (num 2)) (bool #t))
+                         (bool #t)))
+          (bool #t)))
 
 
 ;; or-e
