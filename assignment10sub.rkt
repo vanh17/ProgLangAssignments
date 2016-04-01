@@ -399,7 +399,17 @@
 ;; for 0 or 1 respectively.
 ;; You can choose either a macro approach like in `and-e` or a function
 ;; approach and `foldr` like in `or-e`.
+(define plus
+  (lambda es
+    (for/fold ([sum (num 0)])
+              ([i es])
+      (plus2 sum i))))
 
+(define-syntax mult
+  (syntax-rules ()
+    [(mult) (num 1)]
+    [(mult e1) e1]
+    [(mult e1 e2 ...) (mult2 e1 (mult e2 ...))]))
 
 
 
