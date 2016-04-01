@@ -354,7 +354,7 @@
 ;; expressions `e1` and `e2` and returns the appropriate `if-e` expression
 ;; that performs the "and" of the two expressions.
 (define (and2 e1 e2)
-  (if-e e1 e2 (if-e e2 (bool #f) (bool #f))))   ;  <----- Need to fix this
+  (if-e e1 (if-e e2 (bool #t) (bool #f)) (if-e e2 (bool #f) (bool #f))))   ;  <----- Need to fix this
 
 ;; TODO: Write a function `or-e` that takes as input any number of source
 ;; language expressions as input and creates the corresponding nested
@@ -380,7 +380,7 @@
   (syntax-rules ()
     [(and-e) (bool #t)]
     [(and-e e1) e1]
-    [(and-e e1 e2 ...) #f]))   ; <-- Need to fix this. Use and2 and "recursion"
+    [(and-e e1 e2 ...) (and2 e1 (and-e e2 ...))]))   ; <-- Need to fix this. Use and2 and "recursion"
 
 ;; TODO: Build a `let-e*` macro that takes input like:
 ;; `(let-e* ([s1 e1] [s2 e2] ...) e)` and creates the equivalent nested 
