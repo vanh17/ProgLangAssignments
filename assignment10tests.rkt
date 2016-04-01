@@ -234,6 +234,16 @@
                            (bool #f)
                            (bool #t)))
           (bool #f)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (and-e (comp '< (num 2) (num 3))
+                           (bool #t)
+                           (bool #t)))
+          (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (equal? (evaluate (and-e (comp '< (num 2) (num 3))
+                           (bool #t)
+                           (num 3)))
+          (bool #f)))
 
 
 ;; let-e*
