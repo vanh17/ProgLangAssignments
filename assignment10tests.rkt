@@ -299,6 +299,8 @@
 (displayln "racketlist->sourcelist tests")
 (equal? (racketlist->sourcelist (list (num 2) (num 5)))
         (pair-e (num 2) (pair-e (num 5) (nul))))
+(equal? (racketlist->sourcelist (list (num 2) (num 5) (num 5) (num 6) (list (num 5) (num 6)) (nul) (num 5) (arith '+ (num 6) (arith '* (num 6) (num 7)))))
+        (pair-e (num 2) (pair-e (num 5) (pair-e (num 5) (pair-e (num 6) (pair-e (list (num 5) (num 6)) (pair-e (nul) (pair-e (num 5) (pair-e (arith '+ (num 6) (arith '* (num 6) (num 7))) (nul))))))))))
 
 ;; map-e
 (displayln "map-e tests")
