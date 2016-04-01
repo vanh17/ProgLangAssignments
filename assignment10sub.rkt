@@ -369,8 +369,9 @@
 ;; learn about the syntax for `foldr`.
 (define or-e
   (lambda es
-    (bool #f)))      ; <------ Need to fix this
-
+    (for/fold ([r (bool #f)])
+          ([i es])
+          (or2 r i))))
 ;; TODO: We will similarly do something for `and-e`, but for this one
 ;; we will instead build a macro. For no arguments, this should return
 ;; the language bool for true.
