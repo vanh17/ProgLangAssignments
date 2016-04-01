@@ -282,17 +282,22 @@
            (interp env2 (let-e-e2 e)))]
         [(fun? e)
          (clos e env)]
-        ;[(call? e)
-         ;(let* ([e1c (interp env (call-e1 e))]
-          ;     [e2c (interp env (call-e2 e))])
-           ;(if (clos? e1c)
-            ;   (if (equal? (fun-name (clos-f e1c)) #f)
-             ;      (interp (bind (fun-arg (clos-f e1c))
-              ;                   e2c
-               ;                  (clos-env e1c))
-                ;           (fun-body (clos-f e1c)))
-                 ;  ())
-               ;()))]               
+        [(call? e)
+         (let ([e1c (interp env (call-e1 e))]
+               [e2c (interp env (call-e2 e))])
+           (if (clos? e1c)
+               (if (equal? (fun-name (clos-f e1c)) #f)
+                   (interp (bind (fun-arg (clos-f e1c)) e2c (clos-env e1c))
+                           (fun-body (clos-f e1c)))
+                   (let ([rcenv (bind (fun-name (clos-f e1c))
+                                      e1c
+                                      (clos-env e1c))])
+                     (interp (bind (fun-arg (clos-f e1c))
+                                    e2c
+                                    rcenv)
+                             (fun-body (clos-f (interp rcenv
+                                                       (var (fun-name (clos-f e1c)))))))))
+               (error "interp: call error on non-closure")))]
         [(isnul? e)
          (let ([v1 (interp env (isnul-e e))])
            (nul? v1))]

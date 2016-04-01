@@ -146,7 +146,17 @@
 (with-handlers ([exn:fail? (lambda (exn) #f)])
   (equal? (evaluate (comp '< (num 3) (num 2)))
           (bool #f)))
-
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (call (fun #f 'x (plus2 (var 'x)  (num 3))) (num 3)))
+          (num 6)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (call (fun 'f 'x (if (value-eq? (var 'x) (num 1)) (pair-e (num 1) (nul)) (pair-e (var 'x) (call (var 'f) (arith '- (var 'x) (num 1))))))  (num 3)))
+          (pair-e (num 3) (pair-e (num 2) (pair-e (num 1) (nul))))))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (call (fun 'f 'x (cond [(value-eq? (var 'x) (num 0)) (num 0)]
+                                           [(value-eq? (var 'x) (num 1)) (num 1)]
+                                           [#t (arith '+ (call (var 'f) (arith '- (var 'x) (num 2))) (call (var 'f) (arith '- (var 'x) (num 1))))])) (num 3)))
+          (num 2)))
 
 ;; neq
 (displayln "neq tests")
@@ -181,7 +191,10 @@
   (equal? (evaluate (or2 (comp '> (arith '+ (num 2) (num 6)) (num 3))
                          (bool #t)))
           (bool #t)))
-
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (equal? (evaluate (or2 (comp '< (num 2) (num 3))
+                         (num 3)))
+          (bool #t)))
 
 ;; and2
 (displayln "and2 tests")
