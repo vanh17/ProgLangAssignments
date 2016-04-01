@@ -154,6 +154,14 @@
   (equal? (evaluate (neq (arith '+ (num 2) (num 3))
                          (num 6)))
           (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (neq (arith '+ (num 2) (num 3))
+                         (arith '* (num 1) (num 5))))
+          (bool #f)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (neq (eq-e (num 3) (num 3))
+                         (neq (bool #f) (arith '+ (num 3) (num 6)))))
+          (bool #f)))
 
 ;; or2
 (displayln "or2 tests")
