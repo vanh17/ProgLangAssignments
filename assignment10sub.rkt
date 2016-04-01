@@ -354,7 +354,7 @@
 ;; expressions `e1` and `e2` and returns the appropriate `if-e` expression
 ;; that performs the "and" of the two expressions.
 (define (and2 e1 e2)
-  #f)   ;  <----- Need to fix this
+  (if-e e1 e2 (if-e e2 (bool #f) (bool #f))))   ;  <----- Need to fix this
 
 ;; TODO: Write a function `or-e` that takes as input any number of source
 ;; language expressions as input and creates the corresponding nested
