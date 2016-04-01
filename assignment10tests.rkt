@@ -210,6 +210,21 @@
                           (bool #f)
                           (bool #t)))
           (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (or-e (comp '> (num 2) (num 3))
+                          (bool #f)
+                          (bool #f)))
+          (bool #f)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate (or-e (not-e (comp '> (num 2) (num 3)))
+                          (bool #f)
+                          (bool #f)))
+          (bool #t)))
+(with-handlers ([exn:fail? (lambda (exn) #t)])
+  (equal? (evaluate (or-e (comp '> (num 2) (num 3))
+                          (bool #f)
+                          (num 3)))
+          (bool #t)))
 
 
 ;; and-e
