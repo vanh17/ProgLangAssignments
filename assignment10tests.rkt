@@ -150,13 +150,15 @@
   (equal? (evaluate (call (fun #f 'x (plus2 (var 'x)  (num 3))) (num 3)))
           (num 6)))
 (with-handlers ([exn:fail? (lambda (exn) #f)])
-  (equal? (evaluate (call (fun 'f 'x (if (value-eq? (var 'x) (num 1)) (pair-e (num 1) (nul)) (pair-e (var 'x) (call (var 'f) (arith '- (var 'x) (num 1))))))  (num 3)))
-          (pair-e (num 3) (pair-e (num 2) (pair-e (num 1) (nul))))))
+  (equal? (evaluate (call (fun 'f 'x (if-e (eq-e (var 'x) (num 1)) (pair-e (num 1) (nul)) (pair-e (var 'x) (call (var 'f) (arith '- (var 'x) (num 1))))))  (num 5)))
+          (pair-e (num 5) (pair-e (num 4) (pair-e (num 3) (pair-e (num 2) (pair-e (num 1) (nul))))))))
 (with-handlers ([exn:fail? (lambda (exn) #f)])
-  (equal? (evaluate (call (fun 'f 'x (cond [(value-eq? (var 'x) (num 0)) (num 0)]
-                                           [(value-eq? (var 'x) (num 1)) (num 1)]
-                                           [#t (arith '+ (call (var 'f) (arith '- (var 'x) (num 2))) (call (var 'f) (arith '- (var 'x) (num 1))))])) (num 3)))
-          (num 2)))
+  (equal? (evaluate (call (fun 'f 'x (if-e (eq-e (var 'x) (num 0))
+                                           (num 0)
+                                           (if-e (eq-e (var 'x) (num 1))
+                                               (num 1)
+                                               (arith '+ (call (var 'f) (arith '- (var 'x) (num 2))) (call (var 'f) (arith '- (var 'x) (num 1))))))) (num 4)))
+          (num 3)))
 
 ;; neq
 (displayln "neq tests")
@@ -322,5 +324,25 @@
            (call (call map-e (fun #f 'x (plus2 (var 'x) (num 2))))
                  (pair-e (num 2) (pair-e (num 5) (nul)))))
           (pair-e (num 4) (pair-e (num 7) (nul)))))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate
+           (call (call map-e (fun #f 'x (plus2 (var 'x) (num 2))))
+                 (pair-e (num 2) (nul))))
+          (pair-e (num 4) (nul))))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate
+           (call (call map-e (fun #f 'x (comp '<= (var 'x) (num 5))))
+                 (pair-e (num 6) (pair-e (num -4) (pair-e (num 2) (pair-e (num 5) (nul)))))))
+          (pair-e (bool #f) (pair-e (bool #t) (pair-e (bool #t) (pair-e (bool #t) (nul)))))))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate
+           (call (call map-e (fun #f 'x (plus2 (var 'x) (num 2))))
+                 (nul)))
+           (nul)))
+(with-handlers ([exn:fail? (lambda (exn) #f)])
+  (equal? (evaluate
+           (call (call map-e (fun #f 'x (nul)))
+                 (pair-e (num 6) (pair-e (num -4) (pair-e (num 2) (pair-e (num 5) (nul)))))))
+          (pair-e (nul) (pair-e (nul) (pair-e (nul) (pair-e (nul) (nul)))))))
          
 

@@ -300,7 +300,7 @@
                (error "interp: call error on non-closure")))]
         [(isnul? e)
          (let ([v1 (interp env (isnul-e e))])
-           (nul? v1))]
+           (bool (nul? v1)))]
         [(pair-e? e)
          (let ([v1 (interp env (pair-e-e1 e))]
                [v2 (interp env (pair-e-e2 e))])
@@ -454,9 +454,9 @@
 (define map-e
   (fun 'map 'f 
        (fun 'inner 'lst
-            (if-e (bool (nul? (var 'lst)))
+            (if-e (isnul (var 'lst))
                         (nul)
-                        (if-e (bool (nul? (snd (var 'lst))))
+                        (if-e (isnul (snd (var 'lst)))
                               (pair-e (call (var 'f) (fst (var 'lst)))
                                       (nul))
                               (pair-e (call (var 'f) (fst (var 'lst)))
