@@ -454,4 +454,7 @@
 (define map-e
   (fun 'map 'f 
        (fun 'inner 'lst
-            (nul))))   ; <--- Need to change this
+            (if-e (nul? (var 'lst))
+                  (nul)
+                  (pair-e (call (var 'f) (fst (var 'lst)))
+                          (call (var 'inner) (snd (var 'lst)))))))); <--- Need to change this
