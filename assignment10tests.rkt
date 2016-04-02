@@ -16,6 +16,7 @@
 (equal? (bind 'x (num 4) (bind 'y (num 5) empty)) sample-env1)
 (equal? (bind 'y (num 8) (bind 'z (num 10) (bind 'x (num 4) (bind 't (num 5) empty)))) sample-env3)
 
+
 ;; lookup
 (displayln "lookup tests")
 (with-handlers ([exn:fail? (lambda (exn) #t)])
