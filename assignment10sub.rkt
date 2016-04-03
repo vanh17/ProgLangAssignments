@@ -455,9 +455,21 @@
   (fun 'map 'f 
        (fun 'inner 'lst
             (if-e (isnul (var 'lst))
-                        (nul)
-                        (if-e (isnul (snd (var 'lst)))
-                              (pair-e (call (var 'f) (fst (var 'lst)))
-                                      (nul))
-                              (pair-e (call (var 'f) (fst (var 'lst)))
-                                      (call (var 'inner) (snd (var 'lst))))))))); <--- Need to change this
+                         (nul)
+                         (pair-e (call (var 'f) (fst (var 'lst)))
+                                 (call (var 'inner) (snd (var 'lst)))))))); <--- Need to change this
+;; EXTENSION: Write a source language expression `foldr-e`. It should be a 
+;; `fun` that takes as input a "fun" and returns a 'fun' that takes as input
+;; a source language pair 'pair-e' of two components initial value,and a list 'lst'
+;; and performs a "foldr" of the
+;; function f on the list lst (when interpreted that is).
+(define foldr-e
+  (fun 'foldr 'f
+       (fun 'inner 'input
+             (if-e (isnul (snd (var 'input)))
+                   (fst (var 'input))
+                   (call (var 'inner)
+                         (pair-e (call (var 'f) (pair-e (fst (var 'input))
+                                                        (fst (snd (var 'input)))))
+                                 (snd (snd (var 'input)))))))))
+             
