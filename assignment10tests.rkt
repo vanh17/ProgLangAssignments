@@ -404,5 +404,10 @@
            (call (call map-e (fun #f 'x (nul)))
                  (pair-e (num 6) (pair-e (num -4) (pair-e (num 2) (pair-e (num 5) (nul)))))))
           (pair-e (nul) (pair-e (nul) (pair-e (nul) (pair-e (nul) (nul)))))))
-         
+
+;; foldr-e
+(displayln "foldr-e tests")
+(equal? (evaluate (call (call foldr-e (fun #f 'x (plus2 (fst (var 'x)) (snd (var 'x)))))
+                        (pair-e (num 0) (pair-e (num 1) (pair-e (num 2) (pair-e (num 3) (nul)))))))
+        (num 6))
 
