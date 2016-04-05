@@ -46,7 +46,7 @@ let arithEval op v1 v2 = match (op, v1, v2) with
                          | ("+", Num x, Num y) -> Num (x +. y) 
                          | ("-", Num x, Num y) -> Num (x -. y)
                          | ("*", Num x, Num y) -> Num (x *. y)
-                         | ("/", Num x, Num y) -> if (y == 0.0) then raise (Interp "interpErr: can't divide 0.0")
+                         | ("/", Num x, Num y) -> if (y = 0.0) then raise (Interp "interpErr: can't divide 0.0")
                                                   else Num (x /. y)
                          | (_, Num x, Num y) -> raise (Interp "interpErr: only +, -, *")
                          | _ -> raise (Interp "interpErr: not a num")
